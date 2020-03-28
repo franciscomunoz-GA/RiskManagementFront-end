@@ -1,0 +1,46 @@
+<mat-grid-list cols="1" rowHeight="200px" style="background-color: rgba(43, 41, 126, 1)">
+  <div class="contenedor" *ngIf="showContent">
+    <mat-card class="mat-elevation-z4">
+      <div class="imgContainer">
+        <img mat-card-image src="./assets/logo.png" style="width: 70%">
+      </div>
+
+      <mat-divider></mat-divider><br>
+
+      <mat-card-content style="margin-top: 1em">
+        
+        <mat-form-field class="fullWidth" *ngIf="showEmail">
+          <mat-icon matPrefix style="margin-right: 0.5em">person</mat-icon>
+          <input autocomplete="off" matInput type="email" placeholder="Email de empleado" [(ngModel)]="loginData.email">
+        </mat-form-field>
+
+        <div *ngIf="showPassword" class="containerLabel">
+          <mat-icon style="margin-right: 0.5em">person</mat-icon>
+          <label>{{ loginData.email }}</label>
+        </div>
+        
+        <mat-form-field class="fullWidth" *ngIf="showPassword" style="margin-top:1em">
+          <mat-icon matPrefix style="margin-right: 0.5em">vpn_key</mat-icon>
+          <input autofocus matInput type="password" placeholder="Contraseña" [(ngModel)]="loginData.password">
+        </mat-form-field>
+
+        <!-- Loading Animation -->
+				<mat-spinner class="loadingSpin" [diameter]="40" *ngIf="loading"></mat-spinner>
+
+        <button mat-raised-button color="primary" class="loginButton" *ngIf="showEmail" (window:keydown)="onKey($event)" (click)="nextLogin()">SIGUIENTE</button>
+        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="onKey($event)" (click)="makeLogin()">INGRESAR</button>
+
+        <!-- <div style="text-align: center; margin-top:1em" *ngIf="showRecovery">
+          <button mat-button>Recuperar contraseña</button>
+        </div> -->
+        
+        <div style="text-align: center; margin-top: 0.4em" *ngIf="showPassword" (click)="back()">
+          <button mat-icon-button>
+            <mat-icon>arrow_back_circle</mat-icon>
+          </button>
+        </div>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-grid-list>

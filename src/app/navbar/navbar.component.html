@@ -1,0 +1,16 @@
+<mat-toolbar class="mat-elevation-z5" color="default" *ngIf="ShowNav | async">    
+    
+        <button mat-icon-button (click)="onPropagar()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span class="example-spacer"></span>
+        <img src="./assets/img/armstrong_logo.png" width="auto" height="30" alt="">
+        <span class="example-spacer"></span>        
+        <button mat-raised-button [matMenuTriggerFor]="menu">
+            <mat-icon color="primary">person</mat-icon>
+            {{NombreUsuario | async}}
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-raised-button color="warn" (click)="CerrarSesion()">Cerrar sesión</button>            
+        </mat-menu>
+</mat-toolbar>

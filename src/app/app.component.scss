@@ -1,0 +1,41 @@
+.example-icon {
+    padding: 2 2px;
+}
+  
+.example-spacer {
+flex: 1 1 auto;
+}
+.example-container{
+    height: 100vh;
+    padding-top: 0 !important;
+    
+}
+.example-sidenav{
+    max-width: 400px;
+    padding: 20px;
+    padding-top: 0 !important;
+}
+.fullWidth{
+    width: 100%;
+}
+  
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+.FotoUsuario{
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+.img-sidebar{
+    height: 30px;
+    width: 100px;
+    padding-top: 20px;
+}
+.progressbar{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1000000;
+}
