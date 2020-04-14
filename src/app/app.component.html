@@ -8,30 +8,21 @@
         &nbsp;
         {{NombreUsuario | async}}
         <mat-divider></mat-divider>
-        <!-- <div align="center">            
-            <mat-divider></mat-divider>
-            <mat-nav-list>
-                <a mat-list-item routerLink="/Principal"> Página principal </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item routerLink="/Monitoreo"> Monitoreo </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item routerLink="/Detalle"> Detalle </a>
-                <mat-divider></mat-divider>
-            </mat-nav-list>
-        </div>       -->
+    
         <mat-divider></mat-divider>
         <div align="center">            
             <mat-nav-list>
-                <a mat-list-item routerLink="/Principal"> Página principal </a>
+                <a mat-list-item routerLink="/Dashboard"> Dashboard </a>
+                <a mat-list-item routerLink="/Encuestas"> Encuestas </a>
             </mat-nav-list>
             
-            <mat-divider></mat-divider>
+            <!-- <mat-divider></mat-divider>
             <mat-nav-list *ngFor="let Menu of Menus | async">
                 <h5>{{Menu.Menu}}</h5>                                
                 <a mat-list-item *ngFor="let Submenu of Menu.Submenus" routerLink="/{{Submenu.Submenu}}"> {{Submenu.Submenu}} </a>
                 <mat-divider></mat-divider>
                 
-            </mat-nav-list>
+            </mat-nav-list> -->
         </div>                
     </mat-drawer>  
     <div class="example-sidenav-content">        

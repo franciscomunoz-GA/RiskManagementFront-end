@@ -45,17 +45,22 @@ import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavbarComponent } from './navbar/navbar.component';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTreeModule } from '@angular/material/tree';
 // Servicios
 import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
+import { EncuestasComponent,
+         DialogAgregarEncuesta } from './encuestas/encuestas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    EncuestasComponent,
+    DialogAgregarEncuesta
   ],
   imports: [
     BrowserModule,
@@ -94,9 +99,13 @@ import { SessionValidate } from './servicios/session-validate.service';
     FormsModule,
     ReactiveFormsModule,
     MatBadgeModule,
+    MatSlideToggleModule,
+    MatTreeModule,
     ChartsModule
   ],
-  entryComponents: [],
+  entryComponents: [
+    DialogAgregarEncuesta
+  ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]
 })

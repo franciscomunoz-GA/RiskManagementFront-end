@@ -5,12 +5,18 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guardians/auth.guard';
 import { LoginGuard } from './guardians/login.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EncuestasComponent } from './encuestas/encuestas.component';
 
 const routes: Routes = [
   {
     path: 'Dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Encuestas',
+    component: EncuestasComponent,
+    canActivate: [AuthGuard]
   },
   { 
     path: 'Login', 
@@ -24,10 +30,15 @@ const routes: Routes = [
 
   { 
     path: '', 
-    redirectTo: '/Principal',    
+    redirectTo: '/Dashboard',
     pathMatch: 'full',
   },
-  {path: '**', component: DashboardComponent }];
+  {
+    path: '**', 
+    component: DashboardComponent,
+    canActivate: [AuthGuard] 
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

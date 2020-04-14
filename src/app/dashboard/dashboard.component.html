@@ -1,11 +1,22 @@
-<div>
-  <div style="display: block">
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="barChartType">
-    </canvas>
-  </div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <br>
+      <mat-card>
+        <div class="row">
+          <div class="col-xs-12 col-sm-4 col-md-3">
+            <div style="display: block">
+              <canvas baseChart
+                      [datasets]="barChartData"
+                      [labels]="barChartLabels"
+                      [options]="barChartOptions"
+                      [legend]="barChartLegend"
+                      [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>  
 </div>

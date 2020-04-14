@@ -1,0 +1,157 @@
+<h1 mat-dialog-title>Agregar una encuesta</h1>
+<div mat-dialog-content>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <mat-card>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Nombre de la encuesta</mat-label>
+                        <input matInput>
+                    </mat-form-field>
+                    <mat-card>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Pregunta (Nivel 1)</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Respuesta (Nivel 1)</mat-label>
+                                    <input matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-2">
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Ponderación (Nivel 1)</mat-label>
+                                    <input type="number" matInput>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-3">
+                                <br>
+                                <mat-slide-toggle [(ngModel)]="PreguntaN2">Pregunta dependiente</mat-slide-toggle>
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-1">
+                                <button mat-mini-fab matTooltip="Agregar respuesta" color="primary">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="PreguntaN2">
+                            <div class="col-12">
+                                <mat-card>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Pregunta (Nivel 2)</mat-label>
+                                                <input matInput>
+                                            </mat-form-field>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-6">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Respuesta (Nivel 2)</mat-label>
+                                                <input matInput>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 col-md-2">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Ponderación (Nivel 2)</mat-label>
+                                                <input type="number" matInput>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-3">
+                                            <br>
+                                            <mat-slide-toggle color="warn" [(ngModel)]="PreguntaN3">Pregunta dependiente</mat-slide-toggle>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-2 col-md-1">
+                                            <button mat-mini-fab matTooltip="Agregar respuesta" color="accent">
+                                                <mat-icon>add</mat-icon>
+                                            </button>
+                                        </div>
+                                    </div>          
+                                    <div class="row" *ngIf="PreguntaN3">
+                                        <div class="col-12">
+                                            <mat-card background="red">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <mat-form-field class="example-full-width">
+                                                            <mat-label>Pregunta (Nivel 3)</mat-label>
+                                                            <input matInput>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                                <div class="row">
+                                                    <div class="col-xs-12 col-sm-6 col-md-9">
+                                                        <mat-form-field class="example-full-width">
+                                                            <mat-label>Respuesta (Nivel 3)</mat-label>
+                                                            <input matInput>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-2">
+                                                        <mat-form-field class="example-full-width">
+                                                            <mat-label>Ponderación (Nivel 3)</mat-label>
+                                                            <input type="number" matInput>
+                                                        </mat-form-field>
+                                                    </div>                                                    
+                                                    <div class="col-xs-2 col-sm-2 col-md-1">
+                                                        <button mat-mini-fab matTooltip="Agregar respuesta" color="warn">
+                                                            <mat-icon>add</mat-icon>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <br>
+                                                        <button mat-raised-button color="warn" matTooltip="Agregar pregunta con respuestas" (click)="AgregarPreguntaN3()">Agregar</button>
+                                                    </div>
+                                                </div>                                
+                                            </mat-card>
+                                        </div>
+                                    </div> 
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <br>
+                                            <button mat-raised-button color="accent" matTooltip="Agregar pregunta con respuestas" (click)="AgregarPreguntaN2()">Agregar</button>
+                                        </div>
+                                    </div>                         
+                                </mat-card>
+                            </div>
+                        </div>
+                        <div class="row" aling="right">
+                            <div class="col-12" aling="right">
+                                <br>
+                                <button mat-raised-button color="primary" matTooltip="Agregar pregunta con respuestas">Agregar</button>
+                            </div>
+                        </div>
+                        
+                    </mat-card>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            hola mundo
+            <mat-form-field class="example-full-width">
+                <mat-label>Respuesta (Nivel 3)</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div mat-dialog-actions align="right">
+  <hr>
+  <button mat-button (click)="onNoClick()">Cerrar</button>
+  <button mat-button (click)="onNoClick()" cdkFocusInitial>Crear</button>
+</div>
