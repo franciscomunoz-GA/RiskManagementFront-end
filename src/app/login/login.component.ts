@@ -69,8 +69,9 @@ export class LoginComponent implements OnInit {
       }, error => {
         this.showEmail = true;
         this.loading = false;
-        this.snackBar.open('','',{
-          duration: 2000
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000,
+          
         })
       });             
     }
@@ -164,6 +165,8 @@ export class LoginComponent implements OnInit {
   }
   ValidateEmail(Email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailReg.test( Email );
-   }
+    return emailReg.test( Email );   }
+   resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response: ${captchaResponse}`);
+}
 }

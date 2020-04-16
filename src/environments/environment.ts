@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost/ASM-Back/public/api/',
+  API: 'http://172.16.1.35/apis/asm/asm/public/api/',
 };
 
 /*

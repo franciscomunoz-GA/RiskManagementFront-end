@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ShowSidebar: boolean = false;
   
-  
+  panelOpenState = false;
   constructor(private Menu: ValidarNavbarService, private Sidebar: ValidarNavbarService, public route: Router){
     this.NombreUsuario = this.Menu.ValorNombreUsuario;
     this.Menus         = this.Menu.ValorMenus;

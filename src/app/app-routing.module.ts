@@ -6,8 +6,14 @@ import { AuthGuard } from './guardians/auth.guard';
 import { LoginGuard } from './guardians/login.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
+import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.component';
 
 const routes: Routes = [
+  {
+    path: 'CatalogoRiesgo',
+    component: CatalogoRiesgoComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'Dashboard',
     component: DashboardComponent,

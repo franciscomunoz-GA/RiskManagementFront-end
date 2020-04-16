@@ -23,7 +23,7 @@
           <mat-icon matPrefix style="margin-right: 0.5em">vpn_key</mat-icon>
           <input autofocus matInput type="password" placeholder="Contraseña" [(ngModel)]="loginData.password">
         </mat-form-field>
-
+        <re-captcha *ngIf="showPassword" (resolved)="resolved($event)" siteKey="https://patrickhlauke.github.io/recaptcha/"></re-captcha>
         <!-- Loading Animation -->
 				<mat-spinner class="loadingSpin" [diameter]="40" *ngIf="loading"></mat-spinner>
 

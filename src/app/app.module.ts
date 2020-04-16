@@ -8,9 +8,10 @@ import { HttpClientModule }        from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+//Recaptcha google
+import { RecaptchaModule } from 'ng-recaptcha';
 
 // Angular Material
-
 import { MatBottomSheetModule }     from '@angular/material/bottom-sheet';
 import { MatButtonModule }          from '@angular/material/button';
 import { MatCheckboxModule }        from '@angular/material/checkbox';
@@ -52,6 +53,7 @@ import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
 import { EncuestasComponent,
          DialogAgregarEncuesta } from './encuestas/encuestas.component';
+import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { EncuestasComponent,
     NavbarComponent,
     DashboardComponent,
     EncuestasComponent,
-    DialogAgregarEncuesta
+    DialogAgregarEncuesta,
+    CatalogoRiesgoComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ import { EncuestasComponent,
     MatBadgeModule,
     MatSlideToggleModule,
     MatTreeModule,
-    ChartsModule
+    ChartsModule,
+    RecaptchaModule
   ],
   entryComponents: [
     DialogAgregarEncuesta

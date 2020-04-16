@@ -2,19 +2,51 @@
 <mat-drawer-container class="example-container" autosize>
     <mat-drawer  class="example-sidenav" mode="over" [(opened)]="ShowSidebar">
         <br>
-        <button mat-icon-button (click)="CerrarSideMenu()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        &nbsp;
-        {{NombreUsuario | async}}
+        
+        <!-- {{NombreUsuario | async}} -->
+        
+        <div align="center">
+            <button mat-icon-button (click)="CerrarSideMenu()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            &nbsp;
+            <img src="./assets/logo.png" width="auto" height="50" alt="">
+        </div>
         <mat-divider></mat-divider>
     
         <mat-divider></mat-divider>
-        <div align="center">            
-            <mat-nav-list>
+        <div align="center"> 
+            <mat-accordion>
+                <mat-expansion-panel>
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-icon color="primary">library_books</mat-icon>                                               
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Catálogos
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-nav-list>
+                    <a mat-list-item routerLink="/CatalogoRiesgo"> De riesgo </a>
+                    <a mat-list-item routerLink="/Encuestas"> De dimensión </a>
+                    <a mat-list-item routerLink="/Encuestas"> De tipo de riesgo </a>
+                    <a mat-list-item routerLink="/Encuestas"> De criterio </a>
+                </mat-nav-list>
+                </mat-expansion-panel>
+                <mat-expansion-panel (opened)="panelOpenState = true"
+                                     (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      ejemplo
+                    </mat-panel-title>                    
+                  </mat-expansion-panel-header>
+                  <p>I'm visible because I am open</p>
+                </mat-expansion-panel>
+            </mat-accordion>           
+            <!-- <mat-nav-list>
                 <a mat-list-item routerLink="/Dashboard"> Dashboard </a>
                 <a mat-list-item routerLink="/Encuestas"> Encuestas </a>
-            </mat-nav-list>
+            </mat-nav-list> -->
             
             <!-- <mat-divider></mat-divider>
             <mat-nav-list *ngFor="let Menu of Menus | async">
