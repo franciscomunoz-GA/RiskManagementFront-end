@@ -1,3 +1,7 @@
+# 2020-04-20
+    Se modifica el dialog de Catálogo de riesgo
+    Se toma mejor ejemplo
+    Se agrega importador de excel
 # 2020-04-15
     Se agrega el recaptcha de ejemplo para la presentación, es necesario pagarlo para que sea el funcional ya en productivo
     Se ajusta el sidebar con Expansion panel y la imagen al inicio

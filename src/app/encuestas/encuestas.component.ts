@@ -21,29 +21,29 @@ export interface EstructuraEncuesta{
 })
 export class EncuestasComponent implements OnInit {
   displayedColumns: string[] = ['Nombre', 'Usuario', 'Fecha', 'Visualizar', 'Editar', 'Deshabilitar', 'Eliminar'];
-  TalblaEncuestas: MatTableDataSource<EstructuraEncuesta>;
+  TablaEncuestas: MatTableDataSource<EstructuraEncuesta>;
 
   Encuestas: EstructuraEncuesta[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(public dialog: MatDialog) {
-    this.TalblaEncuestas = new MatTableDataSource(this.Encuestas);
+    this.TablaEncuestas = new MatTableDataSource(this.Encuestas);
     
   }
   
   ngOnInit() {
-    this.TalblaEncuestas.paginator = this.paginator;
-    this.TalblaEncuestas.sort = this.sort;
+    this.TablaEncuestas.paginator = this.paginator;
+    this.TablaEncuestas.sort = this.sort;
     this.TraerInformacion();
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.TalblaEncuestas.filter = filterValue.trim().toLowerCase();
+    this.TablaEncuestas.filter = filterValue.trim().toLowerCase();
 
-    if (this.TalblaEncuestas.paginator) {
-      this.TalblaEncuestas.paginator.firstPage();
+    if (this.TablaEncuestas.paginator) {
+      this.TablaEncuestas.paginator.firstPage();
     }
   }
   DialogAgregar(){
@@ -59,8 +59,8 @@ export class EncuestasComponent implements OnInit {
   }
   TraerInformacion(){        
     this.Encuestas.push({ Id: 1, Nombre: 'Encuesta 1', Usuario: "Francisco", Fecha: '2020-04-01'});
-    this.TalblaEncuestas.data = this.Encuestas;        
-    this.TalblaEncuestas.filter = "";
+    this.TablaEncuestas.data = this.Encuestas;        
+    this.TablaEncuestas.filter = "";
     
   }
 }

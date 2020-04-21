@@ -47,33 +47,39 @@ export class LoginComponent implements OnInit {
     }
     else{     
       if(this.ValidateEmail(this.loginData.email) == false){
-        this.loginData.email = this.loginData.email+"@grupoarmstrong.com";
-      }
-      this.loading = true;
-      this.showEmail = false;
-      this.showRecovery = false;
-
-      this.ObtenerServicio.PostRequest('validarUsuario', 'APIREST', { Correo : this.loginData.email })
-      .subscribe((response: ResponseApiEntity)=>{
-        this.loading = false;
-        if(response.Success){
-          this.showPassword = true;
-          this.showRecovery = true;
-        }else{
-          this.showEmail = true;
-          this.message = response.Message;
-          this.snackBar.open(this.message,'',{
-            duration: 2000
-          });
-        }
-      }, error => {
-        this.showEmail = true;
-        this.loading = false;
-        this.snackBar.open('Error de conexión','',{
+        this.snackBar.open('Es necesario ingresar un correo electrónico','',{
           duration: 2000,
-          
-        })
-      });             
+          panelClass: ['mensaje-error']
+        });
+      }
+      else{
+        this.loading = true;
+        this.showEmail = false;
+        this.showRecovery = false;
+  
+        this.ObtenerServicio.PostRequest('validarUsuario', 'APIREST', { Correo : this.loginData.email })
+        .subscribe((response: ResponseApiEntity)=>{
+          this.loading = false;
+          if(response.Success){
+            this.showPassword = true;
+            this.showRecovery = true;
+          }else{
+            this.showEmail = true;
+            this.message = response.Message;
+            this.snackBar.open(this.message,'',{
+              duration: 2000
+            });
+          }
+        }, error => {
+          this.showEmail = true;
+          this.loading = false;
+          this.snackBar.open('Error de conexión','',{
+            duration: 2000,
+            
+          })
+        }); 
+      }
+                  
     }
   }
   makeLogin(){

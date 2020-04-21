@@ -38,22 +38,24 @@ import { MatSnackBarModule }        from '@angular/material/snack-bar';
 import { MatProgressBarModule }     from '@angular/material/progress-bar';
 import { MatDialogModule }          from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSortModule } from '@angular/material/sort';
-import { ChartsModule } from 'ng2-charts';
-import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MatTreeModule } from '@angular/material/tree';
+import { MatTooltipModule }         from '@angular/material/tooltip';
+import { MatBadgeModule }           from '@angular/material/badge';
+import { MatSidenavModule }         from '@angular/material/sidenav';
+import { MatSortModule }            from '@angular/material/sort';
+import { ChartsModule }             from 'ng2-charts';
+import { LoginComponent }           from './login/login.component';
+import { DashboardComponent }       from './dashboard/dashboard.component';
+import { NavbarComponent }          from './navbar/navbar.component';
+import { MatSlideToggleModule }     from '@angular/material/slide-toggle';
+import { MatTreeModule }            from '@angular/material/tree';
 // Servicios
 import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
 import { EncuestasComponent,
          DialogAgregarEncuesta } from './encuestas/encuestas.component';
-import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.component';
+import { CatalogoRiesgoComponent,
+         DialogRiesgo,
+         DialogImportarRiesgo } from './catalogo-riesgo/catalogo-riesgo.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,10 @@ import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.compo
     DashboardComponent,
     EncuestasComponent,
     DialogAgregarEncuesta,
-    CatalogoRiesgoComponent
+    CatalogoRiesgoComponent,
+    DialogRiesgo,
+    DialogImportarRiesgo
+    
   ],
   imports: [
     BrowserModule,
@@ -108,7 +113,9 @@ import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.compo
     RecaptchaModule
   ],
   entryComponents: [
-    DialogAgregarEncuesta
+    DialogAgregarEncuesta,
+    DialogRiesgo,
+    DialogImportarRiesgo
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]
