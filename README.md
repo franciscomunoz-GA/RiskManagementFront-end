@@ -1,3 +1,6 @@
+# 2020-04-21
+    Se agrega el botón para poder descargar un excel desde un array 
+    Se agrega validación con snackbar a la hora de eliminar un registro
 # 2020-04-20
     Se modifica el dialog de Catálogo de riesgo
     Se toma mejor ejemplo

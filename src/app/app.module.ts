@@ -11,6 +11,9 @@ import { AppComponent } from './app.component';
 //Recaptcha google
 import { RecaptchaModule } from 'ng-recaptcha';
 
+//Descargar excel
+import { Angular2CsvModule } from 'angular2-csv';
+
 // Angular Material
 import { MatBottomSheetModule }     from '@angular/material/bottom-sheet';
 import { MatButtonModule }          from '@angular/material/button';
@@ -110,7 +113,8 @@ import { CatalogoRiesgoComponent,
     MatSlideToggleModule,
     MatTreeModule,
     ChartsModule,
-    RecaptchaModule
+    RecaptchaModule,
+    Angular2CsvModule
   ],
   entryComponents: [
     DialogAgregarEncuesta,

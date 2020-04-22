@@ -8,7 +8,8 @@ import { ValidarNavbarService } from '../Observables/validar-navbar.service';
 import readXlsxFile from 'read-excel-file';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { parseExcelDate } from 'read-excel-file'
+import {ExcelService} from '../servicios/excel-service.service';
+
 export interface EstructuraCatalogo{
   Id:      number;
   Nombre:  string;
@@ -26,11 +27,14 @@ export class CatalogoRiesgoComponent implements OnInit {
   Catalogo: EstructuraCatalogo[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  constructor(public dialog: MatDialog, private Menu: ValidarNavbarService) {
+
+  constructor(public dialog: MatDialog, private Menu: ValidarNavbarService, private excelService:ExcelService, private snackBar: MatSnackBar) {
     this.Menu.OcultarProgress();
     this.Tabla = new MatTableDataSource(this.Catalogo);
   }
-
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.Catalogo, 'CatalogoDeRiesgos');
+  }
   ngOnInit(): void {
     this.Tabla.paginator = this.paginator;
     this.Tabla.sort = this.sort;
@@ -43,6 +47,19 @@ export class CatalogoRiesgoComponent implements OnInit {
     if (this.Tabla.paginator) {
       this.Tabla.paginator.firstPage();
     }
+  }
+  Deshabilitar(){    
+        
+  }
+  Eliminar(){
+    this.snackBar.open('¿Seguro de eliminar el registro?', 'Eliminar', {
+      duration: 5000,
+    }).onAction().subscribe(()=>{
+      this.EliminarRegistro();
+    });
+  }
+  EliminarRegistro(){
+
   }
   DialogAgregar(){
     const dialogRef = this.dialog.open(DialogRiesgo, {
