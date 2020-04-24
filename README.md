@@ -1,4 +1,5 @@
 # 2020-04-22
+    Se realiza el CRUD completo del catálogo de dimensiones
     Se realiza el CRUD completo del catálogo tipo de riesgo 
     Se agregan las rutas de todos los catálogos   
     Se agregan los colores de los snackbars    
