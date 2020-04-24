@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
         this.showEmail = false;
         this.showRecovery = false;
   
-        this.ObtenerServicio.PostRequest('validarUsuario', 'APIREST', { Correo : this.loginData.email })
+        this.ObtenerServicio.PostRequest('Validar/Usuario', 'APIREST', { Correo : this.loginData.email })
         .subscribe((response: ResponseApiEntity)=>{
           this.loading = false;
           if(response.Success){
@@ -92,63 +92,35 @@ export class LoginComponent implements OnInit {
       this.loading = true;      
       this.showRecovery = false;
       this.Menu.MostrarProgress();
-      this.ObtenerServicio.PostRequest('sesionUsuario', 'APIREST', { Correo : this.loginData.email, Password : this.loginData.password})
+      this.ObtenerServicio.PostRequest('Sesion/Usuario', 'APIREST', { Correo : this.loginData.email, Password : this.loginData.password})
       .subscribe((response)=>{
         this.loading = false;
         if(response.Success){
-          let IdUsuario = response.Data[0].Id;
-          let NombreUsuario = response.Data[0].Nombre;
-          this.ObtenerServicio.PostRequest('obtenerMenus', 'APIREST', { IdUsuario : IdUsuario})
-          .subscribe((response)=>{
-            this.loading = false;
-            if(response.Success){
-              if(response.Data == null && response.Message == 'Token No Valido'){
-                sessionStorage.clear();
-                this.back();
-              }
-              else{
-                console.log(response);
-                let token = {
-                  Sesion: true,
-                  IdUsuario:     IdUsuario,
-                  NombreUsuario: NombreUsuario,
-                  Correo:        this.loginData.email
-                }
-                /* Guardamos datos en Sesion */
-                sessionStorage.removeItem('SessionCob');
-                sessionStorage.removeItem('Menus');
-                sessionStorage['Menus'] = JSON.stringify(response.Data.Menus);
-                sessionStorage['SessionCob'] = JSON.stringify(token);    
-                this.Menu.OcultarProgress();            
-                setTimeout(()=>{ this.route.navigate(['/Principal']); }, 200);            
-              }
-            }
-            else{
-              this.showPassword = true;
-              this.message = response.Message;
-              this.snackBar.open(this.message,'',{
-                duration: 2000
-              });
-            }
-          }, 
-          error => {
-            this.loading = false;
-            this.snackBar.open('','',{
+          this.Menu.OcultarProgress();
+          if(response.Data){
+            let Resultado = response.Data[0];
+            sessionStorage.removeItem('SessionCob');
+            sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Id, NombreUsuario: Resultado.Nombre});   
+            setTimeout(()=>{ this.route.navigate(['/Dashboard']); }, 200);
+          }
+          else{
+            this.showPassword = true;
+            this.message = response.Message;
+            this.snackBar.open('Contraseña incorrecta','',{
               duration: 2000
-            })
-          });
+            });            
+          }                    
         }
         else{
-          this.showPassword = true;
-          this.message = response.Message;
-          this.snackBar.open(this.message,'',{
-            duration: 2000
-          });
+          this.loading = false;
+            this.snackBar.open('Error de conexión','',{
+              duration: 2000
+            });
         }
       }, 
       error => {
         this.loading = false;
-        this.snackBar.open('','',{
+        this.snackBar.open('Error de conexión','',{
           duration: 2000
         })
       });

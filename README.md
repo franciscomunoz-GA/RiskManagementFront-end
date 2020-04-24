@@ -1,3 +1,8 @@
+# 2020-04-22
+    Se realiza el CRUD completo del catálogo tipo de riesgo 
+    Se agregan las rutas de todos los catálogos   
+    Se agregan los colores de los snackbars    
+    Se adapta el login al nuevo backend
 # 2020-04-21
     Se agrega el botón para poder descargar un excel desde un array 
     Se agrega validación con snackbar a la hora de eliminar un registro

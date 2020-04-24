@@ -7,11 +7,29 @@ import { LoginGuard } from './guardians/login.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EncuestasComponent } from './encuestas/encuestas.component';
 import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.component';
+import { CatalogoDimensionComponent } from './catalogo-dimension/catalogo-dimension.component';
+import { CatalogoTipoRiesgoComponent } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
+import { CatalogoCriterioComponent } from './catalogo-criterio/catalogo-criterio.component';
 
 const routes: Routes = [
   {
     path: 'CatalogoRiesgo',
     component: CatalogoRiesgoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'CatalogoDimension',
+    component: CatalogoDimensionComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'CatalogoTipoRiesgo',
+    component: CatalogoTipoRiesgoComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'CatalogoCriterio',
+    component: CatalogoCriterioComponent,
     canActivate: [AuthGuard]
   },
   {

@@ -59,6 +59,13 @@ import { EncuestasComponent,
 import { CatalogoRiesgoComponent,
          DialogRiesgo,
          DialogImportarRiesgo } from './catalogo-riesgo/catalogo-riesgo.component';
+import { CatalogoDimensionComponent,
+         DialogDimension,
+         DialogImportarDimension } from './catalogo-dimension/catalogo-dimension.component';
+import { CatalogoCriterioComponent } from './catalogo-criterio/catalogo-criterio.component';
+import { CatalogoTipoRiesgoComponent,
+         DialogTipoRiesgo,
+         DialogImportarTipoRiesgo } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
 
 @NgModule({
   declarations: [
@@ -70,8 +77,14 @@ import { CatalogoRiesgoComponent,
     DialogAgregarEncuesta,
     CatalogoRiesgoComponent,
     DialogRiesgo,
-    DialogImportarRiesgo
-    
+    DialogImportarRiesgo,
+    DialogDimension,
+    DialogImportarDimension,
+    CatalogoDimensionComponent,
+    CatalogoCriterioComponent,
+    CatalogoTipoRiesgoComponent,
+    DialogTipoRiesgo,
+    DialogImportarTipoRiesgo    
   ],
   imports: [
     BrowserModule,
@@ -119,7 +132,11 @@ import { CatalogoRiesgoComponent,
   entryComponents: [
     DialogAgregarEncuesta,
     DialogRiesgo,
-    DialogImportarRiesgo
+    DialogImportarRiesgo,
+    DialogDimension,
+    DialogImportarDimension,
+    DialogTipoRiesgo,
+    DialogImportarTipoRiesgo
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]

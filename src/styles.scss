@@ -3,3 +3,27 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :focus {outline:0 !important;}
+.blue-snackbar {
+    background: #01579B;
+    }
+    .green-snackbar {
+    background: #1B5E20;
+    }
+    .red-snackbar {
+    background: #B71C1C;
+    }
+    .orange-snackbar {
+    background: #E65100;
+    }
+    .mensaje-error{
+    color: #F44336;
+    }
+    .mensaje-success{
+    color: #4CAF50;
+    }
+    .mensaje-info{
+    color: #2196F3;
+    }
+    .mensaje-warning{
+    color: #ff9800;
+    }
