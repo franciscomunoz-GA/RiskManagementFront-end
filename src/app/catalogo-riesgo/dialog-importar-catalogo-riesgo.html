@@ -1,8 +1,9 @@
+<mat-progress-bar mode="indeterminate" *ngIf="Progressbar"></mat-progress-bar>
 <h1 mat-dialog-title>{{Titulo}}</h1>
 <div mat-dialog-content>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div align="center">
                     <mat-card class="example-card">
                         <mat-card-header>
@@ -14,9 +15,12 @@
                     </mat-card>   
                 </div>                                    
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <br>
+            <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="row">
+                  
                     <div class="col-12">
+                        <br>
                         <input type="file" accept=".xlsx, .xls, .csv" id="Excel">
                         <mat-divider></mat-divider>
                     </div>
@@ -24,7 +28,7 @@
                     <br>
                     <div class="col-12">
                         <div class="mat-elevation-z8">
-                            <table mat-table [dataSource]="dataSource">
+                            <table mat-table [dataSource]="Tabla">
                                                         
                               <ng-container matColumnDef="Numero">
                                 <th mat-header-cell *matHeaderCellDef> No. </th>
@@ -34,7 +38,27 @@
                               <ng-container matColumnDef="Nombre">
                                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
                                 <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
-                              </ng-container>                                                        
+                              </ng-container>
+                              <ng-container matColumnDef="Identificador">
+                                <th mat-header-cell *matHeaderCellDef> Identificador </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Identificador}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="Dimension">
+                                <th mat-header-cell *matHeaderCellDef> Dimensión </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Dimension}} </td>
+                              </ng-container> 
+                              <ng-container matColumnDef="TipoRiesgo">
+                                <th mat-header-cell *matHeaderCellDef> Tipo de riesgo </th>
+                                <td mat-cell *matCellDef="let element"> {{element.TipoRiesgo}} </td>
+                              </ng-container>                                                         
+                              <ng-container matColumnDef="Criterio">
+                                <th mat-header-cell *matHeaderCellDef> Criterio legal </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Criterio}} </td>
+                              </ng-container> 
+                              <ng-container matColumnDef="Area">
+                                <th mat-header-cell *matHeaderCellDef> Area </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Area}} </td>
+                              </ng-container> 
                           
                               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -52,5 +76,5 @@
 <div mat-dialog-actions align="right">
   <hr>  
   <button mat-button color="warn" (click)="onNoClick()">Cerrar</button>
-  <button mat-button color="primary" (click)="onNoClick()">Crear</button>
+  <button mat-button color="primary" (click)="Importar()">Importar</button>
 </div>

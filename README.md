@@ -1,4 +1,5 @@
 # 2020-04-23
+    Se realizan correcciones generales a las secciones anteriores
     Se realiza el CRUD completo del catálogo de criterios
 # 2020-04-22
     Se realiza el CRUD completo del catálogo de dimensiones

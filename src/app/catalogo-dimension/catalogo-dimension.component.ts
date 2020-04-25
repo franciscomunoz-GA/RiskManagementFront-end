@@ -145,11 +145,11 @@ export class CatalogoDimensionComponent implements OnInit {
  DialogModificar(Id){
    const dialogRef = this.dialog.open(DialogDimension, {
      width: '50vw',
-     data:   {Titulo: 'Modificar'}
+     data:  {Titulo: 'Modificar', Id: Id}
    });
 
    dialogRef.afterClosed().subscribe(result => {
-     console.log('The dialog was closed');      
+    this.TraerInformacion();       
    });
  }
  DialogImportar(){
@@ -216,7 +216,7 @@ export interface ImportElement {
  templateUrl: 'dialog-catalogo-dimension.html',
  styleUrls: ['./catalogo-dimension.component.scss']
 })
-export class DialogDimension {
+export class DialogDimension implements OnInit{
  // Servicio de api
  ObtenerServicio: any;
  // sesión
@@ -225,11 +225,20 @@ export class DialogDimension {
  Nombre: string;
  Titulo: string;  
  Progressbar: boolean = false;
+ Tipo: boolean = false;
  constructor(public dialogRef: MatDialogRef<DialogDimension>, @Inject(MAT_DIALOG_DATA) public data: any, public http: HttpClient, private snackBar: MatSnackBar,) {
      this.Titulo = data.Titulo;
      this.ObtenerServicio = new ServicioService(http);
  }
- 
+ ngOnInit(){
+  if(this.data.Titulo == 'Modificar'){
+    this.Detalle();
+    this.Tipo = false;
+  }
+  else{
+   this.Tipo = true;
+  }
+}
  onNoClick(): void {
    this.dialogRef.close();
  }
@@ -281,22 +290,81 @@ export class DialogDimension {
    }
  }
  Detalle(){
-   this.ObtenerServicio.PostRequest('validarUsuario', 'APIREST', {})
-   .subscribe((response)=>{      
-     if(response.Success){        
-     }
-     else{                
-       this.snackBar.open('','',{
-         duration: 2000
-       });
-     }
-   }, 
-   error => {      
-     this.snackBar.open('Error de conexión','',{
-       duration: 2000,
-       
-     })
-   });
+  this.Progressbar = true;
+  this.ObtenerServicio.PostRequest('Seleccionar/DimensionesD', 'APIREST', {Id: this.data.Id})
+  .subscribe((response)=>{   
+    this.Progressbar = false;             
+    if(response.Success){
+      if(response.Data){
+        let Resultado = response.Data[0];
+        this.Nombre = Resultado.Nombre;
+      }      
+      else{
+        this.snackBar.open('Error de conexión','',{
+          duration: 3000,
+          panelClass: ['mensaje-error']
+        });
+      }
+    }
+    else{                
+      this.snackBar.open('Error de conexión','',{
+        duration: 2000
+      });
+    }
+  }, 
+  error => {      
+    this.snackBar.open('Error de conexión','',{
+      duration: 2000,
+      
+    })
+  });
+ }
+ Modificar(){
+  if(this.Nombre != '' && this.Nombre != undefined){
+    this.Progressbar = true;
+    this.ObtenerServicio.PostRequest('Modificar/Dimensiones', 'APIREST', {Id: this.data.Id, Nombre: this.Nombre, IdUsuario: this.IdUsuario})
+    .subscribe((response)=>{   
+      this.Progressbar = false;             
+      if(response.Success){
+        if(response.Data > 0){
+          this.snackBar.open('Registro guardado correctamente','',{
+            duration: 3000,
+            panelClass: ['mensaje-success']
+          });
+          this.onNoClick();
+        }
+        else if(response.Data == 'Duplicado'){
+          this.snackBar.open('Ya existe un registro con el mismo nombre','',{
+            duration: 3000,
+            panelClass: ['mensaje-warning']
+          });
+        }
+        else{
+          this.snackBar.open('No ha sido creado el registro','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
+      }
+      else{                
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000
+        });
+      }
+    }, 
+    error => {      
+      this.snackBar.open('Error de conexión','',{
+        duration: 2000,
+        
+      })
+    });
+  }
+  else{
+    this.snackBar.open('Es necesario agregar el nombre del catálogo','',{
+      duration: 3000,
+      panelClass: ['mensaje-warning']
+    });
+  }
  }
 }
 

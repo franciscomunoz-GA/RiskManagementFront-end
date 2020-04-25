@@ -145,11 +145,11 @@ export class CatalogoTipoRiesgoComponent implements OnInit {
   DialogModificar(Id){
     const dialogRef = this.dialog.open(DialogTipoRiesgo, {
       width: '50vw',
-      data:   {Titulo: 'Modificar'}
+      data:  {Titulo: 'Modificar', Id: Id}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');      
+      this.TraerInformacion();   
     });
   }
   DialogImportar(){
@@ -216,7 +216,7 @@ export interface ImportElement {
   templateUrl: 'dialog-catalogo-tipo-riesgo.html',
   styleUrls: ['./catalogo-tipo-riesgo.component.scss']
 })
-export class DialogTipoRiesgo {
+export class DialogTipoRiesgo implements OnInit{
   // Servicio de api
   ObtenerServicio: any;
   // sesión
@@ -225,6 +225,7 @@ export class DialogTipoRiesgo {
   Nombre: string;
   Titulo: string;  
   Progressbar: boolean = false;
+  Tipo: boolean = false;
   constructor(public dialogRef: MatDialogRef<DialogTipoRiesgo>, @Inject(MAT_DIALOG_DATA) public data: any, public http: HttpClient, private snackBar: MatSnackBar,) {
       this.Titulo = data.Titulo;
       this.ObtenerServicio = new ServicioService(http);
@@ -232,6 +233,15 @@ export class DialogTipoRiesgo {
   
   onNoClick(): void {
     this.dialogRef.close();
+  }
+  ngOnInit(){
+    if(this.data.Titulo == 'Modificar'){
+      this.Detalle();
+      this.Tipo = false;
+    }
+    else{
+     this.Tipo = true;
+    }
   }
   Agregar(){
     if(this.Nombre != '' && this.Nombre != undefined){
@@ -281,12 +291,24 @@ export class DialogTipoRiesgo {
     }
   }
   Detalle(){
-    this.ObtenerServicio.PostRequest('validarUsuario', 'APIREST', {})
-    .subscribe((response)=>{      
-      if(response.Success){        
+    this.Progressbar = true;
+    this.ObtenerServicio.PostRequest('Seleccionar/RiskTypesD', 'APIREST', {Id: this.data.Id})
+    .subscribe((response)=>{   
+      this.Progressbar = false;             
+      if(response.Success){
+        if(response.Data){
+          let Resultado = response.Data[0];
+          this.Nombre = Resultado.Nombre;
+        }      
+        else{
+          this.snackBar.open('Error de conexión','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
       }
       else{                
-        this.snackBar.open('','',{
+        this.snackBar.open('Error de conexión','',{
           duration: 2000
         });
       }
@@ -297,7 +319,54 @@ export class DialogTipoRiesgo {
         
       })
     });
-  }
+   }
+   Modificar(){
+    if(this.Nombre != '' && this.Nombre != undefined){
+      this.Progressbar = true;
+      this.ObtenerServicio.PostRequest('Modificar/RiskTypes', 'APIREST', {Id: this.data.Id, Nombre: this.Nombre, IdUsuario: this.IdUsuario})
+      .subscribe((response)=>{   
+        this.Progressbar = false;             
+        if(response.Success){
+          if(response.Data > 0){
+            this.snackBar.open('Registro guardado correctamente','',{
+              duration: 3000,
+              panelClass: ['mensaje-success']
+            });
+            this.onNoClick();
+          }
+          else if(response.Data == 'Duplicado'){
+            this.snackBar.open('Ya existe un registro con el mismo nombre','',{
+              duration: 3000,
+              panelClass: ['mensaje-warning']
+            });
+          }
+          else{
+            this.snackBar.open('No ha sido creado el registro','',{
+              duration: 3000,
+              panelClass: ['mensaje-error']
+            });
+          }
+        }
+        else{                
+          this.snackBar.open('Error de conexión','',{
+            duration: 2000
+          });
+        }
+      }, 
+      error => {      
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000,
+          
+        })
+      });
+    }
+    else{
+      this.snackBar.open('Es necesario agregar el nombre del catálogo','',{
+        duration: 3000,
+        panelClass: ['mensaje-warning']
+      });
+    }
+   }
 }
 
 @Component({

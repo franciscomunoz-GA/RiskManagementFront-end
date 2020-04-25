@@ -15,5 +15,6 @@
 <div mat-dialog-actions align="right">
   <hr>  
   <button mat-button color="warn" (click)="onNoClick()">Cerrar</button>
-  <button mat-button color="primary" (click)="Agregar()">Crear</button>
+  <button mat-button color="primary" *ngIf="Tipo" (click)="Agregar()">Crear</button>
+  <button mat-button color="primary" *ngIf="!Tipo" (click)="Modificar()">Modificar</button>
 </div>
