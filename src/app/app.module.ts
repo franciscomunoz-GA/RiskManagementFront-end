@@ -62,7 +62,9 @@ import { CatalogoRiesgoComponent,
 import { CatalogoDimensionComponent,
          DialogDimension,
          DialogImportarDimension } from './catalogo-dimension/catalogo-dimension.component';
-import { CatalogoCriterioComponent } from './catalogo-criterio/catalogo-criterio.component';
+import { CatalogoCriterioComponent,
+         DialogCriterio,
+         DialogImportarCriterio } from './catalogo-criterio/catalogo-criterio.component';
 import { CatalogoTipoRiesgoComponent,
          DialogTipoRiesgo,
          DialogImportarTipoRiesgo } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
@@ -82,6 +84,8 @@ import { CatalogoTipoRiesgoComponent,
     DialogImportarDimension,
     CatalogoDimensionComponent,
     CatalogoCriterioComponent,
+    DialogCriterio,
+    DialogImportarCriterio,
     CatalogoTipoRiesgoComponent,
     DialogTipoRiesgo,
     DialogImportarTipoRiesgo    
@@ -136,7 +140,9 @@ import { CatalogoTipoRiesgoComponent,
     DialogDimension,
     DialogImportarDimension,
     DialogTipoRiesgo,
-    DialogImportarTipoRiesgo
+    DialogImportarTipoRiesgo,
+    DialogCriterio,
+    DialogImportarCriterio,
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]

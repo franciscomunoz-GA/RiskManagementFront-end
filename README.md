@@ -1,3 +1,5 @@
+# 2020-04-23
+    Se realiza el CRUD completo del catálogo de criterios
 # 2020-04-22
     Se realiza el CRUD completo del catálogo de dimensiones
     Se realiza el CRUD completo del catálogo tipo de riesgo 
