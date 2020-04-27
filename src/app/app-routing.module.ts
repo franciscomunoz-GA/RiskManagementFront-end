@@ -10,8 +10,14 @@ import { CatalogoRiesgoComponent } from './catalogo-riesgo/catalogo-riesgo.compo
 import { CatalogoDimensionComponent } from './catalogo-dimension/catalogo-dimension.component';
 import { CatalogoTipoRiesgoComponent } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
 import { CatalogoCriterioComponent } from './catalogo-criterio/catalogo-criterio.component';
+import { CatalogoAreaComponent } from './catalogo-area/catalogo-area.component';
 
 const routes: Routes = [
+  {
+    path: 'CatalogoArea',
+    component: CatalogoAreaComponent,
+    canActivate: [AuthGuard]
+  },
   {
     path: 'CatalogoRiesgo',
     component: CatalogoRiesgoComponent,

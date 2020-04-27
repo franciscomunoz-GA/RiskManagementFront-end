@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://172.16.1.35/apis/RiskManagementBackend/public/api/',
+  API: 'https://risk-management-backend-dot-systramer.uc.r.appspot.com/public/api/',
 };
 
 /*

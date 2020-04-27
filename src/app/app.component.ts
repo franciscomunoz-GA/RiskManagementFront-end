@@ -14,19 +14,20 @@ export class AppComponent implements OnInit {
   ShowNav:         Observable<boolean>;
   NombreUsuario:   Observable<string>;
   Menus:           Observable<any>;
-
-  ShowSidebar: boolean = false;
-  
+  color: Observable<string>;
+  ShowSidebar: boolean = false;  
   panelOpenState = false;
   constructor(private Menu: ValidarNavbarService, private Sidebar: ValidarNavbarService, public route: Router){
     this.NombreUsuario = this.Menu.ValorNombreUsuario;
     this.Menus         = this.Menu.ValorMenus;
+    
   }  
   ngOnInit() {
     this.ShowNav = this.Menu.ValorNav;
     this.ShowProgressbar = this.Menu.ValorProgessbar;
     this.Menu.MostrarNav();
-     
+    this.color = this.Menu.ValorBackground;
+    
   }
   procesaPropagar(mensaje){
     this.ShowSidebar = mensaje    

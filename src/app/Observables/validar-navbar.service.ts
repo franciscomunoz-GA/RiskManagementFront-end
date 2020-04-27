@@ -7,7 +7,7 @@ export class ValidarNavbarService {
   private Nav      = new BehaviorSubject<boolean>(true);
   private Progress = new BehaviorSubject<boolean>(true);
   private Sidebar  = new BehaviorSubject<boolean>(true);
-  
+  private Background  = new BehaviorSubject<string>('');
   private NombreUsuario = new BehaviorSubject<string>('');
   private Menus         = new BehaviorSubject<any>([]);
   
@@ -27,6 +27,9 @@ export class ValidarNavbarService {
   }
   get ValorNombreUsuario(){
     return this.NombreUsuario.asObservable();
+  }
+  get ValorBackground(){
+    return this.Background.asObservable();
   }
   ActualizarNombreUsuario(){
     let Usuario = JSON.parse(sessionStorage['SessionCob']).NombreUsuario;
@@ -55,5 +58,11 @@ export class ValidarNavbarService {
   }
   OcultarSidebar(){
     this.Sidebar.next(false);      
+  } 
+  MostrarBackground(){
+    this.Background.next('Fondo.jpg');           
+  }
+  OcultarBackground(){
+    this.Background.next('blue');      
   } 
 }

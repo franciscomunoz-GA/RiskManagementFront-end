@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { ValidarNavbarService } from '../Observables/validar-navbar.service';
 import { ServicioService }    from '../servicios/servicio.service';
 import { ResponseApiEntity } from '../servicios/responseApiEntity';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,26 +17,27 @@ export class LoginComponent implements OnInit {
     email : '',
     password : ''
   }
-  showEmail = true;
+  showEmail    = true;
   showPassword = false;
   showRecovery = true;
-  showContent = false;
-  loading = false;
-
+  showContent  = false;
+  loading      = false;
+  desarrollo: boolean = false;
   message : any;  
   
-
   constructor(public http: HttpClient, 
               public route: Router, 
               private snackBar: MatSnackBar,               
               private Menu: ValidarNavbarService){        
     
-    this.Menu.OcultarNav();
     this.ObtenerServicio = new ServicioService(http);
     this.showContent = true;
+    this.Menu.OcultarNav();
     this.Menu.OcultarProgress();
+    this.Menu.MostrarBackground();
   }
   ngOnInit() {    
+    this.desarrollo = environment.production;
   }
   nextLogin(){
     if(this.loginData.email == "")
@@ -143,8 +145,14 @@ export class LoginComponent implements OnInit {
   }
   ValidateEmail(Email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailReg.test( Email );   }
-   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
-}
+    return emailReg.test( Email );   
+  }
+  resolved(captchaResponse: string) {
+    if(captchaResponse.length == 0){
+      alert("Captcha no verificado")
+      } 
+      else {
+        this.desarrollo = false;
+      }
+  }
 }

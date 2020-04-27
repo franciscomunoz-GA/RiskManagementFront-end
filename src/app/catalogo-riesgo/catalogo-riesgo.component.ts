@@ -11,10 +11,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
 import { ThrowStmt } from '@angular/compiler';
+import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 export interface EstructuraCatalogo{
   Id:            number;
-  Nombre:        string;
-  Area:          string;
+  Nombre:        string;  
   Criterio:      string;
   Dimension:     string;
   TipoRiesgo:    string;
@@ -31,7 +31,7 @@ export interface EstructuraCatalogo{
 export class CatalogoRiesgoComponent implements OnInit {
   // Servicio API
  ObtenerServicio: any;
- displayedColumns: string[] = ['Nombre', 'Area', 'Criterio', 'Dimension', 'TipoRiesgo', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
+ displayedColumns: string[] = ['Nombre', 'Criterio', 'Dimension', 'TipoRiesgo', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
  Tabla: MatTableDataSource<EstructuraCatalogo>;
  Catalogo: EstructuraCatalogo[] = [];
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -185,7 +185,6 @@ export class CatalogoRiesgoComponent implements OnInit {
            this.Catalogo.push({ 
             Id:                element.Id, 
             Nombre:            element.Nombre,
-            Area:              element.Areas,
             TipoRiesgo:        element.TiposRiesgos,
             Dimension:         element.Dimension,
             Criterio:          element.CriteriosLegales,
@@ -233,13 +232,11 @@ export class DialogRiesgo implements OnInit{
 
  // Inputs
  Identificador: any;
- Area:          any;
  CriterioLegal: any;
  Dimension:     any;
  TipoRiesgo:    any;
 
- // Listados 
- Areas:            Array<string> = [];
+ // Listados
  Criterioslegales: Array<string> = [];
  Dimensiones:      Array<string> = [];
  TiposRiesgos:     Array<string> = [];
@@ -272,7 +269,6 @@ export class DialogRiesgo implements OnInit{
               IdDimension: this.Dimension,
               IdTRiesgo:   this.TipoRiesgo,
               IdCLegales:  this.CriterioLegal,
-              IdAreas:     this.Area,              
               IdUsuario:   this.IdUsuario})
             .subscribe((response)=>{   
               this.Progressbar = false;             
@@ -287,7 +283,6 @@ export class DialogRiesgo implements OnInit{
                   this.Dimension     = '';
                   this.TipoRiesgo    = '';
                   this.CriterioLegal = '';
-                  this.Area          = '';
                 }
                 else if(response.Data == 'Duplicado'){
                   this.snackBar.open('Ya existe un registro con el mismo nombre','',{
@@ -360,7 +355,6 @@ export class DialogRiesgo implements OnInit{
         let Resultado      = response.Data[0];
         this.Nombre        = Resultado.Nombre;
         this.Identificador = Resultado.IdRiesgo;
-        this.Area          = Resultado.IdAreas;
         this.CriterioLegal = Resultado.IdCriteriosLegales;
         this.Dimension     = Resultado.IdDimension;
         this.TipoRiesgo    = Resultado.IdTiposRiesgos;
@@ -393,7 +387,6 @@ export class DialogRiesgo implements OnInit{
     if(response.Success){
       if(response.Data){
         let Resultado = response.Data;
-        this.Areas            = Resultado.Areas;
         this.Criterioslegales = Resultado.CriteriosLegales;
         this.Dimensiones      = Resultado.Dimensiones;
         this.TiposRiesgos     = Resultado.TiposRiesgos;
@@ -431,7 +424,6 @@ export class DialogRiesgo implements OnInit{
       IdDimension: this.Dimension,
       IdTRiesgo:   this.TipoRiesgo,
       IdCLegales:  this.CriterioLegal,
-      IdAreas:     this.Area,
       IdUsuario:   this.IdUsuario})
     .subscribe((response)=>{   
       this.Progressbar = false;             
@@ -484,7 +476,6 @@ export interface ImportElement {
   Dimension:     string;
   TipoRiesgo:    string;
   Criterio:      string;
-  Area:          string;
  }
 @Component({
  selector: 'dialog-importar-catalogo-riesgo',
@@ -501,7 +492,7 @@ export class DialogImportarRiesgo implements OnInit {
  Titulo: string;
  Excel: any;
 
- displayedColumns: string[] = ['Numero', 'Nombre','Identificador', 'Dimension','TipoRiesgo', 'Criterio', 'Area'];
+ displayedColumns: string[] = ['Numero', 'Nombre','Identificador', 'Dimension','TipoRiesgo', 'Criterio'];
  Tabla = new MatTableDataSource<ImportElement>();
  RegistrosTabla:ImportElement[] = []
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -541,11 +532,6 @@ export class DialogImportarRiesgo implements OnInit {
       type: String,
       required: true
     },
-    'Area': {
-      prop: 'Area',
-      type: String,
-      required: true
-    },
    }
    this.Excel.addEventListener('change', () => {  
      this.RegistrosTabla = [];    
@@ -561,7 +547,6 @@ export class DialogImportarRiesgo implements OnInit {
              Dimension:     element.Dimension,
              TipoRiesgo:    element.TipoRiesgo,
              Criterio:      element.Criterio,
-             Area:          element.Area,
             });            
          });          
        }
@@ -584,18 +569,52 @@ export class DialogImportarRiesgo implements OnInit {
       "Dimension":     element.Dimension,
       "TipoRiesgo":    element.TipoRiesgo,
       "CriterioLegal": element.Criterio,
-      "Area":          element.Area});
+      "Area":          ''
+    });
    });
-     this.ObtenerServicio.PostRequest('Importar/Risk', 'APIREST', {Datos: JSON.stringify(Registros), IdUsuario: this.IdUsuario})
+     this.ObtenerServicio.PostRequest('Importar/Risk', 'APIREST', {
+       Datos: JSON.stringify(Registros), 
+       IdUsuario: this.IdUsuario
+      })
      .subscribe((response)=>{   
        this.Progressbar = false;             
        if(response.Success){
          if(response.Data){
            if(response.Data.Dato){
-            this.snackBar.open('Registros guardados correctamente','',{
-              duration: 3000,
-              panelClass: ['mensaje-success']
-            });            
+             let Resultado: string = '';
+             if(response.Data.Correctos.length > 0){
+               let contador: number;
+                response.Data.Correctos.forEach((element, index) => {
+                  contador = index+1;
+                });
+                Resultado = Resultado+" Insertados: "+contador;
+             }
+             else{
+              Resultado = Resultado+" Insertados: 0";
+             }
+             if(response.Data.Duplicados.length > 0){
+               let contador: number;
+                response.Data.Duplicados.forEach((element, index) => {
+                  contador = index+1;
+                });
+                Resultado = Resultado+" Duplicados: "+contador;
+             }
+             else{
+              Resultado = Resultado+" Duplicados: 0";
+             }
+             if(response.Data.Errores.length > 0){
+              let contador: number;
+              response.Data.Errores.forEach((element, index) => {
+                contador = index+1;
+              });
+              Resultado = Resultado+" Errores: "+contador;
+              }
+              else{
+              Resultado = Resultado+" Errores: 0";
+              }
+              this.snackBar.open(Resultado,'',{
+                duration: 6000,
+              });
            }
            else if(response.Data.Dato == 'Duplicado'){
             this.snackBar.open('Ya existe un registro con el mismo nombre','',{

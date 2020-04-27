@@ -68,6 +68,9 @@ import { CatalogoCriterioComponent,
 import { CatalogoTipoRiesgoComponent,
          DialogTipoRiesgo,
          DialogImportarTipoRiesgo } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
+import { CatalogoAreaComponent,
+         DialogArea,
+         DialogImportarArea } from './catalogo-area/catalogo-area.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +91,10 @@ import { CatalogoTipoRiesgoComponent,
     DialogImportarCriterio,
     CatalogoTipoRiesgoComponent,
     DialogTipoRiesgo,
-    DialogImportarTipoRiesgo    
+    DialogImportarTipoRiesgo,
+    CatalogoAreaComponent,
+    DialogArea,
+    DialogImportarArea
   ],
   imports: [
     BrowserModule,
@@ -143,6 +149,8 @@ import { CatalogoTipoRiesgoComponent,
     DialogImportarTipoRiesgo,
     DialogCriterio,
     DialogImportarCriterio,
+    DialogArea,
+    DialogImportarArea
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]

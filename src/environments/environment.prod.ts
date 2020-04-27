@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API: 'http://localhost/ASM-Back/public/api/',
+  API: 'https://risk-management-backend-dot-systramer.uc.r.appspot.com/public/api/',
 };

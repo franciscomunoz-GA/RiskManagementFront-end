@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
   isAuthenticated() {
     if(this.sessionService.validateSession()) {  
       this.Menu.MostrarNav();
+      this.Menu.OcultarBackground();
       //this.Menu.ActualizarMenu();
       this.Menu.ActualizarNombreUsuario();
       return true;
