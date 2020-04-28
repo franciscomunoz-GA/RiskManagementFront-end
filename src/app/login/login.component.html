@@ -29,7 +29,7 @@
 				<mat-spinner class="loadingSpin" [diameter]="40" *ngIf="loading"></mat-spinner>
 
         <button mat-raised-button color="primary" class="loginButton" *ngIf="showEmail" (window:keydown)="onKey($event)" (click)="nextLogin()">SIGUIENTE</button>
-        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="onKey($event)" (click)="makeLogin()" [disabled]="desarrollo">INGRESAR</button>
+        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="UserPass($event)" (click)="makeLogin()" [disabled]="disabled">INGRESAR</button>
 
         <!-- <div style="text-align: center; margin-top:1em" *ngIf="showRecovery">
           <button mat-button>Recuperar contraseña</button>

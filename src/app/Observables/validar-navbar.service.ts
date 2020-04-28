@@ -60,9 +60,9 @@ export class ValidarNavbarService {
     this.Sidebar.next(false);      
   } 
   MostrarBackground(){
-    this.Background.next('Fondo.jpg');           
+    this.Background.next('Fondo');           
   }
   OcultarBackground(){
-    this.Background.next('blue');      
+    this.Background.next(null);      
   } 
 }

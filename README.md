@@ -1,3 +1,5 @@
+# 2020-04-27
+    Corrección de la imagen de fondo en el login y el logo del sistema
 # 2020-04-23
     Se realizan correcciones generales a las secciones anteriores
     Se realiza el CRUD completo del catálogo de criterios

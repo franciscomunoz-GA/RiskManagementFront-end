@@ -1,5 +1,5 @@
 <mat-progress-bar class="progressbar" mode="indeterminate" *ngIf="ShowProgressbar | async"></mat-progress-bar>
-<mat-drawer-container class="example-container" autosize style="background-image: url('./assets/{{color  | async}}') ">
+<mat-drawer-container class="example-container {{color  | async}}" autosize>
     <mat-drawer  class="example-sidenav" mode="over" [(opened)]="ShowSidebar">
         <br>
         

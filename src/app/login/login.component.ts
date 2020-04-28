@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   showRecovery = true;
   showContent  = false;
   loading      = false;
-  desarrollo: boolean = false;
+  disabled: boolean = false;
   message : any;  
   
   constructor(public http: HttpClient, 
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.Menu.MostrarBackground();
   }
   ngOnInit() {    
-    this.desarrollo = environment.production;
+    this.disabled = environment.production;
   }
   nextLogin(){
     if(this.loginData.email == "")
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   }
   makeLogin(){
     if(this.loginData.password == ""){
-      this.snackBar.open('','',{
+      this.snackBar.open('No se ha ingresado una contraseña','',{
         duration: 2000
       });
     }
@@ -143,6 +143,13 @@ export class LoginComponent implements OnInit {
   public onKey(ev: any){
     this.showEmail ? ev.keyCode == 13 ? this.nextLogin() : null : ev.keyCode == 13 ? this.makeLogin() : null;
   }
+  UserPass(ev: any){
+    if(ev.keyCode == 13){
+      if(this.disabled == false){
+        this.makeLogin();
+      }
+    }    
+  }
   ValidateEmail(Email) {
     var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return emailReg.test( Email );   
@@ -152,7 +159,7 @@ export class LoginComponent implements OnInit {
       alert("Captcha no verificado")
       } 
       else {
-        this.desarrollo = false;
+        this.disabled = false;
       }
   }
 }
