@@ -1,3 +1,8 @@
+# 2020-04-30
+    Se cambia el logo
+    Se crea el archivo app.yaml (para subirlo app engine)
+    Se modifica angular.json (segun documentacion para subir el proyecto)
+    Se realiza modificaciones en los catálogos para que se puedan descargar las plantillas
 # 2020-04-27
     Corrección de la imagen de fondo en el login y el logo del sistema
 # 2020-04-23

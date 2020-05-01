@@ -1,0 +1,16 @@
+
+# [START runtime]
+service: risk-management-front
+runtime: python27
+threadsafe: yes
+# [END runtime]
+handlers:
+- url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+  static_files: dist/\1
+  upload: dist/(.*)(|\.map)
+
+- url: /(.*)
+  static_files: dist/index.html
+  upload: dist/index.html
+skip_files:
+- ^(?!dist)  # Skip any files not in the dist folder

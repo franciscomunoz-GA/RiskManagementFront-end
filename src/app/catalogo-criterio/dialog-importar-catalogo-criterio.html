@@ -3,14 +3,17 @@
 <div mat-dialog-content>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6">
+            <div class="col-xs-12 col-sm-12 col-md-5">
                 <div align="center">
                     <mat-card class="example-card">
                         <mat-card-header>
                         </mat-card-header>
                         <img mat-card-image src="../../assets/PlantillaCriteriosLegales.png">
                         <mat-card-content>
-                          <p>Ejemplo del documento necesitado</p>
+                          Ejemplo del documento XLSX requerido &nbsp;
+                          <button mat-mini-fab color="primary" matTooltip="Descargar plantilla" (click)="exportAsXLSX()">
+                              <mat-icon>insert_drive_file</mat-icon>
+                          </button>
                         </mat-card-content>                    
                     </mat-card>   
                 </div>                                    
@@ -18,6 +21,7 @@
             <div class="col-xs-12 col-sm-12 col-md-6">
                 <div class="row">
                     <div class="col-12">
+                        <mat-card-title>Documento XLSX</mat-card-title>
                         <input type="file" accept=".xlsx, .xls, .csv" id="Excel">
                         <mat-divider></mat-divider>
                     </div>

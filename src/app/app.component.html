@@ -1,19 +1,19 @@
 <mat-progress-bar class="progressbar" mode="indeterminate" *ngIf="ShowProgressbar | async"></mat-progress-bar>
 <mat-drawer-container class="example-container {{color  | async}}" autosize>
-    <mat-drawer  class="example-sidenav" mode="over" [(opened)]="ShowSidebar">
-        <br>
-        
-        <!-- {{NombreUsuario | async}} -->
-        
+    <mat-drawer  class="example-sidenav" mode="push" [(opened)]="ShowSidebar">
+        <br>        
+        <!-- {{NombreUsuario | async}} -->        
         <div align="center">
             <button mat-icon-button (click)="CerrarSideMenu()">
                 <mat-icon>menu</mat-icon>
             </button>
             &nbsp;
-            <img src="./assets/logo.png" width="auto" height="50" alt="">
+            <img src="./assets/logo_horizontal.png" width="auto" height="50" alt="">
         </div>
         <mat-divider></mat-divider>
-    
+        <mat-nav-list>
+            <a mat-list-item routerLink="/Dashboard"><mat-icon color="primary">bar_chart</mat-icon> &nbsp; Dashboard </a>
+        </mat-nav-list>
         <mat-divider></mat-divider>
         <div align="center"> 
             <mat-accordion>

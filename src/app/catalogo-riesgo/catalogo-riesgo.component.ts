@@ -496,12 +496,19 @@ export class DialogImportarRiesgo implements OnInit {
  Tabla = new MatTableDataSource<ImportElement>();
  RegistrosTabla:ImportElement[] = []
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+ Catalogo = [{'Nombre': '', 'Identificador': '', 'Dimension': '', 'Tipo de riesgo': '', 'Criterio legal': ''}];
  constructor(public dialogRef: MatDialogRef<DialogRiesgo>,
-             @Inject(MAT_DIALOG_DATA) public data: any, public http: HttpClient, private snackBar: MatSnackBar,) {
+             @Inject(MAT_DIALOG_DATA) public data: any, 
+             public http: HttpClient, 
+             private snackBar: MatSnackBar,
+             private excelService:ExcelService) {
    this.Titulo = data.Titulo;
    this.Tabla = new MatTableDataSource(this.RegistrosTabla);
    this.ObtenerServicio = new ServicioService(http);
  } 
+ exportAsXLSX():void {
+  this.excelService.exportAsExcelFile(this.Catalogo, 'PantillaRiesgos');
+  }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;
 

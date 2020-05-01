@@ -155,7 +155,7 @@ export class CatalogoCriterioComponent implements OnInit {
  }
  DialogImportar(){
    const dialogRef = this.dialog.open(DialogImportarCriterio, {
-     width: '80vw',
+     width: '70vw',
      data:   {Titulo: 'Importar'}
    });
 
@@ -388,12 +388,19 @@ export class DialogImportarCriterio implements OnInit {
  Tabla = new MatTableDataSource<ImportElement>();
  RegistrosTabla:ImportElement[] = []
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+ Catalogo = [{Nombre: ''}];
  constructor(public dialogRef: MatDialogRef<DialogCriterio>,
-             @Inject(MAT_DIALOG_DATA) public data: any, public http: HttpClient, private snackBar: MatSnackBar,) {
+             @Inject(MAT_DIALOG_DATA) public data: any, 
+             public http: HttpClient, 
+             private snackBar: MatSnackBar,
+             private excelService:ExcelService) {
    this.Titulo = data.Titulo;
    this.Tabla = new MatTableDataSource(this.RegistrosTabla);
    this.ObtenerServicio = new ServicioService(http);
  } 
+ exportAsXLSX():void {
+  this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaAreas');
+  }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;
 

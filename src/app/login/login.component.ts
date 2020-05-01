@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
     this.Menu.MostrarBackground();
   }
   ngOnInit() {    
-    this.disabled = environment.production;
+    // this.disabled = environment.production;
+    this.disabled = false;
   }
   nextLogin(){
     if(this.loginData.email == "")

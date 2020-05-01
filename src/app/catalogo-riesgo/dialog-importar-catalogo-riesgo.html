@@ -10,7 +10,10 @@
                         </mat-card-header>
                         <img mat-card-image src="../../assets/PlantillaRiesgo.png">
                         <mat-card-content>
-                          <p>Ejemplo del documento necesitado</p>
+                          Ejemplo del documento XLSX requerido &nbsp;
+                          <button mat-mini-fab color="primary" matTooltip="Descargar plantilla" (click)="exportAsXLSX()">
+                              <mat-icon>insert_drive_file</mat-icon>
+                          </button>
                         </mat-card-content>                    
                     </mat-card>   
                 </div>                                    
@@ -21,6 +24,7 @@
                   
                     <div class="col-12">
                         <br>
+                        <mat-card-title>Documento XLSX</mat-card-title>
                         <input type="file" accept=".xlsx, .xls, .csv" id="Excel">
                         <mat-divider></mat-divider>
                     </div>
