@@ -13,8 +13,7 @@
         <mat-form-field class="fullWidth" *ngIf="showEmail">
           <mat-icon matPrefix style="margin-right: 0.5em">person</mat-icon>
           <input autocomplete="off" matInput type="email" placeholder="Email de empleado" [(ngModel)]="loginData.email">
-        </mat-form-field>
-
+        </mat-form-field>        
         <div *ngIf="showPassword" class="containerLabel">
           <mat-icon style="margin-right: 0.5em">person</mat-icon>
           <label>{{ loginData.email }}</label>
@@ -24,12 +23,12 @@
           <mat-icon matPrefix style="margin-right: 0.5em">vpn_key</mat-icon>
           <input autofocus matInput type="password" placeholder="Contraseña" [(ngModel)]="loginData.password">
         </mat-form-field>
-        <re-captcha *ngIf="showPassword" (resolved)="resolved($event)" siteKey="6LcS7O0UAAAAANXULMQfpwME6MYvFt49vx47QR9X"></re-captcha>
+        <re-captcha *ngIf="showPassword" (resolved)="resolved($event)" siteKey="6LdkHPEUAAAAAOgAO8WGG0oyOrlyKZol3mFBXtb-"></re-captcha>
         <!-- Loading Animation -->
 				<mat-spinner class="loadingSpin" [diameter]="40" *ngIf="loading"></mat-spinner>
 
         <button mat-raised-button color="primary" class="loginButton" *ngIf="showEmail" (window:keydown)="onKey($event)" (click)="nextLogin()">SIGUIENTE</button>
-        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="UserPass($event)" (click)="makeLogin()">INGRESAR</button>
+        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="UserPass($event)" (click)="makeLogin()" [disabled]="disabled">INGRESAR</button>
 
         <!-- <div style="text-align: center; margin-top:1em" *ngIf="showRecovery">
           <button mat-button>Recuperar contraseña</button>

@@ -1,11 +1,13 @@
 # 2020-05-02
     Se le agrega el scroll a las tablas para que sean responsivas 100%    
+    Se le agregar el MIME type="text/javascript" para importar los archivos js
+    Se agrega la validación el recaptcha en productivo
+    Se agrega la funcionalidad de cerrar el sidenav a la hora de entrar a una sección
 # 2020-04-30
     Se cambia el logo
     Se crea el archivo app.yaml (para subirlo app engine)
     Se modifica angular.json (segun documentacion para subir el proyecto)
-    Se realiza modificaciones en los catálogos para que se puedan descargar las plantillas
-    
+    Se realiza modificaciones en los catálogos para que se puedan descargar las plantillas    
 # 2020-04-27
     Corrección de la imagen de fondo en el login y el logo del sistema
 # 2020-04-23

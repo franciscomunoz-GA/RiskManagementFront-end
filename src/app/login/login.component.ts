@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   showRecovery = true;
   showContent  = false;
   loading      = false;
-  disabled: boolean = false;
+  disabled: boolean = true;
   message : any;  
   
   constructor(public http: HttpClient, 
@@ -36,9 +36,10 @@ export class LoginComponent implements OnInit {
     this.Menu.OcultarProgress();
     this.Menu.MostrarBackground();
   }
+
   ngOnInit() {    
-    // this.disabled = environment.production;
-    this.disabled = false;
+    this.disabled = environment.production;
+    // this.disabled = false;
   }
   nextLogin(){
     if(this.loginData.email == "")

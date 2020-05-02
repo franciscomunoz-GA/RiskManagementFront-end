@@ -1,6 +1,6 @@
 <mat-progress-bar class="progressbar" mode="indeterminate" *ngIf="ShowProgressbar | async"></mat-progress-bar>
 <mat-drawer-container class="example-container {{color  | async}}" autosize>
-    <mat-drawer  class="example-sidenav" mode="push" [(opened)]="ShowSidebar">
+    <mat-drawer  class="example-sidenav" mode="over" [(opened)]="ShowSidebar">
         <br>        
         <!-- {{NombreUsuario | async}} -->        
         <div align="center">
@@ -27,11 +27,11 @@
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <mat-nav-list>
-                      <a mat-list-item routerLink="/CatalogoArea"> De área </a>
-                      <a mat-list-item routerLink="/CatalogoCriterio"> De criterio legal</a>
-                      <a mat-list-item routerLink="/CatalogoDimension"> De dimensión </a>
-                      <a mat-list-item routerLink="/CatalogoTipoRiesgo"> De tipo de riesgo </a>
-                      <a mat-list-item routerLink="/CatalogoRiesgo"> De riesgo </a>
+                      <a mat-list-item routerLink="/CatalogoArea" (click)="CerrarSideMenu()"> De área </a>
+                      <a mat-list-item routerLink="/CatalogoCriterio" (click)="CerrarSideMenu()"> De criterio legal</a>
+                      <a mat-list-item routerLink="/CatalogoDimension" (click)="CerrarSideMenu()"> De dimensión </a>
+                      <a mat-list-item routerLink="/CatalogoTipoRiesgo" (click)="CerrarSideMenu()"> De tipo de riesgo </a>
+                      <a mat-list-item routerLink="/CatalogoRiesgo" (click)="CerrarSideMenu()"> De riesgo </a>
                   </mat-nav-list>
                 </mat-expansion-panel>
                 <!--<mat-expansion-panel (opened)="panelOpenState = true"
