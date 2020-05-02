@@ -1,5 +1,6 @@
 table {
     width: 100%;
+    min-width: 800px !important;
   }
   
   .mat-form-field {
@@ -8,7 +9,8 @@ table {
   }
   
   td, th {
-    width: 14.28%;
+    width: 16.66%;
+    padding-right: 1em;
   }
   .example-full-width {
     width: 100%;
