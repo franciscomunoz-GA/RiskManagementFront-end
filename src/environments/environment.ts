@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'https://risk-management-backend-dot-systramer.uc.r.appspot.com/public/api/',
+  API: 'http://cuenta-cuentas.com/backend/public/api/',
 };
 
 /*

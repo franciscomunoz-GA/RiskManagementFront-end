@@ -33,6 +33,10 @@
             </div>
                 <div class="mat-elevation-z8" style="overflow: auto;">
                   <table mat-table [dataSource]="Tabla" matSort>                  
+                    <ng-container matColumnDef="Identificador">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Identificador </th>
+                      <td mat-cell *matCellDef="let row"> {{row.Identificador}} </td>
+                    </ng-container>
                     <ng-container matColumnDef="Nombre">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
                       <td mat-cell *matCellDef="let row"> {{row.Nombre}} </td>

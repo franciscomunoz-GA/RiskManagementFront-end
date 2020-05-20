@@ -14,6 +14,7 @@ import { ThrowStmt } from '@angular/compiler';
 import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 export interface EstructuraCatalogo{
   Id:            number;
+  Identificador: string;
   Nombre:        string;  
   Criterio:      string;
   Dimension:     string;
@@ -31,7 +32,7 @@ export interface EstructuraCatalogo{
 export class CatalogoRiesgoComponent implements OnInit {
   // Servicio API
  ObtenerServicio: any;
- displayedColumns: string[] = ['Nombre', 'Criterio', 'Dimension', 'TipoRiesgo', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
+ displayedColumns: string[] = ['Nombre', 'Identificador', 'Criterio', 'Dimension', 'TipoRiesgo', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
  Tabla: MatTableDataSource<EstructuraCatalogo>;
  Catalogo: EstructuraCatalogo[] = [];
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -183,7 +184,8 @@ export class CatalogoRiesgoComponent implements OnInit {
              Estatus = false;
            }
            this.Catalogo.push({ 
-            Id:                element.Id, 
+            Id:                element.Id,
+            Identificador:     element.IdRiesgo, 
             Nombre:            element.Nombre,
             TipoRiesgo:        element.TiposRiesgos,
             Dimension:         element.Dimension,
