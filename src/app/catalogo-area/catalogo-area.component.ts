@@ -27,6 +27,8 @@ export interface EstructuraCatalogo{
 export class CatalogoAreaComponent implements OnInit {
 // Servicio API
  ObtenerServicio: any;
+ // sesión
+ IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
  displayedColumns: string[] = ['Nombre', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
  Tabla: MatTableDataSource<EstructuraCatalogo>;
  Catalogo: EstructuraCatalogo[] = [];
@@ -165,7 +167,9 @@ export class CatalogoAreaComponent implements OnInit {
  TraerInformacion(){    
    this.Catalogo = [];
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Seleccionar/Areas', 'APIREST', {})
+   this.ObtenerServicio.PostRequest('Seleccionar/Areas', 'APIREST', {
+    IdUsuario: this.IdUsuario
+   })
    .subscribe((response)=>{
      this.Menu.OcultarProgress();
      if(response.Success){
@@ -291,7 +295,10 @@ export class DialogArea implements OnInit{
  }
  Detalle(){
   this.Progressbar = true;
-  this.ObtenerServicio.PostRequest('Seleccionar/AreasD', 'APIREST', {Id: this.data.Id})
+  this.ObtenerServicio.PostRequest('Seleccionar/AreasD', 'APIREST', {
+    Id: this.data.Id,
+    IdUsuario: this.IdUsuario
+  })
   .subscribe((response)=>{   
     this.Progressbar = false;             
     if(response.Success){
@@ -322,7 +329,11 @@ export class DialogArea implements OnInit{
  Modificar(){
   if(this.Nombre != '' && this.Nombre != undefined){
     this.Progressbar = true;
-    this.ObtenerServicio.PostRequest('Modificar/Areas', 'APIREST', {Id: this.data.Id, Nombre: this.Nombre, IdUsuario: this.IdUsuario})
+    this.ObtenerServicio.PostRequest('Modificar/Areas', 'APIREST', {
+      Id: this.data.Id, 
+      Nombre: this.Nombre, 
+      IdUsuario: this.IdUsuario
+    })
     .subscribe((response)=>{   
       this.Progressbar = false;             
       if(response.Success){

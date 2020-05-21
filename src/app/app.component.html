@@ -19,7 +19,7 @@
         <mat-divider></mat-divider>
         <div align="center"> 
             <mat-accordion>
-                <mat-expansion-panel>
+                <mat-expansion-panel *ngIf="(ShowCatalogoArea || ShowCatalogoCriterioLegal || ShowCatalogoDimension || ShowCatalogoTipoRiesgo || ShowCatalogoRiesgos) | async">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                         <mat-icon color="primary">library_books</mat-icon>                                               
@@ -29,13 +29,37 @@
                     </mat-panel-description>
                   </mat-expansion-panel-header>
                   <mat-nav-list>
-                      <a mat-list-item routerLink="/CatalogoArea" (click)="CerrarSideMenu()"> De área </a>
-                      <a mat-list-item routerLink="/CatalogoCriterio" (click)="CerrarSideMenu()"> De criterio legal</a>
-                      <a mat-list-item routerLink="/CatalogoDimension" (click)="CerrarSideMenu()"> De dimensión </a>
-                      <a mat-list-item routerLink="/CatalogoTipoRiesgo" (click)="CerrarSideMenu()"> De tipo de riesgo </a>
-                      <a mat-list-item routerLink="/CatalogoRiesgo" (click)="CerrarSideMenu()"> De riesgo </a>
+                      <a mat-list-item routerLink="/CatalogoArea"       (click)="CerrarSideMenu()" *ngIf="ShowCatalogoArea | async"> 
+                        De área 
+                      </a>
+                      <a mat-list-item routerLink="/CatalogoCriterio"   (click)="CerrarSideMenu()" *ngIf="ShowCatalogoCriterioLegal | async"> 
+                        De criterio legal
+                      </a>
+                      <a mat-list-item routerLink="/CatalogoDimension"  (click)="CerrarSideMenu()" *ngIf="ShowCatalogoDimension | async"> 
+                        De dimensión 
+                      </a>
+                      <a mat-list-item routerLink="/CatalogoTipoRiesgo" (click)="CerrarSideMenu()" *ngIf="ShowCatalogoTipoRiesgo | async"> 
+                        De tipo de riesgo 
+                      </a>
+                      <a mat-list-item routerLink="/CatalogoRiesgo"     (click)="CerrarSideMenu()" *ngIf="ShowCatalogoRiesgos | async"> 
+                        De riesgo 
+                      </a>
                   </mat-nav-list>
                 </mat-expansion-panel>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                          <mat-icon color="primary">assignment</mat-icon>                                               
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        Encuestas
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-nav-list>
+                        <a mat-list-item routerLink="/RiesgosPuntosInteres" (click)="CerrarSideMenu()"> Riesgos y puntos de interés </a>
+                        <a mat-list-item routerLink="/CatalogoCriterio" (click)="CerrarSideMenu()"> De criterio legal</a>                        
+                    </mat-nav-list>
+                  </mat-expansion-panel>
                 <!--<mat-expansion-panel (opened)="panelOpenState = true"
                                      (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>

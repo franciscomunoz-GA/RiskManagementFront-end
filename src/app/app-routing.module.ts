@@ -11,32 +11,38 @@ import { CatalogoDimensionComponent } from './catalogo-dimension/catalogo-dimens
 import { CatalogoTipoRiesgoComponent } from './catalogo-tipo-riesgo/catalogo-tipo-riesgo.component';
 import { CatalogoCriterioComponent } from './catalogo-criterio/catalogo-criterio.component';
 import { CatalogoAreaComponent } from './catalogo-area/catalogo-area.component';
+import { RiesgosPuntosdeinteresComponent } from './riesgos-puntosdeinteres/riesgos-puntosdeinteres.component';
+import { CatalogoAreaGuard } from './guardians/catalogo-area.guard';
+import { CatalogoCriterioGuard } from './guardians/catalogo-criterio.guard';
+import { CatalogoDimensionGuard } from './guardians/catalogo-dimension.guard';
+import { CatalogoRiesgoGuard } from './guardians/catalogo-riesgo.guard';
+import { CatalogoTipoRiesgoGuard } from './guardians/catalogo-tipo-riesgo.guard';
 
 const routes: Routes = [
   {
     path: 'CatalogoArea',
     component: CatalogoAreaComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'CatalogoRiesgo',
-    component: CatalogoRiesgoComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'CatalogoDimension',
-    component: CatalogoDimensionComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'CatalogoTipoRiesgo',
-    component: CatalogoTipoRiesgoComponent,
-    canActivate: [AuthGuard]
+    canActivate: [CatalogoAreaGuard]
   },
   {
     path: 'CatalogoCriterio',
     component: CatalogoCriterioComponent,
-    canActivate: [AuthGuard]
+    canActivate: [CatalogoCriterioGuard]
+  },
+  {
+    path: 'CatalogoDimension',
+    component: CatalogoDimensionComponent,
+    canActivate: [CatalogoDimensionGuard]
+  },
+  {
+    path: 'CatalogoRiesgo',
+    component: CatalogoRiesgoComponent,
+    canActivate: [CatalogoRiesgoGuard]
+  },
+  {
+    path: 'CatalogoTipoRiesgo',
+    component: CatalogoTipoRiesgoComponent,
+    canActivate: [CatalogoTipoRiesgoGuard]
   },
   {
     path: 'Dashboard',
@@ -57,7 +63,10 @@ const routes: Routes = [
     path: 'nav',
     component: NavbarComponent
   },
-
+  {
+    path: 'RiesgosPuntosInteres',
+    component: RiesgosPuntosdeinteresComponent
+  },
   { 
     path: '', 
     redirectTo: '/Dashboard',

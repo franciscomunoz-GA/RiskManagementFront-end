@@ -32,6 +32,8 @@ export interface EstructuraCatalogo{
 export class CatalogoRiesgoComponent implements OnInit {
   // Servicio API
  ObtenerServicio: any;
+ // sesión
+ IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
  displayedColumns: string[] = ['Nombre', 'Identificador', 'Criterio', 'Dimension', 'TipoRiesgo', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
  Tabla: MatTableDataSource<EstructuraCatalogo>;
  Catalogo: EstructuraCatalogo[] = [];
@@ -170,7 +172,9 @@ export class CatalogoRiesgoComponent implements OnInit {
  TraerInformacion(){    
    this.Catalogo = [];
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Seleccionar/Risk', 'APIREST', {})
+   this.ObtenerServicio.PostRequest('Seleccionar/Risk', 'APIREST', {
+    IdUsuario: this.IdUsuario
+   })
    .subscribe((response)=>{
      this.Menu.OcultarProgress();
      if(response.Success){

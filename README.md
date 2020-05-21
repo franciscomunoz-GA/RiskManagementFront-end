@@ -1,4 +1,11 @@
-# 2020-05-02 (V 1.2.7)
+# 2020-05-20 (V 1.3.0)
+    Se crean guardianes para validar que se tenga acceso a cada sección
+    Se muestra el menú dependiendo de los permisos que se tengan
+    Se agregan los guardianes al app-routing
+    Se modifican las secciones para que solo se muestre la información si se tiene permiso (por si llegaran a fallar los guardianes)
+    Se crean nuevos observables para poder armar las secciones dinamicamente
+    Se modifica el login para tomar más información del usuario (permisos)
+# 2020-05-19 (V 1.2.7)
     Se agregan iconos al sidenav
     Se agrega la columna de identificador a la tabla en riesgos
     Se agrega el scrow a las tablas que faltan

@@ -3,13 +3,17 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs';
 import { SessionValidate } from '../servicios/session-validate.service';
 import { ValidarNavbarService } from '../Observables/validar-navbar.service';
+import { PermisosSeccionesService } from '../Observables/permisos-secciones.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private Menu: ValidarNavbarService, private router:Router, private sessionService: SessionValidate) {}
+  constructor(private Menu: ValidarNavbarService, 
+              private Permisos: PermisosSeccionesService, 
+              private router:Router, 
+              private sessionService: SessionValidate) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -23,6 +27,12 @@ export class AuthGuard implements CanActivate {
       this.Menu.OcultarBackground();
       //this.Menu.ActualizarMenu();
       this.Menu.ActualizarNombreUsuario();
+      // Permisos
+      this.Permisos.AccesoCatalogoArea();
+      this.Permisos.AccesoCatalogoDimension();
+      this.Permisos.AccesoCatalogoCriterioLegal();
+      this.Permisos.AccesoCatalogoRiesgos();
+      this.Permisos.AccesoCatalogoTipoRiesgo();
       return true;
     } 
     else {      

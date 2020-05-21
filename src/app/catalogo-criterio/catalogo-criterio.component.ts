@@ -28,6 +28,8 @@ export interface EstructuraCatalogo{
 export class CatalogoCriterioComponent implements OnInit {
 // Servicio API
  ObtenerServicio: any;
+ // sesión
+ IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
  displayedColumns: string[] = ['Nombre', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
  Tabla: MatTableDataSource<EstructuraCatalogo>;
  Catalogo: EstructuraCatalogo[] = [];
@@ -166,7 +168,9 @@ export class CatalogoCriterioComponent implements OnInit {
  TraerInformacion(){    
    this.Catalogo = [];
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Seleccionar/LegalStandards', 'APIREST', {})
+   this.ObtenerServicio.PostRequest('Seleccionar/LegalStandards', 'APIREST', {
+    IdUsuario: this.IdUsuario
+   })
    .subscribe((response)=>{
      this.Menu.OcultarProgress();
      if(response.Success){

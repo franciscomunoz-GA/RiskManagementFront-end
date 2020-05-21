@@ -67,7 +67,8 @@ export class LoginComponent implements OnInit {
           if(response.Success){
             this.showPassword = true;
             this.showRecovery = true;
-          }else{
+          }
+          else{
             this.showEmail = true;
             this.message = response.Message;
             this.snackBar.open(this.message,'',{
@@ -102,9 +103,9 @@ export class LoginComponent implements OnInit {
         if(response.Success){
           this.Menu.OcultarProgress();
           if(response.Data){
-            let Resultado = response.Data[0];
+            let Resultado = response.Data;
             sessionStorage.removeItem('SessionCob');
-            sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Id, NombreUsuario: Resultado.Nombre});   
+            sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
             setTimeout(()=>{ this.route.navigate(['/Dashboard']); }, 200);
           }
           else{
