@@ -12,6 +12,7 @@ import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
 import { ThrowStmt } from '@angular/compiler';
 import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
+import { ValidarPermisoService } from '../servicios/validar-permiso.service';
 export interface EstructuraCatalogo{
   Id:            number;
   Identificador: string;
@@ -40,14 +41,24 @@ export class CatalogoRiesgoComponent implements OnInit {
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+ //Permisos
+ Create: boolean = false;
+ Update: boolean = false;
+ Delete: boolean = false;
  constructor(public dialog: MatDialog, 
              private Menu: ValidarNavbarService, 
              private excelService:ExcelService, 
              private snackBar: MatSnackBar, 
-             public http: HttpClient,) {
+             public http: HttpClient,
+             private Permiso: ValidarPermisoService) {
    this.ObtenerServicio = new ServicioService(http);
    this.Menu.OcultarProgress();
    this.Tabla = new MatTableDataSource(this.Catalogo);
+
+   //Permisos   
+   this.Create = Permiso.ValidarPermiso('crear riesgos');
+   this.Update = Permiso.ValidarPermiso('editar riesgos');
+   this.Delete = Permiso.ValidarPermiso('eliminar riesgos');
  }
  exportAsXLSX():void {
    this.excelService.exportAsExcelFile(this.Catalogo, 'CatalogoRiesgos');

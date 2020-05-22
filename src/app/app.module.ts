@@ -71,6 +71,7 @@ import { CatalogoTipoRiesgoComponent,
 import { CatalogoAreaComponent,
          DialogArea,
          DialogImportarArea } from './catalogo-area/catalogo-area.component';
+import { RiesgosPuntosdeinteresComponent } from './riesgos-puntosdeinteres/riesgos-puntosdeinteres.component';
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { CatalogoAreaComponent,
     DialogImportarTipoRiesgo,
     CatalogoAreaComponent,
     DialogArea,
-    DialogImportarArea
+    DialogImportarArea,
+    RiesgosPuntosdeinteresComponent
   ],
   imports: [
     BrowserModule,

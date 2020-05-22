@@ -1,3 +1,6 @@
+# 2020-05-21 (V 1.4.0)
+    Se agrega validación de los permisos a las actividades que puede realizar por sección
+    Se crea servicio para validar por actividad y por sección
 # 2020-05-21 (V 1.3.2)
     Se corrigen los guardianes agregando que cada guardian pueda armar el menu y evitar una posible falla después    
 # 2020-05-21 (V 1.3.1)

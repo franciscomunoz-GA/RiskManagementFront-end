@@ -14,12 +14,12 @@
               <div class="col-xs-12 col-sm-2 col-md-2 offset-md-2">
                   <div class="row">                        
                       <div class="col-3">
-                          <button mat-mini-fab color="primary" matTooltip="Agregar registro" (click)="DialogAgregar()">
+                          <button mat-mini-fab color="primary" matTooltip="Agregar registro" (click)="DialogAgregar()" *ngIf="Create">
                               <mat-icon>add</mat-icon>
                           </button>
                       </div>
                       <div class="col-3">
-                          <button mat-mini-fab color="primary" matTooltip="Importar registros" (click)="DialogImportar()">
+                          <button mat-mini-fab color="primary" matTooltip="Importar registros" (click)="DialogImportar()" *ngIf="Create">
                               <mat-icon>cloud_upload</mat-icon>
                           </button>
                       </div>
@@ -64,7 +64,7 @@
                     <ng-container matColumnDef="Editar">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
                       <td mat-cell *matCellDef="let row" align="center">
-                        <button mat-mini-fab color="primary" matTooltip="Editar {{row.Nombre}}" (click)="DialogModificar(row.Id)">
+                        <button mat-mini-fab color="primary" matTooltip="Editar {{row.Nombre}}" (click)="DialogModificar(row.Id)" [disabled]="!Update">
                           <mat-icon>edit</mat-icon>
                         </button>                          
                       </td>
@@ -72,13 +72,13 @@
                     <ng-container matColumnDef="Deshabilitar">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
                       <td mat-cell *matCellDef="let row" align="center">
-                        <mat-slide-toggle color="warn" matTooltip="Deshabilitar/Habilitar {{row.Nombre}}" [checked]="row.Estatus" (change)="Deshabilitar($event, row.Id)"></mat-slide-toggle>
+                        <mat-slide-toggle color="warn" matTooltip="Deshabilitar/Habilitar {{row.Nombre}}" [checked]="row.Estatus" (change)="Deshabilitar($event, row.Id)" [disabled]="!Delete"></mat-slide-toggle>
                       </td>
                     </ng-container>
                     <ng-container matColumnDef="Eliminar">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
                       <td mat-cell *matCellDef="let row" align="center">
-                        <button mat-mini-fab color="warn" matTooltip="Eliminar {{row.Nombre}}" (click)="Eliminar(row.Id);">
+                        <button mat-mini-fab color="warn" matTooltip="Eliminar {{row.Nombre}}" (click)="Eliminar(row.Id);" [disabled]="!Delete">
                           <mat-icon>delete</mat-icon>
                         </button>
                       </td>

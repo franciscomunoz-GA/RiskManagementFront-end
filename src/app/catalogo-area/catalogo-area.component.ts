@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
 import { ThrowStmt } from '@angular/compiler';
+import { ValidarPermisoService } from '../servicios/validar-permiso.service';
 export interface EstructuraCatalogo{
   Id:            number;
   Nombre:        string;
@@ -35,14 +36,24 @@ export class CatalogoAreaComponent implements OnInit {
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
+ //Permisos
+ Create: boolean = false;
+ Update: boolean = false;
+ Delete: boolean = false;
  constructor(public dialog: MatDialog, 
              private Menu: ValidarNavbarService, 
              private excelService:ExcelService, 
              private snackBar: MatSnackBar, 
-             public http: HttpClient,) {
+             public http: HttpClient,
+             private Permiso: ValidarPermisoService){
    this.ObtenerServicio = new ServicioService(http);
    this.Menu.OcultarProgress();
    this.Tabla = new MatTableDataSource(this.Catalogo);
+
+   //Permisos   
+   this.Create = Permiso.ValidarPermiso('crear area');
+   this.Update = Permiso.ValidarPermiso('editar area');
+   this.Delete = Permiso.ValidarPermiso('eliminar area');
  }
  exportAsXLSX():void {
    this.excelService.exportAsExcelFile(this.Catalogo, 'CatalogoAreas');
