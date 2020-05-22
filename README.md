@@ -1,3 +1,5 @@
+# 2020-05-21 (V 1.3.2)
+    Se corrigen los guardianes agregando que cada guardian pueda armar el menu y evitar una posible falla después    
 # 2020-05-21 (V 1.3.1)
     Se corrigen los guardianes 
 # 2020-05-20 (V 1.3.0)

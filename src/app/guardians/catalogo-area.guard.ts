@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SessionValidate } from '../servicios/session-validate.service';
+import { ValidarNavbarService } from '../Observables/validar-navbar.service';
+import { PermisosSeccionesService } from '../Observables/permisos-secciones.service';
 
 
 @Injectable({
@@ -9,7 +11,9 @@ import { SessionValidate } from '../servicios/session-validate.service';
 })
 export class CatalogoAreaGuard implements CanActivate {
   Permiso: Observable<boolean>;
-  constructor(private sessionService: SessionValidate,
+  constructor(private Menu: ValidarNavbarService, 
+              private Permisos: PermisosSeccionesService,
+              private sessionService: SessionValidate,
               private router:Router){}
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -17,7 +21,15 @@ export class CatalogoAreaGuard implements CanActivate {
     return this.isAuthenticated();
   }
   isAuthenticated(){    
-    if(this.sessionService.validateSession()) {      
+    if(this.sessionService.validateSession()) {
+      this.Menu.ActualizarNombreUsuario();
+      // Permisos
+      this.Permisos.AccesoCatalogoArea();
+      this.Permisos.AccesoCatalogoDimension();
+      this.Permisos.AccesoCatalogoCriterioLegal();
+      this.Permisos.AccesoCatalogoRiesgos();
+      this.Permisos.AccesoCatalogoTipoRiesgo();
+
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
       let found = Permisos.find(element => element == 'ver area');
       if(found != null || found != undefined){
