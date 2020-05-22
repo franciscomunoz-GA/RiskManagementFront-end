@@ -16,16 +16,18 @@ export class CatalogoTipoRiesgoGuard implements CanActivate {
     return this.isAuthenticated();
   }
   isAuthenticated(){    
-    if(this.sessionService.validateSession()) {
-      let Permiso: boolean = false;
+    if(this.sessionService.validateSession()) {      
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
-      Permisos.forEach(element => {
-        if(element === 'ver tipos riesgos'){
-          Permiso = true;
-        }
-      });
-      this.router.navigate(['']);
-      return Permiso;
+      let found = Permisos.find(element => element == 'ver tipos riesgos');
+      if(found != null || found != undefined){
+        return true;
+      }
+      else{
+        this.router.navigate(['']);
+        return false;
+      }
+      
+      
     }
     else {      
       this.router.navigate(['/Login']);

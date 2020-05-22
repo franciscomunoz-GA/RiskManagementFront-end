@@ -1,3 +1,5 @@
+# 2020-05-21 (V 1.3.1)
+    Se corrigen los guardianes 
 # 2020-05-20 (V 1.3.0)
     Se crean guardianes para validar que se tenga acceso a cada sección
     Se muestra el menú dependiendo de los permisos que se tengan
