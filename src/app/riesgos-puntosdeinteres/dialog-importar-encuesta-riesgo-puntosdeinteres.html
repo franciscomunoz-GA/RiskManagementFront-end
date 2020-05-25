@@ -1,0 +1,77 @@
+<mat-progress-bar mode="indeterminate" *ngIf="Progressbar"></mat-progress-bar>
+<h1 mat-dialog-title>{{Titulo}}</h1>
+<div mat-dialog-content>
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-xs-12 col-sm-12 col-md-12">
+                <div align="center">
+                    <mat-card class="example-card">
+                        <mat-card-header>
+                        </mat-card-header>
+                        <img mat-card-image src="../../assets/PlantillaRiesgo.png">
+                        <mat-card-content>
+                          Descargar plantilla &nbsp;
+                          <button mat-mini-fab color="primary" matTooltip="Descargar plantilla" (click)="exportAsXLSX()">
+                              <mat-icon>insert_drive_file</mat-icon>
+                          </button>
+                        </mat-card-content>                    
+                    </mat-card>   
+                </div>                                    
+            </div>
+            <br> -->
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="row">
+                  
+                    <div class="col-xs-12 col-sm-12 col-md-8">
+                        <mat-card-title>Documento XLSX</mat-card-title>                        
+                        <input type="file" accept=".xlsx, .xls, .csv" id="Excel">
+                        <mat-divider></mat-divider>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4" align="center">
+                        <button mat-mini-fab color="primary" matTooltip="Descargar plantilla" (click)="exportAsXLSX()">
+                            <mat-icon>insert_drive_file</mat-icon>
+                        </button>
+                        <br>
+                        Descargar plantilla
+                    </div>
+                    <br>
+                    <br>
+                    <div class="col-12">
+                        <div class="mat-elevation-z8" style="overflow: auto;">
+                            <table mat-table [dataSource]="Tabla">
+                                                        
+                              <ng-container matColumnDef="Numero">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Numero}} </td>
+                              </ng-container>
+                          
+                              <ng-container matColumnDef="Nombre">
+                                <th mat-header-cell *matHeaderCellDef> Nombre </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="Riesgo">
+                                <th mat-header-cell *matHeaderCellDef> Riesgo </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Riesgo}} </td>
+                              </ng-container>
+                              <ng-container matColumnDef="SitioInteres">
+                                <th mat-header-cell *matHeaderCellDef> Punto de interés </th>
+                                <td mat-cell *matCellDef="let element"> {{element.SitioInteres}} </td>
+                              </ng-container>                                                                                   
+                              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                          
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        <br>                            
+    </div>    
+</div>
+<div mat-dialog-actions align="right">
+  <hr>  
+  <button mat-button color="warn" (click)="onNoClick()">Cerrar</button>
+  <button mat-button color="primary" (click)="Importar()">Importar</button>
+</div>
