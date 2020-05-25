@@ -35,6 +35,9 @@ export class LoginComponent implements OnInit {
     this.Menu.OcultarNav();
     this.Menu.OcultarProgress();
     this.Menu.MostrarBackground();
+    for (var i = 1; i <= 10000; i++){
+      clearInterval(i);
+    } 
   }
 
   ngOnInit() {    
@@ -104,6 +107,7 @@ export class LoginComponent implements OnInit {
           this.Menu.OcultarProgress();
           if(response.Data){
             let Resultado = response.Data;
+            this.ActualizarSesion(Resultado.Sesion[0].Id); // aquí
             sessionStorage.removeItem('SessionCob');
             sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
             setTimeout(()=>{ this.route.navigate(['/Dashboard']); }, 200);
@@ -164,5 +168,23 @@ export class LoginComponent implements OnInit {
       else {
         this.disabled = false;
       }
+  }
+  private ActualizarSesion(IdUsuario){
+    setInterval(()=>{
+      this.ObtenerServicio.PostRequest('Actualizar/Seccion', 'APIREST', { IdUsuario: IdUsuario})
+      .subscribe((response)=>{
+        this.loading = false;
+        if(response.Success){
+          console.log();
+             
+        }
+        else{
+          this.loading = false;
+            this.snackBar.open('Error de conexión','',{
+              duration: 2000
+            });
+        }
+      });
+    }, 10000);
   }
 }

@@ -1,6 +1,10 @@
+# 2020-05-25 (V 1.6.1)
+    Se modifica cliente, riesgos y areas Con agregar, importar, ver, modificar, deshabilitar y eliminar
+    Queda pendiente validar sesión duplicada y estár actualizando la sesión cada 5 minutos
 # 2020-05-24 (V 1.6.0)
     Se crea Encuesta riesgos y áreas
     Con agregar, importar, ver, modificar, deshabilitar y eliminar
+    Se crea solo el componente cliente, riesgos y areas
 # 2020-05-24 (V 1.5.0)
     Se crea Encuesta riesgos y puntos de interés
     Con agregar, importar, ver, modificar, deshabilitar y eliminar

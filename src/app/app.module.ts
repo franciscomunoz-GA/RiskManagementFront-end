@@ -77,7 +77,9 @@ import { RiesgosPuntosdeinteresComponent,
 import { RiesgosAreasComponent,
          DialogRiesgosAreas,
          DialogImportarRiesgosAreas} from './riesgos-areas/riesgos-areas.component';
-import { ClientesRiesgosAreasComponent, } from './clientes-riesgos-areas/clientes-riesgos-areas.component';
+import { ClientesRiesgosAreasComponent,
+         DialogClienteRiesgosAreas,
+         DialogImportarClienteRiesgosAreas} from './clientes-riesgos-areas/clientes-riesgos-areas.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,9 @@ import { ClientesRiesgosAreasComponent, } from './clientes-riesgos-areas/cliente
     RiesgosAreasComponent,
     DialogRiesgosAreas,
     DialogImportarRiesgosAreas,
-    ClientesRiesgosAreasComponent
+    ClientesRiesgosAreasComponent,
+    DialogClienteRiesgosAreas,
+    DialogImportarClienteRiesgosAreas
   ],
   imports: [
     BrowserModule,
@@ -168,7 +172,9 @@ import { ClientesRiesgosAreasComponent, } from './clientes-riesgos-areas/cliente
     DialogRiesgosPuntosdeinteres,
     DialogImportarRiesgosPuntosdeinteres,
     DialogRiesgosAreas,
-    DialogImportarRiesgosAreas
+    DialogImportarRiesgosAreas,
+    DialogClienteRiesgosAreas,
+    DialogImportarClienteRiesgosAreas
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]
