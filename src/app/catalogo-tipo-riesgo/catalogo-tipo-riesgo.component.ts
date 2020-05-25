@@ -76,7 +76,12 @@ export class CatalogoTipoRiesgoComponent implements OnInit {
       Accion = 0;
     }
     this.Menu.MostrarProgress();
-    this.ObtenerServicio.PostRequest('Modificar/RiskTypesEstatus', 'APIREST', {Id: Id, Accion: Accion})
+    this.ObtenerServicio.PostRequest('Modificar/RiskTypesEstatus', 'APIREST', 
+    {
+      Id: Id, 
+      Accion: Accion,
+      IdUsuario: this.IdUsuario
+    })
     .subscribe((response)=>{
       this.Menu.OcultarProgress();
       if(response.Success){
@@ -115,7 +120,11 @@ export class CatalogoTipoRiesgoComponent implements OnInit {
   }
   EliminarRegistro(Id){
     this.Menu.MostrarProgress();
-    this.ObtenerServicio.PostRequest('Eliminar/RiskTypes', 'APIREST', {Id: Id})
+    this.ObtenerServicio.PostRequest('Eliminar/RiskTypes', 'APIREST', 
+    {
+      Id: Id,
+      IdUsuario: this.IdUsuario
+    })
     .subscribe((response)=>{
       this.TraerInformacion();
       this.Menu.OcultarProgress();
@@ -261,7 +270,11 @@ export class DialogTipoRiesgo implements OnInit{
   Agregar(){
     if(this.Nombre != '' && this.Nombre != undefined){
       this.Progressbar = true;
-      this.ObtenerServicio.PostRequest('Insertar/RiskTypes', 'APIREST', {Nombre: this.Nombre, IdUsuario: this.IdUsuario})
+      this.ObtenerServicio.PostRequest('Insertar/RiskTypes', 'APIREST', 
+      {
+        Nombre: this.Nombre, 
+        IdUsuario: this.IdUsuario
+      })
       .subscribe((response)=>{   
         this.Progressbar = false;             
         if(response.Success){
@@ -307,7 +320,11 @@ export class DialogTipoRiesgo implements OnInit{
   }
   Detalle(){
     this.Progressbar = true;
-    this.ObtenerServicio.PostRequest('Seleccionar/RiskTypesD', 'APIREST', {Id: this.data.Id})
+    this.ObtenerServicio.PostRequest('Seleccionar/RiskTypesD', 'APIREST', 
+    {
+      Id: this.data.Id,
+      IdUsuario: this.IdUsuario
+    })
     .subscribe((response)=>{   
       this.Progressbar = false;             
       if(response.Success){
@@ -338,7 +355,12 @@ export class DialogTipoRiesgo implements OnInit{
    Modificar(){
     if(this.Nombre != '' && this.Nombre != undefined){
       this.Progressbar = true;
-      this.ObtenerServicio.PostRequest('Modificar/RiskTypes', 'APIREST', {Id: this.data.Id, Nombre: this.Nombre, IdUsuario: this.IdUsuario})
+      this.ObtenerServicio.PostRequest('Modificar/RiskTypes', 'APIREST', 
+      {
+        Id: this.data.Id, 
+        Nombre: this.Nombre, 
+        IdUsuario: this.IdUsuario
+      })
       .subscribe((response)=>{   
         this.Progressbar = false;             
         if(response.Success){
@@ -451,7 +473,10 @@ export class DialogImportarTipoRiesgo implements OnInit {
     this.RegistrosTabla.forEach(element => {
       Nombres.push(element.Nombre);
     });
-      this.ObtenerServicio.PostRequest('Importar/RiskTypes', 'APIREST', {Nombres: JSON.stringify(Nombres), IdUsuario: this.IdUsuario})
+      this.ObtenerServicio.PostRequest('Importar/RiskTypes', 'APIREST', {
+        Nombres: JSON.stringify(Nombres), 
+        IdUsuario: this.IdUsuario
+      })
       .subscribe((response)=>{   
         this.Progressbar = false;             
         if(response.Success){

@@ -17,6 +17,7 @@ import { CatalogoCriterioGuard } from './guardians/catalogo-criterio.guard';
 import { CatalogoDimensionGuard } from './guardians/catalogo-dimension.guard';
 import { CatalogoRiesgoGuard } from './guardians/catalogo-riesgo.guard';
 import { CatalogoTipoRiesgoGuard } from './guardians/catalogo-tipo-riesgo.guard';
+import { EncuestaRiesgosPuntosdeinteresGuard } from './guardians/encuesta-riesgos-puntosdeinteres.guard';
 
 const routes: Routes = [
   {
@@ -54,6 +55,11 @@ const routes: Routes = [
     component: EncuestasComponent,
     canActivate: [AuthGuard]
   },
+  {
+    path: 'RiesgosPuntosInteres',
+    component: RiesgosPuntosdeinteresComponent,
+    canActivate: [EncuestaRiesgosPuntosdeinteresGuard]
+  },
   { 
     path: 'Login', 
     component: LoginComponent,
@@ -62,11 +68,7 @@ const routes: Routes = [
   {
     path: 'nav',
     component: NavbarComponent
-  },
-  {
-    path: 'RiesgosPuntosInteres',
-    component: RiesgosPuntosdeinteresComponent
-  },
+  },  
   { 
     path: '', 
     redirectTo: '/Dashboard',

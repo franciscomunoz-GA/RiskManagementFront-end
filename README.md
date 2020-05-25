@@ -1,3 +1,6 @@
+# 2020-05-24 (V 1.4.1)
+    Se agrega el IdUsuario a cada API para validar permiso
+    Se crea y se agrega el guardian de encuesta riesgos y puntos de interés
 # 2020-05-21 (V 1.4.0)
     Se agrega validación de los permisos a las actividades que puede realizar por sección
     Se crea servicio para validar por actividad y por sección

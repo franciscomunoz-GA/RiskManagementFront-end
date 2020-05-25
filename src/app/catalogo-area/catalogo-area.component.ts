@@ -76,7 +76,12 @@ export class CatalogoAreaComponent implements OnInit {
      Accion = 0;
    }
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Modificar/AreasEstatus', 'APIREST', {Id: Id, Accion: Accion})
+   this.ObtenerServicio.PostRequest('Modificar/AreasEstatus', 'APIREST', 
+   {
+     Id: Id, 
+     Accion: Accion,
+     IdUsuario: this.IdUsuario
+   })
    .subscribe((response)=>{
      this.Menu.OcultarProgress();
      if(response.Success){
@@ -115,7 +120,11 @@ export class CatalogoAreaComponent implements OnInit {
  }
  EliminarRegistro(Id){
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Eliminar/Areas', 'APIREST', {Id: Id})
+   this.ObtenerServicio.PostRequest('Eliminar/Areas', 'APIREST', 
+   {
+     Id: Id,
+     IdUsuario: this.IdUsuario
+    })
    .subscribe((response)=>{
      this.TraerInformacion();
      this.Menu.OcultarProgress();
