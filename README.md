@@ -1,3 +1,6 @@
+# 2020-05-24 (V 1.6.0)
+    Se crea Encuesta riesgos y áreas
+    Con agregar, importar, ver, modificar, deshabilitar y eliminar
 # 2020-05-24 (V 1.5.0)
     Se crea Encuesta riesgos y puntos de interés
     Con agregar, importar, ver, modificar, deshabilitar y eliminar

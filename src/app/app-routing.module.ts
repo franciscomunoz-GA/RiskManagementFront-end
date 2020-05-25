@@ -18,6 +18,10 @@ import { CatalogoDimensionGuard } from './guardians/catalogo-dimension.guard';
 import { CatalogoRiesgoGuard } from './guardians/catalogo-riesgo.guard';
 import { CatalogoTipoRiesgoGuard } from './guardians/catalogo-tipo-riesgo.guard';
 import { EncuestaRiesgosPuntosdeinteresGuard } from './guardians/encuesta-riesgos-puntosdeinteres.guard';
+import { RiesgosAreasComponent } from './riesgos-areas/riesgos-areas.component';
+import { EncuestaRiesgosAreasGuard } from './guardians/encuesta-riesgos-areas.guard';
+import { ClientesRiesgosAreasComponent } from './clientes-riesgos-areas/clientes-riesgos-areas.component';
+import { EncuestaClientesRiesgosAreasGuard } from './guardians/encuesta-clientes-riesgos-areas.guard';
 
 const routes: Routes = [
   {
@@ -60,6 +64,16 @@ const routes: Routes = [
     component: RiesgosPuntosdeinteresComponent,
     canActivate: [EncuestaRiesgosPuntosdeinteresGuard]
   },
+  {
+    path: 'RiesgosAreas',
+    component: RiesgosAreasComponent,
+    canActivate: [EncuestaRiesgosAreasGuard]
+  },
+  {
+    path: 'ClientesRiesgosAreas',
+    component: ClientesRiesgosAreasComponent,
+    canActivate: [EncuestaClientesRiesgosAreasGuard]
+  },  
   { 
     path: 'Login', 
     component: LoginComponent,

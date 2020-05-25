@@ -72,7 +72,12 @@ import { CatalogoAreaComponent,
          DialogArea,
          DialogImportarArea } from './catalogo-area/catalogo-area.component';
 import { RiesgosPuntosdeinteresComponent,
-         DialogRiesgosPuntosdeinteresComponent } from './riesgos-puntosdeinteres/riesgos-puntosdeinteres.component';
+         DialogRiesgosPuntosdeinteres,
+         DialogImportarRiesgosPuntosdeinteres } from './riesgos-puntosdeinteres/riesgos-puntosdeinteres.component';
+import { RiesgosAreasComponent,
+         DialogRiesgosAreas,
+         DialogImportarRiesgosAreas} from './riesgos-areas/riesgos-areas.component';
+import { ClientesRiesgosAreasComponent, } from './clientes-riesgos-areas/clientes-riesgos-areas.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +103,12 @@ import { RiesgosPuntosdeinteresComponent,
     DialogArea,
     DialogImportarArea,
     RiesgosPuntosdeinteresComponent,
-    DialogRiesgosPuntosdeinteresComponent
+    DialogRiesgosPuntosdeinteres,
+    DialogImportarRiesgosPuntosdeinteres,
+    RiesgosAreasComponent,
+    DialogRiesgosAreas,
+    DialogImportarRiesgosAreas,
+    ClientesRiesgosAreasComponent
   ],
   imports: [
     BrowserModule,
@@ -155,7 +165,10 @@ import { RiesgosPuntosdeinteresComponent,
     DialogImportarCriterio,
     DialogArea,
     DialogImportarArea,
-    DialogRiesgosPuntosdeinteresComponent
+    DialogRiesgosPuntosdeinteres,
+    DialogImportarRiesgosPuntosdeinteres,
+    DialogRiesgosAreas,
+    DialogImportarRiesgosAreas
   ],
   providers: [ServicioService, SessionValidate],
   bootstrap: [AppComponent]

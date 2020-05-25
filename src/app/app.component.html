@@ -56,33 +56,18 @@
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
-                        <a mat-list-item routerLink="/RiesgosPuntosInteres" (click)="CerrarSideMenu()"> Riesgos y puntos de interés </a>
-                        <a mat-list-item routerLink="/CatalogoCriterio" (click)="CerrarSideMenu()"> De criterio legal</a>                        
+                        <a mat-list-item routerLink="/RiesgosPuntosInteres" (click)="CerrarSideMenu()"> 
+                          Riesgos y puntos de interés
+                        </a>
+                        <a mat-list-item routerLink="/RiesgosAreas" (click)="CerrarSideMenu()"> 
+                          Riesgos y áreas 
+                        </a> 
+                        <a mat-list-item routerLink="/ClientesRiesgosAreas" (click)="CerrarSideMenu()"> 
+                          Clientes, riesgos y áreas 
+                        </a>                       
                     </mat-nav-list>
-                  </mat-expansion-panel>
-                <!--<mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      ejemplo
-                    </mat-panel-title>                    
-                  </mat-expansion-panel-header>
-                  <p>I'm visible because I am open</p>
-                </mat-expansion-panel>
-            -->
-            </mat-accordion>           
-            <!-- <mat-nav-list>
-                <a mat-list-item routerLink="/Dashboard"> Dashboard </a>
-                <a mat-list-item routerLink="/Encuestas"> Encuestas </a>
-            </mat-nav-list> -->
-            
-            <!-- <mat-divider></mat-divider>
-            <mat-nav-list *ngFor="let Menu of Menus | async">
-                <h5>{{Menu.Menu}}</h5>                                
-                <a mat-list-item *ngFor="let Submenu of Menu.Submenus" routerLink="/{{Submenu.Submenu}}"> {{Submenu.Submenu}} </a>
-                <mat-divider></mat-divider>
-                
-            </mat-nav-list> -->
+                  </mat-expansion-panel>                
+            </mat-accordion>            
         </div>                
     </mat-drawer>  
     <div class="example-sidenav-content">        

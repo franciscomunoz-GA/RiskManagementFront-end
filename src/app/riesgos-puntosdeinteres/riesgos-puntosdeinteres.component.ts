@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {ThemePalette} from '@angular/material/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ValidarNavbarService } from '../Observables/validar-navbar.service';
 import readXlsxFile from 'read-excel-file';
@@ -10,9 +9,8 @@ import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
-import { ThrowStmt } from '@angular/compiler';
-import { NodeCompatibleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 import { ValidarPermisoService } from '../servicios/validar-permiso.service';
+
 export interface EstructuraCatalogo{
   Id:                number;  
   Nombre:            string;  
