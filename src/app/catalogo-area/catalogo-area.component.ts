@@ -429,7 +429,7 @@ export class DialogImportarArea implements OnInit {
    this.ObtenerServicio = new ServicioService(http);
  }
  exportAsXLSX():void {
-  this.excelService.exportAsExcelFile(this.Catalogo, 'PantillaAreas');
+  this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaAreas');
   }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;

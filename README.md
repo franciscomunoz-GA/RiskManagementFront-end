@@ -1,3 +1,5 @@
+# 2020-05-24 (V 1.4.2)
+    Se corrige el nombre del excel de "PANTILLA" a "PLANTILLA"
 # 2020-05-24 (V 1.4.1)
     Se agrega el IdUsuario a cada API para validar permiso
     Se crea y se agrega el guardian de encuesta riesgos y puntos de interés

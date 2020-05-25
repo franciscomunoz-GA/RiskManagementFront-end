@@ -436,7 +436,7 @@ export class DialogImportarTipoRiesgo implements OnInit {
     this.ObtenerServicio = new ServicioService(http);
   }
   exportAsXLSX():void {
-    this.excelService.exportAsExcelFile(this.Catalogo, 'PantillaTiposRiesgos');
+    this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaTiposRiesgos');
     }
   ngOnInit() {
     this.Tabla.paginator = this.paginator;

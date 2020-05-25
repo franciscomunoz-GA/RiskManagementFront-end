@@ -433,7 +433,7 @@ export class DialogImportarDimension implements OnInit {
    this.ObtenerServicio = new ServicioService(http);
  } 
  exportAsXLSX():void {
-  this.excelService.exportAsExcelFile(this.Catalogo, 'PantillaDimensiones');
+  this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaDimensiones');
   }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;
