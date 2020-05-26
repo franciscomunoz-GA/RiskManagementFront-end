@@ -1,3 +1,6 @@
+# 2020-05-25 (V 1.7.0)
+    Se valida la sesión duplicada
+    Cada 4 minutos se renueva la sesión activa
 # 2020-05-25 (V 1.6.1)
     Se modifica cliente, riesgos y areas Con agregar, importar, ver, modificar, deshabilitar y eliminar
     Queda pendiente validar sesión duplicada y estár actualizando la sesión cada 5 minutos

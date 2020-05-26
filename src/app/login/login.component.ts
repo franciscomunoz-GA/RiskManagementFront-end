@@ -107,10 +107,19 @@ export class LoginComponent implements OnInit {
           this.Menu.OcultarProgress();
           if(response.Data){
             let Resultado = response.Data;
-            this.ActualizarSesion(Resultado.Sesion[0].Id); // aquí
-            sessionStorage.removeItem('SessionCob');
-            sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
-            setTimeout(()=>{ this.route.navigate(['/Dashboard']); }, 200);
+            console.log('Resultado '+Resultado);
+            
+            if(Resultado.Sesion[0].Sesion != 'Sesión activa'){
+              this.ActualizarSesion(Resultado.Sesion[0].Id); // aquí
+              sessionStorage.removeItem('SessionCob');
+              sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
+              this.route.navigate(['/Dashboard']);
+            }
+            else{
+              this.snackBar.open('Se detectó que ya existe una conexión, si está intentando establecer una conexión adicional es necesario que espere 5 minutos y vuelva a intentarlo','',{
+                duration: 10000
+              });  
+            }         
           }
           else{
             this.showPassword = true;
@@ -185,6 +194,6 @@ export class LoginComponent implements OnInit {
             });
         }
       });
-    }, 10000);
+    }, 240000);
   }
 }
