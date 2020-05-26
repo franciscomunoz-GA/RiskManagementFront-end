@@ -46,7 +46,7 @@
                       </a>
                   </mat-nav-list>
                 </mat-expansion-panel>
-                <mat-expansion-panel>
+                <mat-expansion-panel *ngIf="(ShowEncuestaRiesgosPuntosInteres || ShowEncuestaRiesgosAreas || ShowEncuestaClientesRiesgosAreas) | async">
                     <mat-expansion-panel-header>
                       <mat-panel-title>
                           <mat-icon color="primary">assignment</mat-icon>                                               
@@ -56,13 +56,13 @@
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                     <mat-nav-list>
-                        <a mat-list-item routerLink="/RiesgosPuntosInteres" (click)="CerrarSideMenu()"> 
+                        <a mat-list-item routerLink="/RiesgosPuntosInteres" (click)="CerrarSideMenu()" *ngIf="ShowEncuestaRiesgosPuntosInteres | async"> 
                           Riesgos y puntos de interés
                         </a>
-                        <a mat-list-item routerLink="/RiesgosAreas" (click)="CerrarSideMenu()"> 
+                        <a mat-list-item routerLink="/RiesgosAreas"         (click)="CerrarSideMenu()" *ngIf="ShowEncuestaRiesgosAreas | async"> 
                           Riesgos y áreas 
                         </a> 
-                        <a mat-list-item routerLink="/ClientesRiesgosAreas" (click)="CerrarSideMenu()"> 
+                        <a mat-list-item routerLink="/ClientesRiesgosAreas" (click)="CerrarSideMenu()" *ngIf="ShowEncuestaClientesRiesgosAreas | async"> 
                           Clientes, riesgos y áreas 
                         </a>                       
                     </mat-nav-list>

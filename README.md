@@ -1,3 +1,5 @@
+# 2020-05-25 (V 1.7.1)
+    Se corrige lo que faltaba de la validación de los permisos
 # 2020-05-25 (V 1.7.0)
     Se valida la sesión duplicada
     Cada 4 minutos se renueva la sesión activa

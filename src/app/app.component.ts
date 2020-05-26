@@ -20,11 +20,16 @@ export class AppComponent implements OnInit {
   ShowSidebar: boolean = false;  
   panelOpenState = false;
   // perdóname si ves las siguientes lineas de código, tuve que adaptarme a la base de datos que ya existia -.-
-  ShowCatalogoArea:          Observable<boolean>;
-  ShowCatalogoCriterioLegal: Observable<boolean>;
-  ShowCatalogoDimension:     Observable<boolean>;
-  ShowCatalogoRiesgos:       Observable<boolean>;
-  ShowCatalogoTipoRiesgo:    Observable<boolean>;
+  ShowCatalogoArea:                 Observable<boolean>;
+  ShowCatalogoCriterioLegal:        Observable<boolean>;
+  ShowCatalogoDimension:            Observable<boolean>;
+  ShowCatalogoRiesgos:              Observable<boolean>;
+  ShowCatalogoTipoRiesgo:           Observable<boolean>;
+
+  ShowEncuestaRiesgosPuntosInteres: Observable<boolean>;
+  ShowEncuestaRiesgosAreas:         Observable<boolean>;
+  ShowEncuestaClientesRiesgosAreas: Observable<boolean>;
+  
   constructor(private Menu: ValidarNavbarService, 
               private Sidebar: ValidarNavbarService,
               private Permisos: PermisosSeccionesService,
@@ -39,11 +44,15 @@ export class AppComponent implements OnInit {
     this.Menu.MostrarNav();
     this.color = this.Menu.ValorBackground;
     // Mostrar u ocultar las secciones del sidenav
-    this.ShowCatalogoArea          = this.Permisos.ValorCatalogoArea;
-    this.ShowCatalogoCriterioLegal = this.Permisos.ValorCatalogoCriterioLegal;
-    this.ShowCatalogoDimension     = this.Permisos.ValorCatalogoDimension;
-    this.ShowCatalogoRiesgos       = this.Permisos.ValorCatalogoRiesgos;
-    this.ShowCatalogoTipoRiesgo    = this.Permisos.ValorCatalogoTipoRiesgo;
+    this.ShowCatalogoArea                 = this.Permisos.ValorCatalogoArea;
+    this.ShowCatalogoCriterioLegal        = this.Permisos.ValorCatalogoCriterioLegal;
+    this.ShowCatalogoDimension            = this.Permisos.ValorCatalogoDimension;
+    this.ShowCatalogoRiesgos              = this.Permisos.ValorCatalogoRiesgos;
+    this.ShowCatalogoTipoRiesgo           = this.Permisos.ValorCatalogoTipoRiesgo;
+
+    this.ShowEncuestaRiesgosPuntosInteres = this.Permisos.ValorEncuestaRiesgosPuntosInteres;
+    this.ShowEncuestaRiesgosAreas         = this.Permisos.ValorEncuestaRiesgosAreas;
+    this.ShowEncuestaClientesRiesgosAreas = this.Permisos.ValorEncuestaClientesRiesgosAreas;
   }
   procesaPropagar(mensaje){
     this.ShowSidebar = mensaje    

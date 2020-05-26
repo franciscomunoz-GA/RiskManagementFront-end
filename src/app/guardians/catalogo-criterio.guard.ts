@@ -27,7 +27,12 @@ export class CatalogoCriterioGuard implements CanActivate {
       this.Permisos.AccesoCatalogoDimension();
       this.Permisos.AccesoCatalogoCriterioLegal();
       this.Permisos.AccesoCatalogoRiesgos();
-      this.Permisos.AccesoCatalogoTipoRiesgo();   
+      this.Permisos.AccesoCatalogoTipoRiesgo(); 
+      
+      this.Permisos.AccesoEncuestaRiesgosPuntosInteres();
+      this.Permisos.AccesoEncuestaRiesgosAreas();
+      this.Permisos.AccesoEncuestaClientesRiesgosAreas();
+      
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
       let found = Permisos.find(element => element == 'ver estandares legales');
       if(found != null || found != undefined){

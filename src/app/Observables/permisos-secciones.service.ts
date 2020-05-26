@@ -9,6 +9,11 @@ export class PermisosSeccionesService {
   private CatalogoDimension     = new BehaviorSubject<boolean>(false);
   private CatalogoRiesgos       = new BehaviorSubject<boolean>(false);
   private CatalogoTipoRiesgo    = new BehaviorSubject<boolean>(false);
+
+  private EncuestaRiesgosPuntosInteres = new BehaviorSubject<boolean>(false);
+  private EncuestaRiesgosAreas         = new BehaviorSubject<boolean>(false);
+  private EncuestaClientesRiesgosAreas = new BehaviorSubject<boolean>(false);
+
   constructor() { }
   get ValorCatalogoArea(){
     return this.CatalogoArea.asObservable();
@@ -24,6 +29,15 @@ export class PermisosSeccionesService {
   }
   get ValorCatalogoTipoRiesgo(){
     return this.CatalogoTipoRiesgo.asObservable();
+  }
+  get ValorEncuestaRiesgosPuntosInteres(){
+    return this.EncuestaRiesgosPuntosInteres.asObservable();
+  }
+  get ValorEncuestaRiesgosAreas(){
+    return this.EncuestaRiesgosAreas.asObservable();
+  }
+  get ValorEncuestaClientesRiesgosAreas(){
+    return this.EncuestaClientesRiesgosAreas.asObservable();
   }
   AccesoCatalogoArea(){    
     let Permiso: boolean = this.ValidarPermisoSeccion('ver area');
@@ -45,7 +59,18 @@ export class PermisosSeccionesService {
     let Permiso: boolean = this.ValidarPermisoSeccion('ver tipos riesgos');
     this.CatalogoTipoRiesgo.next(Permiso);
   }
-  
+  AccesoEncuestaRiesgosPuntosInteres(){    
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion riesgo sitio interes');
+    this.EncuestaRiesgosPuntosInteres.next(Permiso);
+  }
+  AccesoEncuestaRiesgosAreas(){    
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion riesgo area');
+    this.EncuestaRiesgosAreas.next(Permiso);
+  }
+  AccesoEncuestaClientesRiesgosAreas(){    
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area');
+    this.EncuestaClientesRiesgosAreas.next(Permiso);
+  }
   private ValidarPermisoSeccion(Seccion): boolean{
     let Permiso: boolean = false;
     let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
