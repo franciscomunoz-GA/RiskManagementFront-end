@@ -10,17 +10,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
 import { ValidarPermisoService } from '../servicios/validar-permiso.service';
+import { FormControl } from '@angular/forms';
 
 export interface EstructuraCatalogo{
-  Id:                number;  
-  Nombre:            string;  
-  RiesgoId:          string;
-  RiesgoNombre:      string;
-  SitioInteres:      string;
-  Usuario:           string;
-  FechaCreacion:     string;
-  FechaModificacion: string;
-  Estatus:           boolean;
+  Id:           number;
+  SitioInteres: string;
+  Riesgos:      string;
+  Usuario:      string;
+  Fecha:        string;  
+  Estatus:      boolean;
+  Usada:        boolean;
 }
 @Component({
   selector: 'app-riesgos-puntosdeinteres',
@@ -32,7 +31,7 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   ObtenerServicio: any;
   // sesión
   IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
-  displayedColumns: string[] = ['Nombre', 'RiesgoId', 'RiesgoNombre', 'SitioInteres', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
+  displayedColumns: string[] = ['SitioInteres', 'Riesgos', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
   Tabla: MatTableDataSource<EstructuraCatalogo>;
   Catalogo: EstructuraCatalogo[] = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -42,6 +41,7 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   Create: boolean = false;
   Update: boolean = false;
   Delete: boolean = false;
+  
   constructor(public dialog: MatDialog, 
               private Menu: ValidarNavbarService, 
               private excelService:ExcelService, 
@@ -88,7 +88,7 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
     .subscribe((response)=>{
       this.Menu.OcultarProgress();
       if(response.Success){
-        if(response.Data == 1){
+        if(response.Data > 0){
           this.snackBar.open('Registro guardado correctamente','',{
             duration: 3000,
             panelClass: ['mensaje-success']
@@ -132,7 +132,7 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
       this.TraerInformacion();
       this.Menu.OcultarProgress();
       if(response.Success){
-        if(response.Data == 1){
+        if(response.Data > 0){
           this.snackBar.open('Registro eliminado correctamente','',{
             duration: 3000,
             panelClass: ['mensaje-success']
@@ -170,22 +170,29 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
         if(response.Data){
           response.Data.forEach(element => {
             let Estatus: boolean;
+            let Usada: boolean;
             if(element.Estatus == 1){
               Estatus = true;
             }
             else{
               Estatus = false;
             }
+
+            if(element.usada == 1){
+              Usada = true;
+            }
+            else{
+              Usada = false;
+            }
+
             this.Catalogo.push({ 
-              Id:                element.Id,
-              Nombre:            element.Nombre,
-              RiesgoId:          element.RiesgoId,
-              RiesgoNombre:      element.RiesgoNombre,
-              SitioInteres:      element.SitioInteres,
-              Usuario:           element.Usuario, 
-              FechaCreacion:     element.FechaCreacion,
-              FechaModificacion: element.FechaModificacion,
-              Estatus:           Estatus
+              Id:           element.Id,
+              SitioInteres: element.SitioInteres,
+              Riesgos:      element.Riesgos,
+              Usuario:      element.Usuario,
+              Fecha:        element.Fecha,
+              Estatus:      Estatus,
+              Usada:        Usada,
             });
           });
           this.Tabla.data = this.Catalogo;
@@ -251,15 +258,16 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   Titulo:      string;
   Tipo:        boolean = false;
   Progressbar: boolean = false;
-
+  SitioInteres: number;
   // Inputs
   Nombre:       string;
   Riesgo:       any;
   PuntoInteres: any;
-
+  toppings = new FormControl();
   // Listados
   Riesgos:       Array<string> = [];
   PuntosInteres: Array<string> = [];
+  RiesgosAgregados: Array<any> = [];
   constructor(public dialogRef: MatDialogRef<DialogRiesgosPuntosdeinteres>, 
               @Inject(MAT_DIALOG_DATA) public data: any, 
               public http: HttpClient, 
@@ -319,20 +327,32 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   }
   Detalle(){
     this.Progressbar = true;
-    this.ObtenerServicio.PostRequest('Seleccionar/RelacionRSID', 'APIREST', 
-    {
-      Id: this.data.Id,
+    this.RiesgosAgregados = [];
+    this.ObtenerServicio.PostRequest('Seleccionar/RelacionRSID', 'APIREST', {
+      Id:        this.data.Id,
       IdUsuario: this.IdUsuario
     })
     .subscribe((response)=>{   
       this.Progressbar = false;             
       if(response.Success){
         if(response.Data){
-          let Resultado      = response.Data[0];
-
-          this.Nombre        = Resultado.Nombre;
-          this.Riesgo        = Resultado.IdRisk;
+          let Resultado = response.Data[0];
+          this.SitioInteres = Resultado.IdSitesInterest;
           this.PuntoInteres = Resultado.IdSitesInterest;
+          Resultado.Riesgos.forEach(element => {
+            let Usada: boolean;
+            if(element.usada > 0){
+              Usada = true;
+            }
+            else{
+              Usada = false;
+            }
+            this.RiesgosAgregados.push({
+              Id:     element.Id, 
+              Nombre: element.Riesgo, 
+              Usado:  Usada
+            });
+          });
         }      
         else{
           this.snackBar.open('Error de conexión','',{
@@ -354,136 +374,248 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
       })
     });
    }
-  Agregar(){
-    if(this.Nombre != '' && this.Nombre != undefined){     
-      if(this.Riesgo > 0){
-          if(this.PuntoInteres > 0){           
-              this.Progressbar = true;
-              this.ObtenerServicio.PostRequest('Insertar/RelacionRSI', 'APIREST', {
-                Nombre:         this.Nombre,
-                IdRiesgo:       this.Riesgo,
-                IdSitioInteres: this.PuntoInteres,               
-                IdUsuario:      this.IdUsuario
-              })
-              .subscribe((response)=>{   
-                this.Progressbar = false;             
-                if(response.Success){
-                  if(response.Data > 0){
-                    this.snackBar.open('Registro guardado correctamente','',{
-                      duration: 3000,
-                      panelClass: ['mensaje-success']
-                    });
-                    this.Nombre       = '';                    
-                    this.Riesgo       = '';
-                    this.PuntoInteres = '';                    
-                  }
-                  else if(response.Data == 'Duplicado'){
-                    this.snackBar.open('Ya existe un registro con el mismo nombre','',{
-                      duration: 3000,
-                      panelClass: ['mensaje-warning']
-                    });
-                  }
-                  else{
-                    this.snackBar.open('No ha sido creado el registro','',{
-                      duration: 3000,
-                      panelClass: ['mensaje-error']
-                    });
-                  }
-                }
-                else{                
-                  this.snackBar.open('Error de conexión','',{
-                    duration: 2000
-                  });
-                }
-              }, 
-              error => {      
-                this.snackBar.open('Error de conexión','',{
-                  duration: 2000,
-                  
-                })
+  Agregar(){       
+    if(this.PuntoInteres > 0){
+      if(this.RiesgosAgregados.length > 0 && this.RiesgosAgregados != []){
+        let IdsRiesgos = [];
+        this.RiesgosAgregados.forEach(element => {
+          IdsRiesgos.push(element.Id);
+        });
+        this.Progressbar = true;
+        this.ObtenerServicio.PostRequest('Insertar/RelacionRSI', 'APIREST', {          
+          IdRiesgo:       JSON.stringify(IdsRiesgos),
+          IdSitioInteres: this.PuntoInteres,               
+          IdUsuario:      this.IdUsuario
+        })
+        .subscribe((response)=>{   
+          this.Progressbar = false;             
+          if(response.Success){
+            if(response.Data > 0){
+              this.snackBar.open('Registro guardado correctamente','',{
+                duration: 3000,
+                panelClass: ['mensaje-success']
               });
-                
+              
+              this.onNoClick();
+            }
+            else if(response.Data == 'Duplicidad'){
+              this.snackBar.open('Ya existe un registro con el mismo punto de interés','',{
+                duration: 3000,
+                panelClass: ['mensaje-warning']
+              });
+            }
+            else{
+              this.snackBar.open('No ha sido creado el registro','',{
+                duration: 3000,
+                panelClass: ['mensaje-error']
+              });
+            }
           }
-          else{
-          this.snackBar.open('Es necesario seleccionar un punto de interés','',{
-            duration: 3000,
-            panelClass: ['mensaje-warning']
-          });
+          else{                
+            this.snackBar.open('Error de conexión','',{
+              duration: 2000
+            });
           }
+        }, 
+        error => {      
+          this.snackBar.open('Error de conexión','',{
+            duration: 2000,
+            
+          })
+        });
       }
       else{
-        this.snackBar.open('Es necesario seleccionar un riesgo','',{
+        this.snackBar.open('Es necesario agregar al menos un riesgo','',{
           duration: 3000,
           panelClass: ['mensaje-warning']
         });
-      }
+      }        
     }
     else{
-      this.snackBar.open('Es necesario agregar el nombre del catálogo','',{
+      this.snackBar.open('Es necesario seleccionar un punto de interés','',{
         duration: 3000,
         panelClass: ['mensaje-warning']
       });
+    }    
+  }
+  AgregarRiesgos(){
+    if(this.Riesgo != '' && this.Riesgo != undefined){
+      if(this.Titulo == 'Modificar'){
+        this.InsertarRiesgos();
+      }
+      else{
+        this.Riesgo.forEach(element => {
+          let Nombre = this.BuscarEnArray(this.Riesgos, 'Nombre', element);
+          let Duplicado = this.BuscarEnArray(this.RiesgosAgregados, 'Nombre', element);
+          if(!Duplicado){
+            this.RiesgosAgregados.push({Id: element, Nombre: Nombre});
+          }                
+        });
+      }
+      this.Riesgo = '';      
     }
   }
-  Modificar(){
-    if(this.Nombre != '' && this.Nombre != undefined){
-      this.Progressbar = true;
-      this.ObtenerServicio.PostRequest('Modificar/RelacionRSI', 'APIREST', {
-        Id:             this.data.Id, 
-        Nombre:         this.Nombre, 
-        IdRiesgo:       this.Riesgo,
-        IdSitioInteres: this.PuntoInteres,
-        IdUsuario:      this.IdUsuario
-      })
-      .subscribe((response)=>{   
-        this.Progressbar = false;             
-        if(response.Success){
-          if(response.Data > 0){
-            this.snackBar.open('Registro guardado correctamente','',{
-              duration: 3000,
-              panelClass: ['mensaje-success']
-            });
-            this.onNoClick();
-          }
-          else if(response.Data == 'Duplicado'){
-            this.snackBar.open('Ya existe un registro con el mismo nombre','',{
-              duration: 3000,
-              panelClass: ['mensaje-warning']
-            });
-          }
-          else{
-            this.snackBar.open('No ha sido creado el registro','',{
-              duration: 3000,
-              panelClass: ['mensaje-error']
-            });
-          }
-        }
-        else{                
-          this.snackBar.open('Error de conexión','',{
-            duration: 2000
-          });
-        }
-      }, 
-      error => {      
-        this.snackBar.open('Error de conexión','',{
-          duration: 2000,
-          
-        })
-      });
+  
+  EliminarRiesgos(riesgos){
+    if(this.Titulo == 'Modificar'){
+      this.BorrarRiesgos(riesgos);
     }
     else{
-      this.snackBar.open('Es necesario agregar el nombre del catálogo','',{
-        duration: 3000,
-        panelClass: ['mensaje-warning']
+      riesgos.forEach(element => {
+        console.log(element._value);
+        this.RiesgosAgregados.forEach((item, index) => {
+          if(item.Id === element._value) {
+            this.RiesgosAgregados.splice(index, 1);
+          }
+        });
       });
-    }
-   }
+    }    
+  }
+  Modificar(){
+    let riesgos = [];
+    this.RiesgosAgregados.forEach(element => {
+      riesgos.push(element.Id);
+    });
+    this.Progressbar = true;
+    this.ObtenerServicio.PostRequest('Modificar/RelacionRSI', 'APIREST', {        
+      IdSitioInteres: this.PuntoInteres,
+      Id: JSON.stringify(riesgos),
+      IdUsuario:      this.IdUsuario
+    })
+    .subscribe((response)=>{   
+      this.Progressbar = false;             
+      if(response.Success){
+        if(response.Data > 0){
+          this.snackBar.open('Registro guardado correctamente','',{
+            duration: 3000,
+            panelClass: ['mensaje-success']
+          });
+          this.onNoClick();
+        }
+        else if(response.Data == 'Duplicado'){
+          this.snackBar.open('Ya existe un registro con el mismo nombre','',{
+            duration: 3000,
+            panelClass: ['mensaje-warning']
+          });
+        }
+        else if(response.Data == 'Error al modificar'){
+          this.snackBar.open('El registro no ha sido modificado','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
+        else{
+          this.snackBar.open('El registro no ha sido modificado','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
+      }
+      else{                
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000
+        });
+      }
+    }, 
+    error => {      
+      this.snackBar.open('Error de conexión','',{
+        duration: 2000,
+        
+      })
+    });    
+  }
+  private InsertarRiesgos(){
+    this.Progressbar = true;
+    this.ObtenerServicio.PostRequest('Agregar/RelacionRSI', 'APIREST', {
+      IdSitioInteres: this.SitioInteres,
+      IdRiesgo:       JSON.stringify(this.Riesgo),
+      IdUsuario:      this.IdUsuario
+    })
+    .subscribe((response)=>{   
+      this.Progressbar = false;             
+      if(response.Success){
+        if(response.Data){
+          this.Detalle();
+        }      
+        else{
+          this.snackBar.open('Error de conexión','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
+      }
+      else{
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000
+        });
+      }
+    }, 
+    error => {      
+      this.snackBar.open('Error de conexión','',{
+        duration: 2000,
+        
+      })
+    });
+  }
+  private BorrarRiesgos(riesgos){
+    let RiesgosEliminados = [];
+    riesgos.forEach(element => {
+      RiesgosEliminados.push(element._value);
+    });
+    this.Progressbar = true;
+    this.ObtenerServicio.PostRequest('Quitar/RelacionRSI', 'APIREST', {      
+      IdRelacion: JSON.stringify(RiesgosEliminados),
+      IdUsuario:  this.IdUsuario
+    })
+    .subscribe((response)=>{   
+      this.Progressbar = false;             
+      if(response.Success){
+        if(response.Data){
+          this.Detalle();
+        }      
+        else{
+          this.snackBar.open('Error de conexión','',{
+            duration: 3000,
+            panelClass: ['mensaje-error']
+          });
+        }
+      }
+      else{
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000
+        });
+      }
+    }, 
+    error => {      
+      this.snackBar.open('Error de conexión','',{
+        duration: 2000,
+        
+      })
+    });
+  }
+  private BuscarEnArray(array, Tipo: string, Valor){
+  let Resultado = false;
+  if(Tipo === 'Nombre'){
+    array.find((element, index) => {
+      if(element.Id == Valor){
+        Resultado = element.Nombre;
+      }
+    });
+  }
+  else{
+    array.find((element, index) => {
+      if(element.Nombre == Valor){
+        Resultado = element.Id;
+      }
+    });
+  }
+  return Resultado;
+  }
  }
  export interface ImportElement {
   Numero:       number;
-  Nombre:       string;
+  SitioInteres: string;
   Riesgo:       string;
-  SitioInteres: string;  
  }
 @Component({
  selector: 'dialog-importar-encuesta-riesgo-puntosdeinteres',
@@ -500,11 +632,11 @@ export class DialogImportarRiesgosPuntosdeinteres implements OnInit {
  Titulo: string;
  Excel: any;
 
- displayedColumns: string[] = ['Numero', 'Nombre','Riesgo', 'SitioInteres'];
+ displayedColumns: string[] = ['Numero', 'SitioInteres', 'Riesgo'];
  Tabla = new MatTableDataSource<ImportElement>();
  RegistrosTabla:ImportElement[] = []
  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
- Catalogo = [{'Nombre': '', 'Riesgo': '', 'Punto de interes': ''}];
+ Catalogo = [{'Punto de interes': '', 'Riesgo': '', }];
  constructor(public dialogRef: MatDialogRef<DialogImportarRiesgosPuntosdeinteres>,
              @Inject(MAT_DIALOG_DATA) public data: any, 
              public http: HttpClient, 
@@ -521,22 +653,17 @@ export class DialogImportarRiesgosPuntosdeinteres implements OnInit {
    this.Tabla.paginator = this.paginator;
 
    this.Excel = (<HTMLInputElement>document.getElementById('Excel'));
-   const schema = {
-     'Nombre': {
-       prop: 'Nombre',
-       type: String,
-       required: true
-     },     
+   const schema = {      
+    'Punto de interes': {
+      prop: 'SitioInteres',
+      type: String,
+      required: true
+    },
     'Riesgo': {
       prop: 'Riesgo',
       type: String,
       required: true
     },
-    'Punto de interes': {
-      prop: 'SitioInteres',
-      type: String,
-      required: true
-    }
    }
    this.Excel.addEventListener('change', () => {  
      this.RegistrosTabla = [];    
@@ -544,13 +671,14 @@ export class DialogImportarRiesgosPuntosdeinteres implements OnInit {
        // `errors` have shape `{ row, column, error, value }`.
        // errors.length === 0
        if(rows.length > 0){          
-         rows.forEach((element, index) => {                        
-           this.RegistrosTabla.push({
-             Numero:       index+1, 
-             Nombre:       element.Nombre,
-             Riesgo:       element.Riesgo,
-             SitioInteres: element.SitioInteres
-            });            
+         rows.forEach((element, index) => {         
+          if(!this.Duplicidad(element)){
+            this.RegistrosTabla.push({
+              Numero:       index+1,
+              SitioInteres: element.SitioInteres,
+              Riesgo:       element.Riesgo,
+             });
+          }                          
          });          
        }
        this.Tabla.data = this.RegistrosTabla;
@@ -564,13 +692,11 @@ export class DialogImportarRiesgosPuntosdeinteres implements OnInit {
  Importar(){
    this.Progressbar = true;
    let Registros = [];
-   this.RegistrosTabla.forEach(element => {
-    
-    Registros.push({      
-      "Nombre":       element.Nombre,
+   this.RegistrosTabla.forEach(element => {    
+    Registros.push({
+      "SitioInteres": element.SitioInteres,
       "Riesgo":       element.Riesgo,
-      "SitioInteres": element.SitioInteres
-    });
+    });      
    });
      this.ObtenerServicio.PostRequest('Importador/RelacionRSI', 'APIREST', {
        Datos: JSON.stringify(Registros), 
@@ -654,5 +780,14 @@ export class DialogImportarRiesgosPuntosdeinteres implements OnInit {
          
        })
      });    
+ }
+ private Duplicidad(Fila): boolean{
+    let Resultado: boolean = false;
+    this.RegistrosTabla.forEach(element => {
+      if(element.SitioInteres == Fila.SitioInteres && element.Riesgo == Fila.Riesgo){
+        Resultado = true;
+      } 
+    });
+    return Resultado;
  }
 }

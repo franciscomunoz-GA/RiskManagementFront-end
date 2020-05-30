@@ -1,3 +1,5 @@
+# 2020-05-28 (V 1.7.2)
+    Se realiza cambio en riesgos puntos de interés porque se programó de manera erronea 
 # 2020-05-25 (V 1.7.1)
     Se corrige lo que faltaba de la validación de los permisos
 # 2020-05-25 (V 1.7.0)
