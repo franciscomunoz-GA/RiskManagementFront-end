@@ -178,7 +178,7 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
               Estatus = false;
             }
 
-            if(element.usada == 1){
+            if(element.usada > 0){
               Usada = true;
             }
             else{
@@ -216,7 +216,8 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   }
   DialogAgregar(){
     const dialogRef = this.dialog.open(DialogRiesgosPuntosdeinteres, {
-      width: '50vw',
+      maxWidth: '600px',
+      minWidth: '300px',
       data:  {Titulo: 'Agregar'}
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -235,7 +236,8 @@ export class RiesgosPuntosdeinteresComponent implements OnInit {
   }
   DialogModificar(Id){
     const dialogRef = this.dialog.open(DialogRiesgosPuntosdeinteres, {
-      width: '50vw',
+      maxWidth: '600px',
+      minWidth: '300px',
       data:  {Titulo: 'Modificar', Id: Id}
     });
  

@@ -1,3 +1,11 @@
+# 2020-05-28 (V 1.7.3)
+    Se realiza cambio en area riesgos porque se programod de manera erronea
+    Se eliminan las imagenes que ya no se utilizan en el proyecto
+    Se agrega la imagen enviada por Roberto
+    Se cambian los logos por el de enviado
+    Se agrega el import para poder actualizar la página (se agregar un /#/)
+    Se agrega para que el navegador de chrome cambie de color
+    Se oculta una sección a petición de Roberto
 # 2020-05-28 (V 1.7.2)
     Se realiza cambio en riesgos puntos de interés porque se programó de manera erronea 
 # 2020-05-25 (V 1.7.1)

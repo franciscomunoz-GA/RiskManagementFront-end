@@ -64,11 +64,11 @@ export class PermisosSeccionesService {
     this.EncuestaRiesgosPuntosInteres.next(Permiso);
   }
   AccesoEncuestaRiesgosAreas(){    
-    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion riesgo area');
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion area riesgo');
     this.EncuestaRiesgosAreas.next(Permiso);
   }
   AccesoEncuestaClientesRiesgosAreas(){    
-    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area');
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area1');
     this.EncuestaClientesRiesgosAreas.next(Permiso);
   }
   private ValidarPermisoSeccion(Seccion): boolean{

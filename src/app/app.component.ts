@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
   ShowEncuestaRiesgosAreas:         Observable<boolean>;
   ShowEncuestaClientesRiesgosAreas: Observable<boolean>;
   
-  constructor(private Menu: ValidarNavbarService, 
-              private Sidebar: ValidarNavbarService,
+  constructor(private Menu:     ValidarNavbarService, 
+              private Sidebar:  ValidarNavbarService,
               private Permisos: PermisosSeccionesService,
               public route: Router){
     this.NombreUsuario = this.Menu.ValorNombreUsuario;

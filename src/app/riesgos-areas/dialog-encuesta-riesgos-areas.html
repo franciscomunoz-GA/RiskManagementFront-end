@@ -3,39 +3,67 @@
 <div mat-dialog-content>
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-10">
+                
                 <mat-form-field class="example-full-width">
                     <mat-label>Nombre del catálogo</mat-label>
                     <input matInput [(ngModel)]="Nombre" maxlength="45">
                 </mat-form-field>                
-            </div>                   
-            <div class="col-12">
-                <mat-form-field>
-                    <mat-label>Riesgo</mat-label>
-                    <mat-select [(ngModel)]="Riesgo">
-                      <mat-option *ngFor="let item of Riesgos" [value]="item.Id">
-                        {{item.Identificador}}
-                        <small>{{ item.Nombre}}</small>
-                    </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-12">
+        
                 <mat-form-field>
                     <mat-label> Área </mat-label>
                     <mat-select [(ngModel)]="Area">
-                      <mat-option *ngFor="let item of Areas" [value]="item.Id">
+                        <mat-option *ngFor="let item of Areas" [value]="item.Id">
                         {{item.Nombre}}
-                      </mat-option>
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>                
+            </div>
+            <div class="col-2">
+                <br>
+                <br>
+                <button mat-mini-fab color="primary" matTooltip="Cambiar nombre y área" (click)="Modificar()" *ngIf="!Tipo">
+                    <mat-icon>autorenew</mat-icon>
+                </button>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10">
+                <mat-form-field>
+                    <mat-label>Riesgos</mat-label>
+                    <mat-select [formControl]="toppings" multiple [(ngModel)]="Riesgo">                      
+                        <mat-option *ngFor="let item of Riesgos" [value]="item.Id">
+                        {{item.Nombre}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
-            </div>                        
+            </div>
+            <div class="col-2">
+                <button mat-mini-fab color="primary" matTooltip="Agregar riesgo(s)" (click)="AgregarRiesgos()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="row">            
+            <div class="col-12">
+                <mat-selection-list #riesgos>
+                    <mat-list-option *ngFor="let item of RiesgosAgregados" [value]="item.Id" [disabled]="item.Usado">
+                      {{item.Nombre}}
+                      <mat-divider></mat-divider>
+                    </mat-list-option>
+                  </mat-selection-list>
+            </div>
+            <div class="col-12" *ngIf="RiesgosAgregados.length" align="end">
+                <button mat-mini-fab color="warn" matTooltip="Eliminar riesgos seleccionados" (click)="EliminarRiesgos(riesgos.selectedOptions.selected)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </div>
     </div>    
 </div>
 <div mat-dialog-actions align="right">
   <hr>  
   <button mat-button color="warn" (click)="onNoClick()">Cerrar</button>
-  <button mat-button color="primary" *ngIf="Tipo" (click)="Agregar()">Crear</button>
-  <button mat-button color="primary" *ngIf="!Tipo" (click)="Modificar()">Modificar</button>
+  <button mat-button color="primary" *ngIf="Tipo" (click)="Agregar()">Crear</button>  
 </div>

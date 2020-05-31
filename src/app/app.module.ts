@@ -8,6 +8,10 @@ import { HttpClientModule }        from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+// Poder recargar la página
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 //Recaptcha google
 import { RecaptchaModule } from 'ng-recaptcha';
 
@@ -155,7 +159,7 @@ import { ClientesRiesgosAreasComponent,
     MatTreeModule,
     ChartsModule,
     RecaptchaModule,
-    Angular2CsvModule
+    Angular2CsvModule,
   ],
   entryComponents: [
     DialogAgregarEncuesta,
@@ -176,7 +180,11 @@ import { ClientesRiesgosAreasComponent,
     DialogClienteRiesgosAreas,
     DialogImportarClienteRiesgosAreas
   ],
-  providers: [ServicioService, SessionValidate],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    ServicioService, 
+    SessionValidate,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

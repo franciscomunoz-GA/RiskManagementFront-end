@@ -34,7 +34,7 @@ export class EncuestaRiesgosAreasGuard implements CanActivate {
       this.Permisos.AccesoEncuestaClientesRiesgosAreas();
       
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
-      let found = Permisos.find(element => element == 'ver relacion riesgo area');
+      let found = Permisos.find(element => element == 'ver relacion area riesgo');
       if(found != null || found != undefined){
         return true;
       }

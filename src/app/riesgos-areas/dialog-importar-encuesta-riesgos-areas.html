@@ -33,14 +33,17 @@
                                 <th mat-header-cell *matHeaderCellDef> Nombre </th>
                                 <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
                               </ng-container>
+                              
+                              <ng-container matColumnDef="Area">
+                                <th mat-header-cell *matHeaderCellDef> Área </th>
+                                <td mat-cell *matCellDef="let element"> {{element.Area}} </td>
+                              </ng-container> 
+
                               <ng-container matColumnDef="Riesgo">
                                 <th mat-header-cell *matHeaderCellDef> Riesgo </th>
                                 <td mat-cell *matCellDef="let element"> {{element.Riesgo}} </td>
                               </ng-container>
-                              <ng-container matColumnDef="Area">
-                                <th mat-header-cell *matHeaderCellDef> Área </th>
-                                <td mat-cell *matCellDef="let element"> {{element.Area}} </td>
-                              </ng-container>                                                                                   
+                                                                                                                
                               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                             </table>

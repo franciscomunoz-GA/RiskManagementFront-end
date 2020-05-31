@@ -22,11 +22,11 @@
                 <mat-form-field>
                     <mat-label>Riesgos</mat-label>
                     <mat-select [formControl]="toppings" multiple [(ngModel)]="Riesgo">                      
-                      <mat-option *ngFor="let item of Riesgos" [value]="item.Id">
+                        <mat-option *ngFor="let item of Riesgos" [value]="item.Id">
                         {{item.Nombre}}
-                      </mat-option>
+                        </mat-option>
                     </mat-select>
-                  </mat-form-field>                
+                </mat-form-field>                
             </div>
             <div class="col-1">                
                 <button mat-mini-fab color="primary" matTooltip="Agregar riesgo(s)" (click)="AgregarRiesgos()">
