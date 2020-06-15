@@ -68,7 +68,7 @@ export class PermisosSeccionesService {
     this.EncuestaRiesgosAreas.next(Permiso);
   }
   AccesoEncuestaClientesRiesgosAreas(){    
-    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area1');
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area');
     this.EncuestaClientesRiesgosAreas.next(Permiso);
   }
   private ValidarPermisoSeccion(Seccion): boolean{

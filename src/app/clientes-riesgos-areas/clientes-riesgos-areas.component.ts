@@ -377,6 +377,7 @@ Agregar(){
                 duration: 4000,
                 panelClass: ['mensaje-success']
               });
+              this.onNoClick();
               this.Nombre     = '';                    
               this.RiesgoArea = '';                   
             }
@@ -512,7 +513,7 @@ displayedColumns: string[] = ['Numero', 'Nombre','RiesgoArea', 'Cliente'];
 Tabla = new MatTableDataSource<ImportElement>();
 RegistrosTabla:ImportElement[] = []
 @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-Catalogo = [{'Nombre': '', 'Riesgo-Area': '', 'Cliente': ''}];
+Catalogo = [{'Nombre': '', 'Cliente': '', 'Riesgo-Area': '' }];
 constructor(public dialogRef: MatDialogRef<DialogImportarClienteRiesgosAreas>,
            @Inject(MAT_DIALOG_DATA) public data: any, 
            public http: HttpClient, 
@@ -523,7 +524,7 @@ constructor(public dialogRef: MatDialogRef<DialogImportarClienteRiesgosAreas>,
  this.ObtenerServicio = new ServicioService(http);
 } 
 exportAsXLSX():void {
-this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaClientesRiesgosAreas');
+this.excelService.exportAsExcelFile(this.Catalogo, 'PlantillaClientesAreasRiesgos');
 }
 ngOnInit() {
  this.Tabla.paginator = this.paginator;

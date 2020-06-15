@@ -19,26 +19,24 @@
           <label>{{ loginData.email }}</label>
         </div>
         
-        <mat-form-field class="fullWidth" *ngIf="showPassword" style="margin-top:1em">
+        <!-- <mat-form-field class="fullWidth" *ngIf="showPassword" style="margin-top:1em"> -->
+        <mat-form-field class="fullWidth"  style="margin-top:1em">
           <mat-icon matPrefix style="margin-right: 0.5em">vpn_key</mat-icon>
           <input autofocus matInput type="password" placeholder="Contraseña" [(ngModel)]="loginData.password">
         </mat-form-field>
-        <re-captcha *ngIf="showPassword" (resolved)="resolved($event)" siteKey="6LdkHPEUAAAAAOgAO8WGG0oyOrlyKZol3mFBXtb-"></re-captcha>
+        <re-captcha  (resolved)="resolved($event)" siteKey="6LdkHPEUAAAAAOgAO8WGG0oyOrlyKZol3mFBXtb-"></re-captcha>
         <!-- Loading Animation -->
 				<mat-spinner class="loadingSpin" [diameter]="40" *ngIf="loading"></mat-spinner>
 
-        <button mat-raised-button color="primary" class="loginButton" *ngIf="showEmail" (window:keydown)="onKey($event)" (click)="nextLogin()">SIGUIENTE</button>
-        <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="UserPass($event)" (click)="makeLogin()" [disabled]="disabled">INGRESAR</button>
+        <!-- <button mat-raised-button color="primary" class="loginButton" *ngIf="showEmail" (window:keydown)="onKey($event)" (click)="nextLogin()">SIGUIENTE</button> -->
+        <!-- <button mat-raised-button color="primary" class="loginButton" *ngIf="showPassword" (window:keydown)="UserPass($event)" (click)="makeLogin()" [disabled]="disabled">INGRESAR</button> -->
+        <button mat-raised-button color="primary" class="loginButton" (window:keydown)="UserPass($event)" (click)="nextLogin()" [disabled]="disabled">INGRESAR</button>
 
         <!-- <div style="text-align: center; margin-top:1em" *ngIf="showRecovery">
           <button mat-button>Recuperar contraseña</button>
         </div> -->
         
-        <div style="text-align: center; margin-top: 0.4em" *ngIf="showPassword" (click)="back()">
-          <button mat-icon-button>
-            <mat-icon>arrow_back_circle</mat-icon>
-          </button>
-        </div>
+        
 
       </mat-card-content>
     </mat-card>

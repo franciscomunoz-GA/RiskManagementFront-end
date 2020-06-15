@@ -1,29 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :focus {outline:0 !important;}
 .blue-snackbar {
     background: #01579B;
-    }
-    .green-snackbar {
+}
+.green-snackbar {
     background: #1B5E20;
-    }
-    .red-snackbar {
+}
+.red-snackbar {
     background: #B71C1C;
-    }
-    .orange-snackbar {
+}
+.orange-snackbar {
     background: #E65100;
-    }
-    .mensaje-error{
+}
+.mensaje-error{
     color: #F44336;
-    }
-    .mensaje-success{
+}
+.mensaje-success{
     color: #4CAF50;
-    }
-    .mensaje-info{
+}
+.mensaje-info{
     color: #2196F3;
-    }
-    .mensaje-warning{
+}
+.mensaje-warning{
     color: #ff9800;
-    }
+}
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

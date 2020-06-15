@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
     this.ShowEncuestaClientesRiesgosAreas = this.Permisos.ValorEncuestaClientesRiesgosAreas;
   }
   procesaPropagar(mensaje){
-    this.ShowSidebar = mensaje    
+    this.ShowSidebar = mensaje;
   }
   CerrarSideMenu(){
     this.ShowSidebar = false;

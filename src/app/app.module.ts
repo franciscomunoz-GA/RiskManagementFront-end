@@ -55,9 +55,11 @@ import { DashboardComponent }       from './dashboard/dashboard.component';
 import { NavbarComponent }          from './navbar/navbar.component';
 import { MatSlideToggleModule }     from '@angular/material/slide-toggle';
 import { MatTreeModule }            from '@angular/material/tree';
+
 // Servicios
 import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
+//Componentes
 import { EncuestasComponent,
          DialogAgregarEncuesta } from './encuestas/encuestas.component';
 import { CatalogoRiesgoComponent,
@@ -84,6 +86,12 @@ import { RiesgosAreasComponent,
 import { ClientesRiesgosAreasComponent,
          DialogClienteRiesgosAreas,
          DialogImportarClienteRiesgosAreas} from './clientes-riesgos-areas/clientes-riesgos-areas.component';
+import { CalendarioComponent } from './calendario/calendario.component';
+
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -116,7 +124,8 @@ import { ClientesRiesgosAreasComponent,
     DialogImportarRiesgosAreas,
     ClientesRiesgosAreasComponent,
     DialogClienteRiesgosAreas,
-    DialogImportarClienteRiesgosAreas
+    DialogImportarClienteRiesgosAreas,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,
@@ -160,6 +169,9 @@ import { ClientesRiesgosAreasComponent,
     ChartsModule,
     RecaptchaModule,
     Angular2CsvModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    NgbModule,
+    
   ],
   entryComponents: [
     DialogAgregarEncuesta,

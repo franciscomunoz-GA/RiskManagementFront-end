@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit {
     // this.disabled = false;
   }
   nextLogin(){
-    if(this.loginData.email == "")
-    {
+    if(this.loginData.email == ""){
       this.snackBar.open('Es necesario ingresar el correo electrónico','',{
         duration: 2000,
         panelClass: ['mensaje-error']
@@ -60,32 +59,9 @@ export class LoginComponent implements OnInit {
         });
       }
       else{
-        this.loading = true;
-        this.showEmail = false;
-        this.showRecovery = false;
-  
-        this.ObtenerServicio.PostRequest('Validar/Usuario', 'APIREST', { Correo : this.loginData.email })
-        .subscribe((response: ResponseApiEntity)=>{
-          this.loading = false;
-          if(response.Success){
-            this.showPassword = true;
-            this.showRecovery = true;
-          }
-          else{
-            this.showEmail = true;
-            this.message = response.Message;
-            this.snackBar.open(this.message,'',{
-              duration: 2000
-            });
-          }
-        }, error => {
-          this.showEmail = true;
-          this.loading = false;
-          this.snackBar.open('Error de conexión','',{
-            duration: 2000,
-            
-          })
-        }); 
+        this.loading = true;        
+        this.showRecovery = false;  
+        this.makeLogin();
       }
                   
     }
@@ -103,23 +79,29 @@ export class LoginComponent implements OnInit {
       this.ObtenerServicio.PostRequest('Sesion/Usuario', 'APIREST', { Correo : this.loginData.email, Password : this.loginData.password})
       .subscribe((response)=>{
         this.loading = false;
-        if(response.Success){
+        if(response.Success){          
           this.Menu.OcultarProgress();
           if(response.Data){
             let Resultado = response.Data;
-            console.log('Resultado '+Resultado);
-            
-            if(Resultado.Sesion[0].Sesion != 'Sesión activa'){
-              this.ActualizarSesion(Resultado.Sesion[0].Id); // aquí
-              sessionStorage.removeItem('SessionCob');
-              sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
-              this.route.navigate(['/Dashboard']);
+            if(Resultado.Permisos == [] || Resultado.Permisos == null || Resultado.Permisos == ''){
+              this.snackBar.open('Contraseña incorrecta','',{
+                duration: 2000
+              }); 
             }
             else{
-              this.snackBar.open('Se detectó que ya existe una conexión, si está intentando establecer una conexión adicional es necesario que espere 5 minutos y vuelva a intentarlo','',{
-                duration: 10000
-              });  
-            }         
+              if(Resultado.Sesion[0].Sesion != 'Sesión activa'){
+                this.ActualizarSesion(Resultado.Sesion[0].Id);
+                sessionStorage.removeItem('SessionCob');
+                sessionStorage['SessionCob'] = JSON.stringify({IdUsuario: Resultado.Sesion[0].Id, NombreUsuario: Resultado.Sesion[0].Nombre, Permisos: Resultado.Permisos});   
+                this.route.navigate(['/Dashboard']);
+              }
+              else{
+                this.snackBar.open('Se detectó que ya existe una conexión, si está intentando establecer una conexión adicional es necesario que espere 5 minutos y vuelva a intentarlo','',{
+                  duration: 10000
+                });  
+              } 
+            }
+                    
           }
           else{
             this.showPassword = true;

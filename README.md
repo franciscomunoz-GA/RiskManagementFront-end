@@ -1,3 +1,5 @@
+# 2020-06-15 (V 1.8.0)
+    Se crea componente de calendario y se corrigen otras cosas
 # 2020-05-28 (V 1.7.3)
     Se realiza cambio en area riesgos porque se programod de manera erronea
     Se eliminan las imagenes que ya no se utilizan en el proyecto
