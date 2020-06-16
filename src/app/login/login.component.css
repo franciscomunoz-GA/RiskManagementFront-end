@@ -1,4 +1,3 @@
-
 mat-card{
   margin-top: 26em !important;
   max-width: 450px;  
@@ -29,6 +28,7 @@ mat-card{
 .loadingSpin{
   margin: 0 auto;
   position: relative;
+position: relative;
 }
 
 .containerLabel{

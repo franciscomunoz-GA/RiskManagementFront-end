@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 offset-2">
+            <full-calendar  #calendar  
+            defaultView="dayGridMonth" 
+            [locales]="locales" 
+            [height]="'auto'" 
+            locale="es" 
+            [header]="{
+                   left: 'prev,next',
+                   center: 'title',
+                   right: 'dayGridMonth,timeGridDay'
+                 }" [plugins]="calendarPlugins" [weekends]="calendarWeekends" [events]="calendarEvents" 
+                 (dateClick)="handleDateClick($event)" ></full-calendar>
+        </div>
+    </div>
+</div>

@@ -1,3 +1,9 @@
+# 2020-06-15 (V 2.0.0)
+    Se baja la versión de angular
+    Se instala FullCalendar 
+    Se hacen ajustes para la versión inferior de angular
+    Se crea el calendario
+    Se crea dialog para insertar citas    
 # 2020-06-15 (V 1.8.0)
     Se crea componente de calendario y se corrigen otras cosas
 # 2020-05-28 (V 1.7.3)

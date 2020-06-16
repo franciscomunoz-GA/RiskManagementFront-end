@@ -15,8 +15,7 @@ export interface EstructuraCatalogo{
   Id:                number;  
   Nombre:            string;
   Cliente:           string;  
-  RiesgoId:          string;
-  RiesgoNombre:      string;
+  NombreRelacionAR:  string;  
   Area:              string;
   Usuario:           string;
   FechaCreacion:     string;
@@ -34,7 +33,7 @@ export class ClientesRiesgosAreasComponent implements OnInit {
 ObtenerServicio: any;
 // sesión
 IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
-displayedColumns: string[] = ['Nombre', 'Cliente', 'RiesgoId', 'RiesgoNombre', 'Area', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
+displayedColumns: string[] = ['Nombre', 'Cliente', 'NombreRelacionAR', 'Area', 'Usuario', 'Fecha', 'Editar', 'Deshabilitar', 'Eliminar'];
 Tabla: MatTableDataSource<EstructuraCatalogo>;
 Catalogo: EstructuraCatalogo[] = [];
 @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -182,8 +181,7 @@ TraerInformacion(){
             Id:                element.Id,
             Nombre:            element.Nombre,
             Cliente:           element.Cliente,
-            RiesgoId:          element.RiesgoId,
-            RiesgoNombre:      element.RiesgoNombre,
+            NombreRelacionAR:  element.NombreRelacionAR,            
             Area:              element.Area,
             Usuario:           element.Usuario, 
             FechaCreacion:     element.FechaCreacion,

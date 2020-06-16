@@ -1,23 +1,10 @@
-import { BrowserModule }           from '@angular/platform-browser';
-import { NgModule }                from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, 
-         ReactiveFormsModule}      from '@angular/forms';
-import { HttpClientModule }        from '@angular/common/http';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-// Poder recargar la página
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
-//Recaptcha google
-import { RecaptchaModule } from 'ng-recaptcha';
-
-//Descargar excel
-import { Angular2CsvModule } from 'angular2-csv';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FullCalendarModule } from '@fullcalendar/angular';
 // Angular Material
 import { MatBottomSheetModule }     from '@angular/material/bottom-sheet';
 import { MatButtonModule }          from '@angular/material/button';
@@ -55,7 +42,12 @@ import { DashboardComponent }       from './dashboard/dashboard.component';
 import { NavbarComponent }          from './navbar/navbar.component';
 import { MatSlideToggleModule }     from '@angular/material/slide-toggle';
 import { MatTreeModule }            from '@angular/material/tree';
-
+// Poder recargar la página
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+//Recaptcha google
+import { RecaptchaModule } from 'ng-recaptcha';
+//Descargar excel
+import { Angular2CsvModule } from 'angular2-csv';
 // Servicios
 import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
@@ -86,13 +78,10 @@ import { RiesgosAreasComponent,
 import { ClientesRiesgosAreasComponent,
          DialogClienteRiesgosAreas,
          DialogImportarClienteRiesgosAreas} from './clientes-riesgos-areas/clientes-riesgos-areas.component';
-import { CalendarioComponent } from './calendario/calendario.component';
-
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { CalendarioComponent,
+         DialogCalendario } from './calendario/calendario.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,7 +114,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ClientesRiesgosAreasComponent,
     DialogClienteRiesgosAreas,
     DialogImportarClienteRiesgosAreas,
-    CalendarioComponent
+    CalendarioComponent,
+    DialogCalendario,    
   ],
   imports: [
     BrowserModule,
@@ -169,10 +159,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ChartsModule,
     RecaptchaModule,
     Angular2CsvModule,
-    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    NgbModule,
-    
+    FullCalendarModule,    
   ],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    ServicioService, 
+    SessionValidate,
+  ],  
+  bootstrap: [AppComponent],
   entryComponents: [
     DialogAgregarEncuesta,
     DialogRiesgo,
@@ -190,13 +184,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     DialogRiesgosAreas,
     DialogImportarRiesgosAreas,
     DialogClienteRiesgosAreas,
-    DialogImportarClienteRiesgosAreas
-  ],
-  providers: [
-    {provide: LocationStrategy, useClass: HashLocationStrategy},
-    ServicioService, 
-    SessionValidate,
-  ],
-  bootstrap: [AppComponent]
+    DialogImportarClienteRiesgosAreas,
+    DialogCalendario
+  ]
 })
 export class AppModule { }
