@@ -38,6 +38,7 @@ export class AuthGuard implements CanActivate {
       this.Permisos.AccesoEncuestaRiesgosAreas();
       this.Permisos.AccesoEncuestaClientesRiesgosAreas();
       
+      this.Permisos.AccesoEncuestas();
       return true;
     } 
     else {      

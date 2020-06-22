@@ -531,7 +531,9 @@ export class DialogRiesgosAreas implements OnInit{
   }
   private InsertarRiesgos(){
     this.Progressbar = true;
-    this.ObtenerServicio.PostRequest('Agregar/RelacionRSI', 'APIREST', {    
+    this.ObtenerServicio.PostRequest('Agregar/RelacionRA', 'APIREST', {  
+      Id:        this.data.Id,       
+      IdArea:    this.Area,  
       IdRiesgo:       JSON.stringify(this.Riesgo),
       IdUsuario:      this.IdUsuario
     })

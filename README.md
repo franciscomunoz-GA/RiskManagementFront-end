@@ -1,3 +1,8 @@
+# 2020-06-22 (V 2.1.0)
+    Se cambian graficas por un plano cartesiano
+    Se le da funcionalidad al plano cartesiano
+    Se adaptan todos los guardianes a la nueva sección
+    Se eliminan archivos innecesarios
 # 2020-06-15 (V 2.0.0)
     Se baja la versión de angular
     Se instala FullCalendar 

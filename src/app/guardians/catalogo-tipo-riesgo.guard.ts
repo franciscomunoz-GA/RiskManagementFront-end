@@ -32,7 +32,7 @@ export class CatalogoTipoRiesgoGuard implements CanActivate {
       this.Permisos.AccesoEncuestaRiesgosPuntosInteres();
       this.Permisos.AccesoEncuestaRiesgosAreas();
       this.Permisos.AccesoEncuestaClientesRiesgosAreas();
-      
+      this.Permisos.AccesoEncuestas();
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
       let found = Permisos.find(element => element == 'ver tipos riesgos');
       if(found != null || found != undefined){

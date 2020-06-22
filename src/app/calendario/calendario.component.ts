@@ -16,6 +16,9 @@ import {
 } from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { FullCalendarComponent } from '@fullcalendar/angular';
+import { ValidarNavbarService } from '../Observables/validar-navbar.service';
+import { ExcelService } from '../servicios/excel-service.service';
+import { ValidarPermisoService } from '../servicios/validar-permiso.service';
 
 @Component({
   selector: 'app-calendario',
@@ -23,29 +26,29 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
   styleUrls: ['./calendario.component.scss']
 })
 export class CalendarioComponent implements OnInit {
+  // Servicio API
+  ObtenerServicio: any;
+  // sesión
+  IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
+  
   // references the #calendar in the template  
   @ViewChild('calendar', null) calendarComponent: FullCalendarComponent;
   locales = [esLocale];
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = true;
-  calendarEvents: EventInput[] = [
-    { 
-      title: 'Event Now', 
-      start: new Date('2020-06-05'), 
-      description:"1)Descripcion del evento, o algo asi por el estilo.",
-      color: 'purple'
-    },
-    { 
-      title: 'Other event ', 
-      start: new Date('2020-06-07'), 
-      description:"2)Descripcion del evento, o algo asi por el estilo.",
-      color: 'orange' // override!
-    }
-
-  ];
-  constructor(public dialog: MatDialog, ) { }
+  calendarEvents: EventInput[] = [];
+  constructor(public dialog: MatDialog, 
+              private Menu: ValidarNavbarService, 
+              private excelService:ExcelService, 
+              private snackBar: MatSnackBar, 
+              public http: HttpClient,
+              private Permiso: ValidarPermisoService) {
+    this.ObtenerServicio = new ServicioService(http);
+    this.Menu.OcultarProgress();
+   }
 
   ngOnInit(): void {
+    this.TraerInformacion();
   }
   handleDateClick(arg) { // handler method    
     const dialogRef = this.dialog.open(DialogCalendario, {
@@ -61,8 +64,61 @@ export class CalendarioComponent implements OnInit {
        this.TraerInformacion();   
     });
   }
-  TraerInformacion(){
+  Detalle(event){    
+    console.log(event);
     
+  }
+  TraerInformacion(){
+    this.calendarEvents = [];
+    this.Menu.MostrarProgress();
+    this.ObtenerServicio.PostRequest('Seleccionar/Calendario', 'APIREST', {
+      IdUsuario: this.IdUsuario
+     })
+     .subscribe((response)=>{
+       this.Menu.OcultarProgress();
+       if(response.Success){
+         if(response.Data){
+           response.Data.forEach(element => {
+             let color: string;
+             switch (element.respondido) {
+               case 1:
+                 color = "#1A237E";
+                 break;
+               case 0:
+                  color = "#1B5E20";
+                  break;
+               case 3:
+                  color = "red";
+                  break;
+               default:
+                 color = "#1A237E";
+                 break;
+             }            
+            this.calendarEvents = this.calendarEvents.concat({              
+              id:          element.IdCalendario,
+              title:       element.Inspector+" "+element.Descripcion,
+              textColor:   "white",
+              start:       new Date(element.Fecha),    
+              color:       color,
+              allDay:      false,
+              
+            })
+           });           
+         }
+           
+       }
+       else{                
+         this.snackBar.open('Error de conexión','',{
+           duration: 2000
+         });
+       }
+     }, 
+     error => {      
+       this.snackBar.open('Error de conexión','',{
+         duration: 2000,
+         
+       });
+     });  
   }
 }
 @Component({

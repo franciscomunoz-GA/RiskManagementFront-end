@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   ShowEncuestaRiesgosAreas:         Observable<boolean>;
   ShowEncuestaClientesRiesgosAreas: Observable<boolean>;
   
+  ShowEncuestas:                    Observable<boolean>;
   constructor(private Menu:     ValidarNavbarService, 
               private Sidebar:  ValidarNavbarService,
               private Permisos: PermisosSeccionesService,
@@ -44,6 +45,8 @@ export class AppComponent implements OnInit {
     this.Menu.MostrarNav();
     this.color = this.Menu.ValorBackground;
     // Mostrar u ocultar las secciones del sidenav
+    this.ShowEncuestas                    = this.Permisos.ValorEncuestas;
+
     this.ShowCatalogoArea                 = this.Permisos.ValorCatalogoArea;
     this.ShowCatalogoCriterioLegal        = this.Permisos.ValorCatalogoCriterioLegal;
     this.ShowCatalogoDimension            = this.Permisos.ValorCatalogoDimension;
@@ -53,6 +56,7 @@ export class AppComponent implements OnInit {
     this.ShowEncuestaRiesgosPuntosInteres = this.Permisos.ValorEncuestaRiesgosPuntosInteres;
     this.ShowEncuestaRiesgosAreas         = this.Permisos.ValorEncuestaRiesgosAreas;
     this.ShowEncuestaClientesRiesgosAreas = this.Permisos.ValorEncuestaClientesRiesgosAreas;
+    
   }
   procesaPropagar(mensaje){
     this.ShowSidebar = mensaje;

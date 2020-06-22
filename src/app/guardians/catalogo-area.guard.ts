@@ -33,7 +33,7 @@ export class CatalogoAreaGuard implements CanActivate {
       this.Permisos.AccesoEncuestaRiesgosPuntosInteres();
       this.Permisos.AccesoEncuestaRiesgosAreas();
       this.Permisos.AccesoEncuestaClientesRiesgosAreas();
-      
+      this.Permisos.AccesoEncuestas();
       let Permisos = JSON.parse(sessionStorage['SessionCob']).Permisos;
       let found = Permisos.find(element => element == 'ver area');
       if(found != null || found != undefined){

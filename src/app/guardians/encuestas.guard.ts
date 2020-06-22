@@ -8,7 +8,7 @@ import { PermisosSeccionesService } from '../Observables/permisos-secciones.serv
 @Injectable({
   providedIn: 'root'
 })
-export class EncuestaRiesgosAreasGuard implements CanActivate {
+export class EncuestasGuard implements CanActivate {
   Permiso: Observable<boolean>;
   constructor(private Menu: ValidarNavbarService, 
               private Permisos: PermisosSeccionesService,

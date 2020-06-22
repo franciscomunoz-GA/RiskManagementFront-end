@@ -53,7 +53,7 @@ import { ServicioService } from './servicios/servicio.service';
 import { SessionValidate } from './servicios/session-validate.service';
 //Componentes
 import { EncuestasComponent,
-         DialogAgregarEncuesta } from './encuestas/encuestas.component';
+  DialogEncuesta } from './encuestas/encuestas.component';
 import { CatalogoRiesgoComponent,
          DialogRiesgo,
          DialogImportarRiesgo } from './catalogo-riesgo/catalogo-riesgo.component';
@@ -89,7 +89,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     DashboardComponent,
     EncuestasComponent,
-    DialogAgregarEncuesta,
+    DialogEncuesta,
     CatalogoRiesgoComponent,
     DialogRiesgo,
     DialogImportarRiesgo,
@@ -168,7 +168,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],  
   bootstrap: [AppComponent],
   entryComponents: [
-    DialogAgregarEncuesta,
+    DialogEncuesta,
     DialogRiesgo,
     DialogImportarRiesgo,
     DialogDimension,

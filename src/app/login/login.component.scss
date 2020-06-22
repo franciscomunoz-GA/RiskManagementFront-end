@@ -1,0 +1,45 @@
+mat-card{
+  
+  max-width: 450px;  
+  min-width: 300px;  
+  max-height: 600px;
+  
+}
+.Fondo{    
+  background: url('../../assets/Fondo.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+// .contenedor{
+//   position: absolute !important;
+//   top: 50% !important;
+//   left: 50% !important;
+//   transform: translate(-50%, -50%) !important;
+// }
+
+.imgContainer{
+  text-align: center;
+  margin-top: 2em !important;
+}
+
+.fullWidth{
+  width: 100%;
+}
+
+.loginButton{
+  width: 100%;
+  margin-top: 1em !important;
+}
+
+.loadingSpin{
+  margin: 0 auto;
+  position: relative;
+position: relative;
+}
+
+.containerLabel{
+  display: flex;
+  align-items: center;
+}

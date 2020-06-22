@@ -14,6 +14,8 @@ export class PermisosSeccionesService {
   private EncuestaRiesgosAreas         = new BehaviorSubject<boolean>(false);
   private EncuestaClientesRiesgosAreas = new BehaviorSubject<boolean>(false);
 
+  private Encuestas = new BehaviorSubject<boolean>(false);
+
   constructor() { }
   get ValorCatalogoArea(){
     return this.CatalogoArea.asObservable();
@@ -38,6 +40,9 @@ export class PermisosSeccionesService {
   }
   get ValorEncuestaClientesRiesgosAreas(){
     return this.EncuestaClientesRiesgosAreas.asObservable();
+  }
+  get ValorEncuestas(){
+    return this.Encuestas.asObservable();
   }
   AccesoCatalogoArea(){    
     let Permiso: boolean = this.ValidarPermisoSeccion('ver area');
@@ -70,6 +75,11 @@ export class PermisosSeccionesService {
   AccesoEncuestaClientesRiesgosAreas(){    
     let Permiso: boolean = this.ValidarPermisoSeccion('ver relacion cliente riesgo area');
     this.EncuestaClientesRiesgosAreas.next(Permiso);
+  }
+
+  AccesoEncuestas(){    
+    let Permiso: boolean = this.ValidarPermisoSeccion('ver encuestas');
+    this.Encuestas.next(Permiso);
   }
   private ValidarPermisoSeccion(Seccion): boolean{
     let Permiso: boolean = false;

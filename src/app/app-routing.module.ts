@@ -22,6 +22,7 @@ import { RiesgosAreasComponent } from './riesgos-areas/riesgos-areas.component';
 import { EncuestaRiesgosAreasGuard } from './guardians/encuesta-riesgos-areas.guard';
 import { ClientesRiesgosAreasComponent } from './clientes-riesgos-areas/clientes-riesgos-areas.component';
 import { EncuestaClientesRiesgosAreasGuard } from './guardians/encuesta-clientes-riesgos-areas.guard';
+import { EncuestasGuard } from './guardians/encuestas.guard';
 
 const routes: Routes = [
   {
@@ -57,7 +58,7 @@ const routes: Routes = [
   {
     path: 'Encuestas',
     component: EncuestasComponent,
-    canActivate: [AuthGuard]
+    canActivate: [EncuestasGuard]
   },
   {
     path: 'RiesgosPuntosInteres',
