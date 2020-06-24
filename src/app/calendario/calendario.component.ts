@@ -19,6 +19,7 @@ import { FullCalendarComponent } from '@fullcalendar/angular';
 import { ValidarNavbarService } from '../Observables/validar-navbar.service';
 import { ExcelService } from '../servicios/excel-service.service';
 import { ValidarPermisoService } from '../servicios/validar-permiso.service';
+import { DialogEncuesta } from '../encuestas/encuestas.component';
 
 @Component({
   selector: 'app-calendario',
@@ -37,6 +38,15 @@ export class CalendarioComponent implements OnInit {
   calendarPlugins = [dayGridPlugin, timeGrigPlugin, interactionPlugin];
   calendarWeekends = true;
   calendarEvents: EventInput[] = [];
+
+  Citas = [];
+  
+  //Permisos
+  Create: boolean = false;
+  Select: boolean = false;
+  Update: boolean = false;
+  Delete: boolean = false;
+
   constructor(public dialog: MatDialog, 
               private Menu: ValidarNavbarService, 
               private excelService:ExcelService, 
@@ -45,24 +55,32 @@ export class CalendarioComponent implements OnInit {
               private Permiso: ValidarPermisoService) {
     this.ObtenerServicio = new ServicioService(http);
     this.Menu.OcultarProgress();
+    //Permisos   
+   this.Create = Permiso.ValidarPermiso('crear calendario');
+   this.Select = Permiso.ValidarPermiso('ver calendario');
+   
    }
 
   ngOnInit(): void {
     this.TraerInformacion();
   }
-  handleDateClick(arg) { // handler method    
-    const dialogRef = this.dialog.open(DialogCalendario, {
-      width: '50vw',
-      data:  {
-        Titulo: 'Agregar cita',
-        Tipo: 'Agregar', 
-        Dia: arg.dateStr
-      }
-    });
- 
-    dialogRef.afterClosed().subscribe(result => {
-       this.TraerInformacion();   
-    });
+  handleDateClick(arg) {
+    if(this.Create){
+      const dialogRef = this.dialog.open(DialogCalendario, {
+        maxWidth: '1200px',
+        minWidth: '300px',
+        data:  {
+          Titulo: 'Agregar cita',
+          Tipo: 'Agregar', 
+          Dia: arg.dateStr
+        }
+      });
+   
+      dialogRef.afterClosed().subscribe(result => {
+         this.TraerInformacion();   
+      });
+    }
+    
   }
   Detalle(event){    
     console.log(event);
@@ -70,6 +88,7 @@ export class CalendarioComponent implements OnInit {
   }
   TraerInformacion(){
     this.calendarEvents = [];
+    this.Citas = [];
     this.Menu.MostrarProgress();
     this.ObtenerServicio.PostRequest('Seleccionar/Calendario', 'APIREST', {
       IdUsuario: this.IdUsuario
@@ -101,9 +120,10 @@ export class CalendarioComponent implements OnInit {
               start:       new Date(element.Fecha),    
               color:       color,
               allDay:      false,
-              
-            })
-           });           
+              height:       '100px'
+            });
+            this.Citas.push({Id: element.IdCalendario, Tipo: element.Tipo}); 
+           });                 
          }
            
        }
@@ -119,6 +139,37 @@ export class CalendarioComponent implements OnInit {
          
        });
      });  
+  }
+  evento(event){
+    if(this.Select){
+      console.log(event);
+      let Id = event.event.id;
+      let Tipo;
+      let NombreTipo: string;
+      for (var i = 0; i < this.Citas.length; i++){      
+        if (this.Citas[i].Id == Id){
+          Tipo = this.Citas[i].Tipo;
+        }
+      }
+      if(Tipo == 2){
+        NombreTipo = 'Cliente';
+      }
+      else{
+        NombreTipo = 'SitioInteres';
+      }
+      const dialogRef = this.dialog.open(DialogEncuesta, {
+        maxWidth: '1200px',
+        minWidth: '300px',
+        data:{
+          Id: Id,
+          Tipo: NombreTipo
+        },    
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        // this.TraerInformacion();
+      });
+    }    
   }
 }
 @Component({

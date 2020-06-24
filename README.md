@@ -1,3 +1,7 @@
+# 2020-06-24 (V 2.1.1)
+    Se cambia el plano cartesiano para que se muestren varios riesgos a la vez
+    Se le agregan los permisos para ver, crear y modificar
+
 # 2020-06-22 (V 2.1.0)
     Se cambian graficas por un plano cartesiano
     Se le da funcionalidad al plano cartesiano

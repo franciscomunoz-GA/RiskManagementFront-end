@@ -11,6 +11,7 @@ import {ExcelService} from '../servicios/excel-service.service';
 import { ServicioService } from '../servicios/servicio.service';
 import { ValidarPermisoService } from '../servicios/validar-permiso.service';
 import { FormControl } from '@angular/forms';
+import { DataSource } from '@angular/cdk/table';
 
 export interface EstructuraEncuesta{
   Id:          number;
@@ -71,7 +72,8 @@ export class EncuestasComponent implements OnInit {
   }
   Dialog(Id, Tipo){
     const dialogRef = this.dialog.open(DialogEncuesta, {
-      width: '100vw',
+      maxWidth: '1200px',
+      minWidth: '300px',
       data:{
         Id: Id,
         Tipo: Tipo
@@ -79,7 +81,7 @@ export class EncuestasComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');      
+      
     });
   }
   TraerInformacion(){    
@@ -130,10 +132,11 @@ export class EncuestasComponent implements OnInit {
   }  
 }
 export interface Riesgos {
-  Id:     number
-  Riesgo: string;
-  Descripcion: string;
-  Impacto: number;
+  Tipo:         number;
+  Id:           number;
+  Riesgo:       string;
+  Descripcion:  string;
+  Impacto:      number;
   Probabilidad: number; 
 }
 
@@ -149,6 +152,7 @@ export interface AreasRiesgos {
 })
 export class DialogEncuesta implements OnInit {
   AreasRiesgosControl = new FormControl();
+  toppings = new FormControl();
   AreasRiesgos: AreasRiesgos[] = [];
   // Servicio de api
   ObtenerServicio: any;
@@ -188,12 +192,31 @@ export class DialogEncuesta implements OnInit {
   C4_1: boolean; C4_2: boolean; C4_3: boolean; C4_4: boolean; C4_5: boolean; C4_6: boolean; C4_7: boolean; C4_8: boolean; C4_9: boolean; C4_10: boolean; 
   C3_1: boolean; C3_2: boolean; C3_3: boolean; C3_4: boolean; C3_5: boolean; C3_6: boolean; C3_7: boolean; C3_8: boolean; C3_9: boolean; C3_10: boolean; 
   C2_1: boolean; C2_2: boolean; C2_3: boolean; C2_4: boolean; C2_5: boolean; C2_6: boolean; C2_7: boolean; C2_8: boolean; C2_9: boolean; C2_10: boolean; 
-  C1_1: boolean; C1_2: boolean; C1_3: boolean; C1_4: boolean; C1_5: boolean; C1_6: boolean; C1_7: boolean; C1_8: boolean; C1_9: boolean; C1_10: boolean; 
-  constructor(public dialogRef: MatDialogRef<DialogEncuesta>, @Inject(MAT_DIALOG_DATA) public data: any, public http: HttpClient, private snackBar: MatSnackBar,) {
+  C1_1: boolean; C1_2: boolean; C1_3: boolean; C1_4: boolean; C1_5: boolean; C1_6: boolean; C1_7: boolean; C1_8: boolean; C1_9: boolean; C1_10: boolean;
+  
+  ToolTipC10_1: string; ToolTipC10_2: string; ToolTipC10_3: string; ToolTipC10_4: string; ToolTipC10_5: string; ToolTipC10_6: string; ToolTipC10_7: string; ToolTipC10_8: string; ToolTipC10_9: string; ToolTipC10_10: string; 
+  ToolTipC9_1: string; ToolTipC9_2: string; ToolTipC9_3: string; ToolTipC9_4: string; ToolTipC9_5: string; ToolTipC9_6: string; ToolTipC9_7: string; ToolTipC9_8: string; ToolTipC9_9: string; ToolTipC9_10: string;
+  ToolTipC8_1: string; ToolTipC8_2: string; ToolTipC8_3: string; ToolTipC8_4: string; ToolTipC8_5: string; ToolTipC8_6: string; ToolTipC8_7: string; ToolTipC8_8: string; ToolTipC8_9: string; ToolTipC8_10: string; 
+  ToolTipC7_1: string; ToolTipC7_2: string; ToolTipC7_3: string; ToolTipC7_4: string; ToolTipC7_5: string; ToolTipC7_6: string; ToolTipC7_7: string; ToolTipC7_8: string; ToolTipC7_9: string; ToolTipC7_10: string; 
+  ToolTipC6_1: string; ToolTipC6_2: string; ToolTipC6_3: string; ToolTipC6_4: string; ToolTipC6_5: string; ToolTipC6_6: string; ToolTipC6_7: string; ToolTipC6_8: string; ToolTipC6_9: string; ToolTipC6_10: string; 
+  ToolTipC5_1: string; ToolTipC5_2: string; ToolTipC5_3: string; ToolTipC5_4: string; ToolTipC5_5: string; ToolTipC5_6: string; ToolTipC5_7: string; ToolTipC5_8: string; ToolTipC5_9: string; ToolTipC5_10: string; 
+  ToolTipC4_1: string; ToolTipC4_2: string; ToolTipC4_3: string; ToolTipC4_4: string; ToolTipC4_5: string; ToolTipC4_6: string; ToolTipC4_7: string; ToolTipC4_8: string; ToolTipC4_9: string; ToolTipC4_10: string; 
+  ToolTipC3_1: string; ToolTipC3_2: string; ToolTipC3_3: string; ToolTipC3_4: string; ToolTipC3_5: string; ToolTipC3_6: string; ToolTipC3_7: string; ToolTipC3_8: string; ToolTipC3_9: string; ToolTipC3_10: string; 
+  ToolTipC2_1: string; ToolTipC2_2: string; ToolTipC2_3: string; ToolTipC2_4: string; ToolTipC2_5: string; ToolTipC2_6: string; ToolTipC2_7: string; ToolTipC2_8: string; ToolTipC2_9: string; ToolTipC2_10: string; 
+  ToolTipC1_1: string; ToolTipC1_2: string; ToolTipC1_3: string; ToolTipC1_4: string; ToolTipC1_5: string; ToolTipC1_6: string; ToolTipC1_7: string; ToolTipC1_8: string; ToolTipC1_9: string; ToolTipC1_10: string;
+
+  Update: boolean = false;
+  constructor(public dialog: MatDialog,
+              public dialogRef: MatDialogRef<DialogEncuesta>, 
+              @Inject(MAT_DIALOG_DATA) public data: any, 
+              public http: HttpClient, 
+              private snackBar: MatSnackBar,
+              private Permiso: ValidarPermisoService) {
       this.Id   = data.Id;
       this.Tipo = data.Tipo;
 
       this.ObtenerServicio = new ServicioService(http);
+      this.Update = Permiso.ValidarPermiso('modificar encuestas');
   }
   ngOnInit() {    
     this.TraerInformacion();
@@ -202,7 +225,8 @@ export class DialogEncuesta implements OnInit {
     this.dialogRef.close();
   }
   TraerInformacion(){
-    console.log(this.Id, this.Tipo);
+    this.Riesgos = [];
+    this.AreasRiesgos = [];
     let tipo;
     if(this.Tipo == 'Cliente'){
       tipo = 2;
@@ -212,8 +236,7 @@ export class DialogEncuesta implements OnInit {
     }
 
     this.Progressbar= true;
-    this.ObtenerServicio.PostRequest('Seleccionar/CartesianoD', 'APIREST', 
-    {
+    this.ObtenerServicio.PostRequest('Seleccionar/CartesianoD', 'APIREST', {
       Id :       this.Id,
       Tipo:      tipo,
       IdUsuario: this.IdUsuario
@@ -233,7 +256,8 @@ export class DialogEncuesta implements OnInit {
               let Descripcion: string;
               Descripcion = "Impacto: "+element.Impacto+" Probabilidad: "+element.Probabilidad;
               this.Riesgos.push({
-                Id:           element.IdRiesgo,
+                Tipo: 1,
+                Id:           element.IdRespuestas,
                 Riesgo:       element.Riesgo,
                 Descripcion:  Descripcion,
                 Impacto:      element.Impacto,
@@ -251,10 +275,11 @@ export class DialogEncuesta implements OnInit {
             Resultado.Areas.forEach(element => {
               let NombreArea: string = element.NombreArea;
               let Area: string = element.Area;
-              let Titulo: string = NombreArea+" ("+Area+")";
-              
+              //let Titulo: string = NombreArea+" ("+Area+")";
+              let Titulo: string = NombreArea;
               element.Riesgos.forEach(item => {
                 riesgos.push({
+                  Tipo: 2,
                   Id:           item.IdRespuestas, 
                   Riesgo:       item.Riesgo, 
                   Descripcion:  "Impacto: "+item.Impacto+" Probabilidad: "+item.Probabilidad,
@@ -286,168 +311,384 @@ export class DialogEncuesta implements OnInit {
       })
     });
   }
-  BuscarArea(event){    
-    let area;
-    // area = this.Areas.find(element => element.IdArea == event);        
-    this.AreasRiesgos.forEach(element => {
-      element.Riesgos.forEach(item => {
-        event == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad): null;
+  BuscarArea(event){
+    this.LimpiarPuntos();
+    event.forEach(elemento => {
+      this.AreasRiesgos.forEach(element => {
+        element.Riesgos.forEach(item => {
+          elemento == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad, item.Riesgo): null;
+        });
       });
     });
+    // area = this.Areas.find(element => element.IdArea == event);        
+    
     // this.Riesgos = area.Riesgos;
   }
   BuscarRiesgo(event){
-    this.Riesgos.forEach(item => {
-      event == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad): null;
+    this.LimpiarPuntos();
+    event.forEach(element => {
+      this.Riesgos.forEach(item => {
+        element == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad, item.Riesgo): null;
+      });
     });
+    
   }
-  private MostrarPunto(Impacto: number, Probabilidad: number){
+  private LimpiarPuntos(){
+    this.C1_1 = false;
+    this.C1_2 = false;
+    this.C1_3 = false;
+    this.C1_4 = false;
+    this.C1_5 = false;
+    this.C1_6 = false;
+    this.C1_7 = false;
+    this.C1_8 = false;
+    this.C1_9 = false;
+    this.C1_10 = false;
+
+    this.C2_1 = false;
+    this.C2_2 = false;
+    this.C2_3 = false;
+    this.C2_4 = false;
+    this.C2_5 = false;
+    this.C2_6 = false;
+    this.C2_7 = false;
+    this.C2_8 = false;
+    this.C2_9 = false;
+    this.C2_10 = false;
+
+    this.C3_1 = false;
+    this.C3_2 = false;
+    this.C3_3 = false;
+    this.C3_4 = false;
+    this.C3_5 = false;
+    this.C3_6 = false;
+    this.C3_7 = false;
+    this.C3_8 = false;
+    this.C3_9 = false;
+    this.C3_10 = false;
+
+    this.C4_1 = false;
+    this.C4_2 = false;
+    this.C4_3 = false;
+    this.C4_4 = false;
+    this.C4_5 = false;
+    this.C4_6 = false;
+    this.C4_7 = false;
+    this.C4_8 = false;
+    this.C4_9 = false;
+    this.C4_10 = false;
+
+    this.C5_1 = false;
+    this.C5_2 = false;
+    this.C5_3 = false;
+    this.C5_4 = false;
+    this.C5_5 = false;
+    this.C5_6 = false;
+    this.C5_7 = false;
+    this.C5_8 = false;
+    this.C5_9 = false;
+    this.C5_10 = false;
+
+    this.C6_1 = false;
+    this.C6_2 = false;
+    this.C6_3 = false;
+    this.C6_4 = false;
+    this.C6_5 = false;
+    this.C6_6 = false;
+    this.C6_7 = false;
+    this.C6_8 = false;
+    this.C6_9 = false;
+    this.C6_10 = false;
+    
+    this.C7_1 = false;
+    this.C7_2 = false;
+    this.C7_3 = false;
+    this.C7_4 = false;
+    this.C7_5 = false;
+    this.C7_6 = false;
+    this.C7_7 = false;
+    this.C7_8 = false;
+    this.C7_9 = false;
+    this.C7_10 = false;
+
+    this.C8_1 = false;
+    this.C8_2 = false;
+    this.C8_3 = false;
+    this.C8_4 = false;
+    this.C8_5 = false;
+    this.C8_6 = false;
+    this.C8_7 = false;
+    this.C8_8 = false;
+    this.C8_9 = false;
+    this.C8_10 = false;
+
+    this.C9_1 = false;
+    this.C9_2 = false;
+    this.C9_3 = false;
+    this.C9_4 = false;
+    this.C9_5 = false;
+    this.C9_6 = false;
+    this.C9_7 = false;
+    this.C9_8 = false;
+    this.C9_9 = false;
+    this.C9_10 = false;
+
+    this.C10_1 = false;
+    this.C10_2 = false;
+    this.C10_3 = false;
+    this.C10_4 = false;
+    this.C10_5 = false;
+    this.C10_6 = false;
+    this.C10_7 = false;
+    this.C10_8 = false;
+    this.C10_9 = false;
+    this.C10_10 = false;
+  }
+  private MostrarPunto(Impacto: number, Probabilidad: number, Riesgo: string){
     let Formula: number;
     Formula = Math.round(((+Impacto+ +Probabilidad)/2));    
-    
+    let tooltip;
     switch (Formula) {
       case 1:
-        this.ToolTip = Formula+" - No significativo";
+        tooltip = Riesgo+" - No significativo";
         break;
       case 2:
-        this.ToolTip = Formula+" - No significativo";
+        tooltip = Riesgo+" - No significativo";
           break;
       case 3:
-          this.ToolTip = Formula+" - Menor";
+          tooltip = Riesgo+" - Menor";
           break;
       case 4:
-          this.ToolTip = Formula+" - Menor";
+          tooltip = Riesgo+" - Menor";
           break;
       case 5:
-          this.ToolTip = Formula+" - Crítico";
+          tooltip = Riesgo+" - Crítico";
           break;
       case 6:
-          this.ToolTip = Formula+" - Crítico";
+          tooltip = Riesgo+" - Crítico";
           break;
       case 7:
-          this.ToolTip = Formula+" - Mayor";
+          tooltip = Riesgo+" - Mayor";
           break;
       case 8:
-          this.ToolTip = Formula+" - Mayor";
+          tooltip = Riesgo+" - Mayor";
           break;
       case 9:
-          this.ToolTip = Formula+" - Catastrófico";
+          tooltip = Riesgo+" - Catastrófico";
           break;
       case 10:
-          this.ToolTip = Formula+" - Catastrófico";
+          tooltip = Riesgo+" - Catastrófico";
           break;
       default:
-        this.ToolTip = Formula+" - No evaluado";
+        tooltip = Riesgo+" - No evaluado";
         break;
     }
-    (Impacto == 1 && Probabilidad == 1) ? this.C1_1 = true : this.C1_1 = false;
-    (Impacto == 1 && Probabilidad == 2) ? this.C1_2 = true : this.C1_2 = false;
-    (Impacto == 1 && Probabilidad == 3) ? this.C1_3 = true : this.C1_3 = false;
-    (Impacto == 1 && Probabilidad == 4) ? this.C1_4 = true : this.C1_4 = false;
-    (Impacto == 1 && Probabilidad == 5) ? this.C1_5 = true : this.C1_5 = false;
-    (Impacto == 1 && Probabilidad == 6) ? this.C1_6 = true : this.C1_6 = false;
-    (Impacto == 1 && Probabilidad == 7) ? this.C1_7 = true : this.C1_7 = false;
-    (Impacto == 1 && Probabilidad == 8) ? this.C1_8 = true : this.C1_8 = false;
-    (Impacto == 1 && Probabilidad == 9) ? this.C1_9 = true : this.C1_9 = false;
-    (Impacto == 1 && Probabilidad == 10) ? this.C1_10 = true : this.C1_10 = false;
+    if(Impacto == 1 && Probabilidad == 1){this.C1_1 = true; this.ToolTipC1_1 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 2){this.C1_2 = true; this.ToolTipC1_2 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 3){this.C1_3 = true; this.ToolTipC1_3 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 4){this.C1_4 = true; this.ToolTipC1_4 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 5){this.C1_5 = true; this.ToolTipC1_5 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 6){this.C1_6 = true; this.ToolTipC1_6 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 7){this.C1_7 = true; this.ToolTipC1_7 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 8){this.C1_8 = true; this.ToolTipC1_8 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 9){this.C1_9 = true; this.ToolTipC1_9 = tooltip;}
+    if(Impacto == 1 && Probabilidad == 10){this.C1_10 = true; this.ToolTipC1_10 = tooltip;}
 
-    (Impacto == 1 && Probabilidad == 1) ? this.C2_1 = true : this.C2_1 = false;
-    (Impacto == 2 && Probabilidad == 2) ? this.C2_2 = true : this.C2_2 = false;
-    (Impacto == 2 && Probabilidad == 3) ? this.C2_3 = true : this.C2_3 = false;
-    (Impacto == 2 && Probabilidad == 4) ? this.C2_4 = true : this.C2_4 = false;
-    (Impacto == 2 && Probabilidad == 5) ? this.C2_5 = true : this.C2_5 = false;
-    (Impacto == 2 && Probabilidad == 6) ? this.C2_6 = true : this.C2_6 = false;
-    (Impacto == 2 && Probabilidad == 7) ? this.C2_7 = true : this.C2_7 = false;
-    (Impacto == 2 && Probabilidad == 8) ? this.C2_8 = true : this.C2_8 = false;
-    (Impacto == 2 && Probabilidad == 9) ? this.C2_9 = true : this.C2_9 = false;
-    (Impacto == 2 && Probabilidad == 10) ? this.C2_10 = true : this.C2_10 = false;
+    if(Impacto == 2 && Probabilidad == 1){this.C2_1 = true; this.ToolTipC2_1 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 2){this.C2_2 = true; this.ToolTipC2_2 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 3){this.C2_3 = true; this.ToolTipC2_3 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 4){this.C2_4 = true; this.ToolTipC2_4 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 5){this.C2_5 = true; this.ToolTipC2_5 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 6){this.C2_6 = true; this.ToolTipC2_6 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 7){this.C2_7 = true; this.ToolTipC2_7 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 8){this.C2_8 = true; this.ToolTipC2_8 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 9){this.C2_9 = true; this.ToolTipC2_9 = tooltip;}
+    if(Impacto == 2 && Probabilidad == 10){this.C2_10 = true; this.ToolTipC2_10 = tooltip;}
     
-    (Impacto == 3 && Probabilidad == 1) ? this.C3_1 = true : this.C3_1 = false;
-    (Impacto == 3 && Probabilidad == 2) ? this.C3_2 = true : this.C3_2 = false;
-    (Impacto == 3 && Probabilidad == 3) ? this.C3_3 = true : this.C3_3 = false;
-    (Impacto == 3 && Probabilidad == 4) ? this.C3_4 = true : this.C3_4 = false;
-    (Impacto == 3 && Probabilidad == 5) ? this.C3_5 = true : this.C3_5 = false;
-    (Impacto == 3 && Probabilidad == 6) ? this.C3_6 = true : this.C3_6 = false;
-    (Impacto == 3 && Probabilidad == 7) ? this.C3_7 = true : this.C3_7 = false;
-    (Impacto == 3 && Probabilidad == 8) ? this.C3_8 = true : this.C3_8 = false;
-    (Impacto == 3 && Probabilidad == 9) ? this.C3_9 = true : this.C3_9 = false;
-    (Impacto == 3 && Probabilidad == 10) ? this.C3_10 = true : this.C3_10 = false;
+    if(Impacto == 3 && Probabilidad == 1){this.C3_1 = true; this.ToolTipC3_1 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 2){this.C3_2 = true; this.ToolTipC3_2 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 3){this.C3_3 = true; this.ToolTipC3_3 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 4){this.C3_4 = true; this.ToolTipC3_4 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 5){this.C3_5 = true; this.ToolTipC3_5 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 6){this.C3_6 = true; this.ToolTipC3_6 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 7){this.C3_7 = true; this.ToolTipC3_7 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 8){this.C3_8 = true; this.ToolTipC3_8 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 9){this.C3_9 = true; this.ToolTipC3_9 = tooltip;}
+    if(Impacto == 3 && Probabilidad == 10){this.C3_10 = true; this.ToolTipC3_10 = tooltip;}
 
-    (Impacto == 4 && Probabilidad == 1) ? this.C4_1 = true : this.C4_1 = false;
-    (Impacto == 4 && Probabilidad == 2) ? this.C4_2 = true : this.C4_2 = false;
-    (Impacto == 4 && Probabilidad == 3) ? this.C4_3 = true : this.C4_3 = false;
-    (Impacto == 4 && Probabilidad == 4) ? this.C4_4 = true : this.C4_4 = false;
-    (Impacto == 4 && Probabilidad == 5) ? this.C4_5 = true : this.C4_5 = false;
-    (Impacto == 4 && Probabilidad == 6) ? this.C4_6 = true : this.C4_6 = false;
-    (Impacto == 4 && Probabilidad == 7) ? this.C4_7 = true : this.C4_7 = false;
-    (Impacto == 4 && Probabilidad == 8) ? this.C4_8 = true : this.C4_8 = false;
-    (Impacto == 4 && Probabilidad == 9) ? this.C4_9 = true : this.C4_9 = false;
-    (Impacto == 4 && Probabilidad == 10) ? this.C4_10 = true : this.C4_10 = false;
+    if(Impacto == 4 && Probabilidad == 1){this.C4_1 = true; this.ToolTipC4_1 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 2){this.C4_2 = true; this.ToolTipC4_2 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 3){this.C4_3 = true; this.ToolTipC4_3 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 4){this.C4_4 = true; this.ToolTipC4_4 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 5){this.C4_5 = true; this.ToolTipC4_5 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 6){this.C4_6 = true; this.ToolTipC4_6 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 7){this.C4_7 = true; this.ToolTipC4_7 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 8){this.C4_8 = true; this.ToolTipC4_8 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 9){this.C4_9 = true; this.ToolTipC4_9 = tooltip;}
+    if(Impacto == 4 && Probabilidad == 10){this.C4_10 = true; this.ToolTipC4_10 = tooltip;}
 
-    (Impacto == 5 && Probabilidad == 1) ? this.C5_1 = true : this.C5_1 = false;
-    (Impacto == 5 && Probabilidad == 2) ? this.C5_2 = true : this.C5_2 = false;
-    (Impacto == 5 && Probabilidad == 3) ? this.C5_3 = true : this.C5_3 = false;
-    (Impacto == 5 && Probabilidad == 4) ? this.C5_4 = true : this.C5_4 = false;
-    (Impacto == 5 && Probabilidad == 5) ? this.C5_5 = true : this.C5_5 = false;
-    (Impacto == 5 && Probabilidad == 6) ? this.C5_6 = true : this.C5_6 = false;
-    (Impacto == 5 && Probabilidad == 7) ? this.C5_7 = true : this.C5_7 = false;
-    (Impacto == 5 && Probabilidad == 8) ? this.C5_8 = true : this.C5_8 = false;
-    (Impacto == 5 && Probabilidad == 9) ? this.C5_9 = true : this.C5_9 = false;
-    (Impacto == 5 && Probabilidad == 10) ? this.C5_10 = true : this.C5_10 = false;
+    if(Impacto == 5 && Probabilidad == 1){this.C5_1 = true; this.ToolTipC5_1 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 2){this.C5_2 = true; this.ToolTipC5_2 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 3){this.C5_3 = true; this.ToolTipC5_3 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 4){this.C5_4 = true; this.ToolTipC5_4 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 5){this.C5_5 = true; this.ToolTipC5_5 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 6){this.C5_6 = true; this.ToolTipC5_6 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 7){this.C5_7 = true; this.ToolTipC5_7 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 8){this.C5_8 = true; this.ToolTipC5_8 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 9){this.C5_9 = true; this.ToolTipC5_9 = tooltip;}
+    if(Impacto == 5 && Probabilidad == 10){this.C5_10 = true; this.ToolTipC5_10 = tooltip;}
 
-    (Impacto == 6 && Probabilidad == 1) ? this.C6_1 = true : this.C6_1 = false;
-    (Impacto == 6 && Probabilidad == 2) ? this.C6_2 = true : this.C6_2 = false;
-    (Impacto == 6 && Probabilidad == 3) ? this.C6_3 = true : this.C6_3 = false;
-    (Impacto == 6 && Probabilidad == 4) ? this.C6_4 = true : this.C6_4 = false;
-    (Impacto == 6 && Probabilidad == 5) ? this.C6_5 = true : this.C6_5 = false;
-    (Impacto == 6 && Probabilidad == 6) ? this.C6_6 = true : this.C6_6 = false;
-    (Impacto == 6 && Probabilidad == 7) ? this.C6_7 = true : this.C6_7 = false;
-    (Impacto == 6 && Probabilidad == 8) ? this.C6_8 = true : this.C6_8 = false;
-    (Impacto == 6 && Probabilidad == 9) ? this.C6_9 = true : this.C6_9 = false;
-    (Impacto == 6 && Probabilidad == 10) ? this.C6_10 = true : this.C6_10 = false;
+    if(Impacto == 6 && Probabilidad == 1){this.C6_1 = true; this.ToolTipC6_1 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 2){this.C6_2 = true; this.ToolTipC6_2 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 3){this.C6_3 = true; this.ToolTipC6_3 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 4){this.C6_4 = true; this.ToolTipC6_4 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 5){this.C6_5 = true; this.ToolTipC6_5 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 6){this.C6_6 = true; this.ToolTipC6_6 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 7){this.C6_7 = true; this.ToolTipC6_7 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 8){this.C6_8 = true; this.ToolTipC6_8 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 9){this.C6_9 = true; this.ToolTipC6_9 = tooltip;}
+    if(Impacto == 6 && Probabilidad == 10){this.C6_10 = true; this.ToolTipC6_10 = tooltip;}
 
-    (Impacto == 7 && Probabilidad == 1) ? this.C7_1 = true : this.C7_1 = false;
-    (Impacto == 7 && Probabilidad == 2) ? this.C7_2 = true : this.C7_2 = false;
-    (Impacto == 7 && Probabilidad == 3) ? this.C7_3 = true : this.C7_3 = false;
-    (Impacto == 7 && Probabilidad == 4) ? this.C7_4 = true : this.C7_4 = false;
-    (Impacto == 7 && Probabilidad == 5) ? this.C7_5 = true : this.C7_5 = false;
-    (Impacto == 7 && Probabilidad == 6) ? this.C7_6 = true : this.C7_6 = false;
-    (Impacto == 7 && Probabilidad == 7) ? this.C7_7 = true : this.C7_7 = false;
-    (Impacto == 7 && Probabilidad == 8) ? this.C7_8 = true : this.C7_8 = false;
-    (Impacto == 7 && Probabilidad == 9) ? this.C7_9 = true : this.C7_9 = false;
-    (Impacto == 7 && Probabilidad == 10) ? this.C7_10 = true : this.C7_10 = false;
+    if(Impacto == 7 && Probabilidad == 1){this.C7_1 = true; this.ToolTipC7_1 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 2){this.C7_2 = true; this.ToolTipC7_2 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 3){this.C7_3 = true; this.ToolTipC7_3 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 4){this.C7_4 = true; this.ToolTipC7_4 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 5){this.C7_5 = true; this.ToolTipC7_5 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 6){this.C7_6 = true; this.ToolTipC7_6 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 7){this.C7_7 = true; this.ToolTipC7_7 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 8){this.C7_8 = true; this.ToolTipC7_8 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 9){this.C7_9 = true; this.ToolTipC7_9 = tooltip;}
+    if(Impacto == 7 && Probabilidad == 10){this.C7_10 = true; this.ToolTipC7_10 = tooltip;}
 
-    (Impacto == 8 && Probabilidad == 1) ? this.C8_1 = true : this.C8_1 = false;
-    (Impacto == 8 && Probabilidad == 2) ? this.C8_2 = true : this.C8_2 = false;
-    (Impacto == 8 && Probabilidad == 3) ? this.C8_3 = true : this.C8_3 = false;
-    (Impacto == 8 && Probabilidad == 4) ? this.C8_4 = true : this.C8_4 = false;
-    (Impacto == 8 && Probabilidad == 5) ? this.C8_5 = true : this.C8_5 = false;
-    (Impacto == 8 && Probabilidad == 6) ? this.C8_6 = true : this.C8_6 = false;
-    (Impacto == 8 && Probabilidad == 7) ? this.C8_7 = true : this.C8_7 = false;
-    (Impacto == 8 && Probabilidad == 8) ? this.C8_8 = true : this.C8_8 = false;
-    (Impacto == 8 && Probabilidad == 9) ? this.C8_9 = true : this.C8_9 = false;
-    (Impacto == 8 && Probabilidad == 10) ? this.C8_10 = true : this.C8_10 = false;
+    if(Impacto == 8 && Probabilidad == 1){this.C8_1 = true; this.ToolTipC8_1 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 2){this.C8_2 = true; this.ToolTipC8_2 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 3){this.C8_3 = true; this.ToolTipC8_3 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 4){this.C8_4 = true; this.ToolTipC8_4 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 5){this.C8_5 = true; this.ToolTipC8_5 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 6){this.C8_6 = true; this.ToolTipC8_6 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 7){this.C8_7 = true; this.ToolTipC8_7 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 8){this.C8_8 = true; this.ToolTipC8_8 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 9){this.C8_9 = true; this.ToolTipC8_9 = tooltip;}
+    if(Impacto == 8 && Probabilidad == 10){this.C8_10 = true; this.ToolTipC8_10 = tooltip;}
 
-    (Impacto == 9 && Probabilidad == 1) ? this.C9_1 = true : this.C9_1 = false;
-    (Impacto == 9 && Probabilidad == 2) ? this.C9_2 = true : this.C9_2 = false;
-    (Impacto == 9 && Probabilidad == 3) ? this.C9_3 = true : this.C9_3 = false;
-    (Impacto == 9 && Probabilidad == 4) ? this.C9_4 = true : this.C9_4 = false;
-    (Impacto == 9 && Probabilidad == 5) ? this.C9_5 = true : this.C9_5 = false;
-    (Impacto == 9 && Probabilidad == 6) ? this.C9_6 = true : this.C9_6 = false;
-    (Impacto == 9 && Probabilidad == 7) ? this.C9_7 = true : this.C9_7 = false;
-    (Impacto == 9 && Probabilidad == 8) ? this.C9_8 = true : this.C9_8 = false;
-    (Impacto == 9 && Probabilidad == 9) ? this.C9_9 = true : this.C9_9 = false;
-    (Impacto == 9 && Probabilidad == 10) ? this.C9_10 = true : this.C9_10 = false;
+    if(Impacto == 9 && Probabilidad == 1){this.C9_1 = true; this.ToolTipC9_1 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 2){this.C9_2 = true; this.ToolTipC9_2 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 3){this.C9_3 = true; this.ToolTipC9_3 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 4){this.C9_4 = true; this.ToolTipC9_4 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 5){this.C9_5 = true; this.ToolTipC9_5 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 6){this.C9_6 = true; this.ToolTipC9_6 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 7){this.C9_7 = true; this.ToolTipC9_7 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 8){this.C9_8 = true; this.ToolTipC9_8 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 9){this.C9_9 = true; this.ToolTipC9_9 = tooltip;}
+    if(Impacto == 9 && Probabilidad == 10){this.C9_10 = true; this.ToolTipC9_10 = tooltip;}
 
-    (Impacto == 10 && Probabilidad == 1) ? this.C10_1 = true : this.C10_1 = false;
-    (Impacto == 10 && Probabilidad == 2) ? this.C10_2 = true : this.C10_2 = false;
-    (Impacto == 10 && Probabilidad == 3) ? this.C10_3 = true : this.C10_3 = false;
-    (Impacto == 10 && Probabilidad == 4) ? this.C10_4 = true : this.C10_4 = false;
-    (Impacto == 10 && Probabilidad == 5) ? this.C10_5 = true : this.C10_5 = false;
-    (Impacto == 10 && Probabilidad == 6) ? this.C10_6 = true : this.C10_6 = false;
-    (Impacto == 10 && Probabilidad == 7) ? this.C10_7 = true : this.C10_7 = false;
-    (Impacto == 10 && Probabilidad == 8) ? this.C10_8 = true : this.C10_8 = false;
-    (Impacto == 10 && Probabilidad == 9) ? this.C10_9 = true : this.C10_9 = false;
-    (Impacto == 10 && Probabilidad == 10) ? this.C10_10 = true : this.C10_10 = false;
+    if(Impacto == 10 && Probabilidad == 1){this.C10_1 = true; this.ToolTipC10_1 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 2){this.C10_2 = true; this.ToolTipC10_2 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 3){this.C10_3 = true; this.ToolTipC10_3 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 4){this.C10_4 = true; this.ToolTipC10_4 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 5){this.C10_5 = true; this.ToolTipC10_5 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 6){this.C10_6 = true; this.ToolTipC10_6 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 7){this.C10_7 = true; this.ToolTipC10_7 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 8){this.C10_8 = true; this.ToolTipC10_8 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 9){this.C10_9 = true; this.ToolTipC10_9 = tooltip;}
+    if(Impacto == 10 && Probabilidad == 10){this.C10_10 = true; this.ToolTipC10_10 = tooltip;} 
+  }
+  EditarRiesgo(Riesgo){
+    console.log(Riesgo);
+    const dialogRef = this.dialog.open(DialogModificarRiesgo, {
+      maxWidth: '600px',
+      minWidth: '200px',
+      data:{
+        Riesgo: Riesgo
+      },    
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.TraerInformacion();
+    });
+  }
+}
+@Component({
+  selector: 'dialog-modificar-riesgo',
+  templateUrl: 'dialog-modificar-riesgo.html',
+  styleUrls: ['./dialog.component.scss']
+})
+export class DialogModificarRiesgo {
+  Id: number;
+  Tipo: number;
+  Impacto: number;
+  Probabilidad: number
+  Riesgo: string;
+  // sesión
+  IdUsuario = JSON.parse(sessionStorage['SessionCob']).IdUsuario;
+  ObtenerServicio: any;
+  constructor(public dialogRef: MatDialogRef<DialogModificarRiesgo>, 
+              @Inject(MAT_DIALOG_DATA) public data: any, 
+              public http: HttpClient, 
+              private snackBar: MatSnackBar,) {
+    this.Id   = data.Riesgo.Id;
+    this.Tipo = data.Riesgo.Tipo;
+    this.Impacto = data.Riesgo.Impacto;
+    this.Probabilidad = data.Riesgo.Probabilidad;
+    this.Riesgo = data.Riesgo.Riesgo;
+    this.ObtenerServicio = new ServicioService(http);
+    if(this.Id == null){
+      this.Id = this.data.IdRespuestas;
+    }
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  Guardar(){    
+    if((this.Impacto > 0 || this.Impacto < 11) && (this.Probabilidad > 0 || this.Probabilidad < 11)){
+      let Parametros = [{
+        IdRespuestas: this.Id,
+        Impacto:      this.Impacto, 
+        Probabilidad: this.Probabilidad
+      }];
+      let tipo;
+      if(this.Tipo != 1){
+        tipo = 2;
+      }
+      else{
+        tipo = 1
+      }
+      this.ObtenerServicio.PostRequest('Modificar/Resultados', 'APIREST', {      
+        Tipo:      tipo,
+        Datos:     JSON.stringify(Parametros),
+        IdUsuario: this.IdUsuario
+      })
+      .subscribe((response)=>{
+        console.log(response);
+        this.onNoClick();
+      }, 
+      error => {      
+        this.snackBar.open('Error de conexión','',{
+          duration: 2000,
+          
+        });
+      });
+    }
+    else{
+      this.snackBar.open('El rango es de 1 a 10','',{
+        duration: 2000
+      });
+    }
+  }
+  ValidarImpacto(){
+    if(this.Impacto < 1 || this.Impacto > 10){
+      this.Impacto = null;
+      this.snackBar.open('El rango es de 1 a 10','',{
+        duration: 2000
+      });
+    }
+  }
+  ValidarProbabilidad(){
+    if(this.Probabilidad < 1 || this.Probabilidad > 10){
+      this.Probabilidad = null;
+      this.snackBar.open('El rango es de 1 a 10','',{
+        duration: 2000
+      });
+    }
   }
 }

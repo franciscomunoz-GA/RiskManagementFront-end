@@ -210,7 +210,7 @@ TraerInformacion(){
 }
 DialogAgregar(){
   const dialogRef = this.dialog.open(DialogClienteRiesgosAreas, {
-    width: '50vw',
+    width: '80vw',
     data:  {Titulo: 'Agregar'}
   });
   dialogRef.afterClosed().subscribe(result => {
@@ -229,7 +229,7 @@ DialogImportar(){
 }
 DialogModificar(Id){
   const dialogRef = this.dialog.open(DialogClienteRiesgosAreas, {
-    width: '50vw',
+    width: '80vw',
     data:  {Titulo: 'Modificar', Id: Id}
   });
 

@@ -157,7 +157,7 @@ export class CatalogoTipoRiesgoComponent implements OnInit {
   }
   DialogAgregar(){    
     const dialogRef = this.dialog.open(DialogTipoRiesgo, {
-      width: '50vw',
+      width: '80vw',
       data:  {Titulo: 'Agregar'}
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -166,7 +166,7 @@ export class CatalogoTipoRiesgoComponent implements OnInit {
   }
   DialogModificar(Id){
     const dialogRef = this.dialog.open(DialogTipoRiesgo, {
-      width: '50vw',
+      width: '80vw',
       data:  {Titulo: 'Modificar', Id: Id}
     });
 

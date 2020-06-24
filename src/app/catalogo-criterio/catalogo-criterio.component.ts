@@ -158,7 +158,7 @@ export class CatalogoCriterioComponent implements OnInit {
  }
  DialogAgregar(){    
    const dialogRef = this.dialog.open(DialogCriterio, {
-     width: '50vw',
+     width: '80vw',
      data:  {Titulo: 'Agregar'}
    });
    dialogRef.afterClosed().subscribe(result => {
@@ -167,7 +167,7 @@ export class CatalogoCriterioComponent implements OnInit {
  }
  DialogModificar(Id){
    const dialogRef = this.dialog.open(DialogCriterio, {
-     width: '50vw',
+     width: '80vw',
      data:  {Titulo: 'Modificar', Id: Id}
    });
 
