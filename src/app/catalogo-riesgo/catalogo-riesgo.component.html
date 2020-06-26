@@ -34,32 +34,32 @@
                 <div class="mat-elevation-z8" style="overflow: auto;">
                   <table mat-table [dataSource]="Tabla" matSort>                  
                     <ng-container matColumnDef="Identificador">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Identificador </th>
-                      <td mat-cell *matCellDef="let row"> {{row.Identificador}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 200px !important;"> Identificador </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 200px !important;"> {{row.Identificador}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Nombre">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
-                      <td mat-cell *matCellDef="let row"> {{row.Nombre}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 200px !important;"> Nombre </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 200px !important;"> {{row.Nombre}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Criterio">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Criterio legal </th>
-                      <td mat-cell *matCellDef="let row"> {{row.Criterio}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 200px !important;"> Criterio legal </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 200px !important;"> {{row.Criterio}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Dimension">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Dimensión </th>
-                      <td mat-cell *matCellDef="let row"> {{row.Dimension}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 150px !important;"> Dimensión </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 150px !important;"> {{row.Dimension}} </td>
                     </ng-container>
                     <ng-container matColumnDef="TipoRiesgo">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo de riesgo </th>
-                      <td mat-cell *matCellDef="let row"> {{row.TipoRiesgo}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 150px !important;"> Tipo de riesgo </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 150px !important;"> {{row.TipoRiesgo}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Usuario">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuario </th>
-                      <td mat-cell *matCellDef="let row"> {{row.Usuario}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 200px !important;"> Usuario </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 200px !important;"> {{row.Usuario}} </td>
                     </ng-container>                  
                     <ng-container matColumnDef="Fecha">
-                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                      <td mat-cell *matCellDef="let row" align="center"> {{row.FechaModificacion}} </td>
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header style="min-width: 200px !important;"> Fecha </th>
+                      <td mat-cell *matCellDef="let row" style="min-width: 200px !important;"> {{row.FechaModificacion}} </td>
                     </ng-container>
                     <ng-container matColumnDef="Editar">
                       <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>

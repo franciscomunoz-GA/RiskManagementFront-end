@@ -79,29 +79,40 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #FFCDD2">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button>
-                                         Atención inmediata
+                                    <div class="col-xs-12 col-sm-10 col-md-10">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #FFCDD2" (click)="AtencionInmediata()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>
+                                                 Atención inmediata
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #FFE0B2" (click)="AtencionPeriodica()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button> 
+                                                 Atención periódica
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #BBDEFB" (click)="AtencionSeguimiento()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>   
+                                                 Atención seguimiento
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #C8E6C9" (click)="AtencionControlada()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>   
+                                                 Atención controlada
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #FFE0B2">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button> 
-                                         Atención periódica
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #BBDEFB">
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        <button mat-mini-fab style="background-color: #757575;" (click)="AtencionTodos()">
                                             <mat-icon class="primary">location_on</mat-icon>
                                          </button>   
-                                         Atención seguimiento
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #C8E6C9">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button>   
-                                         Atención controlada
+                                         Todos
                                     </div>
                                 </div>
                                 <div class="row" align="center">
@@ -110,149 +121,149 @@
                                             <tr>
                                                 <td><strong>Impacto</strong></td>                                                    
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">10</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_1" mat-icon-button matTooltip="{{ToolTipC10_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_2" mat-icon-button matTooltip="{{ToolTipC10_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_3" mat-icon-button matTooltip="{{ToolTipC10_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_4" mat-icon-button matTooltip="{{ToolTipC10_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C10_5" mat-icon-button matTooltip="{{ToolTipC10_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_6" mat-icon-button matTooltip="{{ToolTipC10_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_7" mat-icon-button matTooltip="{{ToolTipC10_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_8" mat-icon-button matTooltip="{{ToolTipC10_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_9" mat-icon-button matTooltip="{{ToolTipC10_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_10" mat-icon-button matTooltip="{{ToolTipC10_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_1" mat-icon-button matTooltip="{{ToolTipC10_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_2" mat-icon-button matTooltip="{{ToolTipC10_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_3" mat-icon-button matTooltip="{{ToolTipC10_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_4" mat-icon-button matTooltip="{{ToolTipC10_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_5" mat-icon-button matTooltip="{{ToolTipC10_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_6" mat-icon-button matTooltip="{{ToolTipC10_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_7" mat-icon-button matTooltip="{{ToolTipC10_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_8" mat-icon-button matTooltip="{{ToolTipC10_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_9" mat-icon-button matTooltip="{{ToolTipC10_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_10" mat-icon-button matTooltip="{{ToolTipC10_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">9</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_1" mat-icon-button matTooltip="{{ToolTipC9_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_2" mat-icon-button matTooltip="{{ToolTipC9_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_3" mat-icon-button matTooltip="{{ToolTipC9_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_4" mat-icon-button matTooltip="{{ToolTipC9_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C9_5" mat-icon-button matTooltip="{{ToolTipC9_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_6" mat-icon-button matTooltip="{{ToolTipC9_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_7" mat-icon-button matTooltip="{{ToolTipC9_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_8" mat-icon-button matTooltip="{{ToolTipC9_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_9" mat-icon-button matTooltip="{{ToolTipC9_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_10" mat-icon-button matTooltip="{{ToolTipC9_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C9_1" mat-icon-button matTooltip="{{ToolTipC9_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_2" mat-icon-button matTooltip="{{ToolTipC9_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_3" mat-icon-button matTooltip="{{ToolTipC9_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_4" mat-icon-button matTooltip="{{ToolTipC9_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C9_5" mat-icon-button matTooltip="{{ToolTipC9_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C9_6" mat-icon-button matTooltip="{{ToolTipC9_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_7" mat-icon-button matTooltip="{{ToolTipC9_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_8" mat-icon-button matTooltip="{{ToolTipC9_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_9" mat-icon-button matTooltip="{{ToolTipC9_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C9_10" mat-icon-button matTooltip="{{ToolTipC9_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">8</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_1" mat-icon-button matTooltip="{{ToolTipC8_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_2"mat-icon-button matTooltip="{{ToolTipC8_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_3"mat-icon-button matTooltip="{{ToolTipC8_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_4" mat-icon-button matTooltip="{{ToolTipC8_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C8_5" mat-icon-button matTooltip="{{ToolTipC8_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_6" mat-icon-button matTooltip="{{ToolTipC8_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_7" mat-icon-button matTooltip="{{ToolTipC8_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_8" mat-icon-button matTooltip="{{ToolTipC8_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_9" mat-icon-button matTooltip="{{ToolTipC8_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_10" mat-icon-button matTooltip="{{ToolTipC8_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C8_1" mat-icon-button matTooltip="{{ToolTipC8_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_2"mat-icon-button matTooltip="{{ToolTipC8_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_3"mat-icon-button matTooltip="{{ToolTipC8_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_4" mat-icon-button matTooltip="{{ToolTipC8_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C8_5" mat-icon-button matTooltip="{{ToolTipC8_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C8_6" mat-icon-button matTooltip="{{ToolTipC8_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_7" mat-icon-button matTooltip="{{ToolTipC8_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_8" mat-icon-button matTooltip="{{ToolTipC8_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_9" mat-icon-button matTooltip="{{ToolTipC8_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C8_10" mat-icon-button matTooltip="{{ToolTipC8_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">7</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_1" mat-icon-button matTooltip="{{ToolTipC7_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_2" mat-icon-button matTooltip="{{ToolTipC7_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_3" mat-icon-button matTooltip="{{ToolTipC7_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_4" mat-icon-button matTooltip="{{ToolTipC7_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C7_5" mat-icon-button matTooltip="{{ToolTip}}C7_5"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_6" mat-icon-button matTooltip="{{ToolTipC7_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_7" mat-icon-button matTooltip="{{ToolTipC7_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_8" mat-icon-button matTooltip="{{ToolTipC7_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_9" mat-icon-button matTooltip="{{ToolTipC7_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_10" mat-icon-button matTooltip="{{ToolTipC7_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C7_1" mat-icon-button matTooltip="{{ToolTipC7_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_2" mat-icon-button matTooltip="{{ToolTipC7_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_3" mat-icon-button matTooltip="{{ToolTipC7_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_4" mat-icon-button matTooltip="{{ToolTipC7_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C7_5" mat-icon-button matTooltip="{{ToolTip}}C7_5"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C7_6" mat-icon-button matTooltip="{{ToolTipC7_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_7" mat-icon-button matTooltip="{{ToolTipC7_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_8" mat-icon-button matTooltip="{{ToolTipC7_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_9" mat-icon-button matTooltip="{{ToolTipC7_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C7_10" mat-icon-button matTooltip="{{ToolTipC7_10}}"><mat-icon>location_on</mat-icon></button></td>
                                                 
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">6</td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_1" mat-icon-button matTooltip="{{ToolTipC6_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_2" mat-icon-button matTooltip="{{ToolTipC6_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_3" mat-icon-button matTooltip="{{ToolTipC6_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_4" mat-icon-button matTooltip="{{ToolTipC6_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black; border-right: 1px solid black;" ><button *ngIf="C6_5" mat-icon-button matTooltip="{{ToolTipC6_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_6" mat-icon-button matTooltip="{{ToolTipC6_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_7" mat-icon-button matTooltip="{{ToolTipC6_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_8" mat-icon-button matTooltip="{{ToolTipC6_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_9" mat-icon-button matTooltip="{{ToolTipC6_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_10" mat-icon-button matTooltip="{{ToolTipC6_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_1" mat-icon-button matTooltip="{{ToolTipC6_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_2" mat-icon-button matTooltip="{{ToolTipC6_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_3" mat-icon-button matTooltip="{{ToolTipC6_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_4" mat-icon-button matTooltip="{{ToolTipC6_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_5" mat-icon-button matTooltip="{{ToolTipC6_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_6" mat-icon-button matTooltip="{{ToolTipC6_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_7" mat-icon-button matTooltip="{{ToolTipC6_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_8" mat-icon-button matTooltip="{{ToolTipC6_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_9" mat-icon-button matTooltip="{{ToolTipC6_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_10" mat-icon-button matTooltip="{{ToolTipC6_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">5</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_1" mat-icon-button matTooltip="{{ToolTipC5_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_2" mat-icon-button matTooltip="{{ToolTipC5_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_3" mat-icon-button matTooltip="{{ToolTipC5_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_4" mat-icon-button matTooltip="{{ToolTipC5_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C5_5" mat-icon-button matTooltip="{{ToolTipC5_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_6" mat-icon-button matTooltip="{{ToolTipC5_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_7" mat-icon-button matTooltip="{{ToolTipC5_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_8" mat-icon-button matTooltip="{{ToolTipC5_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_9" mat-icon-button matTooltip="{{ToolTipC5_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_10" mat-icon-button matTooltip="{{ToolTipC5_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_1" mat-icon-button matTooltip="{{ToolTipC5_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_2" mat-icon-button matTooltip="{{ToolTipC5_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_3" mat-icon-button matTooltip="{{ToolTipC5_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_4" mat-icon-button matTooltip="{{ToolTipC5_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_5" mat-icon-button matTooltip="{{ToolTipC5_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_6" mat-icon-button matTooltip="{{ToolTipC5_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_7" mat-icon-button matTooltip="{{ToolTipC5_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_8" mat-icon-button matTooltip="{{ToolTipC5_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_9" mat-icon-button matTooltip="{{ToolTipC5_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_10" mat-icon-button matTooltip="{{ToolTipC5_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">4</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_1" mat-icon-button matTooltip="{{ToolTipC4_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_2" mat-icon-button matTooltip="{{ToolTipC4_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_3" mat-icon-button matTooltip="{{ToolTipC4_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_4" mat-icon-button matTooltip="{{ToolTipC4_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C4_5" mat-icon-button matTooltip="{{ToolTipC4_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_6" mat-icon-button matTooltip="{{ToolTipC4_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_7" mat-icon-button matTooltip="{{ToolTipC4_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_8" mat-icon-button matTooltip="{{ToolTipC4_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_9" mat-icon-button matTooltip="{{ToolTipC4_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_10" mat-icon-button matTooltip="{{ToolTipC4_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C4_1" mat-icon-button matTooltip="{{ToolTipC4_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_2" mat-icon-button matTooltip="{{ToolTipC4_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_3" mat-icon-button matTooltip="{{ToolTipC4_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_4" mat-icon-button matTooltip="{{ToolTipC4_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C4_5" mat-icon-button matTooltip="{{ToolTipC4_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C4_6" mat-icon-button matTooltip="{{ToolTipC4_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_7" mat-icon-button matTooltip="{{ToolTipC4_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_8" mat-icon-button matTooltip="{{ToolTipC4_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_9" mat-icon-button matTooltip="{{ToolTipC4_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C4_10" mat-icon-button matTooltip="{{ToolTipC4_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">3</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_1" mat-icon-button matTooltip="{{ToolTipC3_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_2" mat-icon-button matTooltip="{{ToolTipC3_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_3" mat-icon-button matTooltip="{{ToolTipC3_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_4" mat-icon-button matTooltip="{{ToolTipC3_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C3_5" mat-icon-button matTooltip="{{ToolTipC3_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_6" mat-icon-button matTooltip="{{ToolTipC3_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_7" mat-icon-button matTooltip="{{ToolTipC3_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_8" mat-icon-button matTooltip="{{ToolTipC3_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_9" mat-icon-button matTooltip="{{ToolTipC3_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_10" mat-icon-button matTooltip="{{ToolTipC3_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C3_1" mat-icon-button matTooltip="{{ToolTipC3_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_2" mat-icon-button matTooltip="{{ToolTipC3_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_3" mat-icon-button matTooltip="{{ToolTipC3_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_4" mat-icon-button matTooltip="{{ToolTipC3_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C3_5" mat-icon-button matTooltip="{{ToolTipC3_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C3_6" mat-icon-button matTooltip="{{ToolTipC3_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_7" mat-icon-button matTooltip="{{ToolTipC3_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_8" mat-icon-button matTooltip="{{ToolTipC3_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_9" mat-icon-button matTooltip="{{ToolTipC3_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C3_10" mat-icon-button matTooltip="{{ToolTipC3_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">2</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_1" mat-icon-button matTooltip="{{ToolTipC2_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_2" mat-icon-button matTooltip="{{ToolTipC2_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_3" mat-icon-button matTooltip="{{ToolTipC2_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_4" mat-icon-button matTooltip="{{ToolTipC2_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C2_5" mat-icon-button matTooltip="{{ToolTipC2_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_6" mat-icon-button matTooltip="{{ToolTipC2_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_7" mat-icon-button matTooltip="{{ToolTipC2_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_8" mat-icon-button matTooltip="{{ToolTipC2_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_9" mat-icon-button matTooltip="{{ToolTipC2_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_10" mat-icon-button matTooltip="{{ToolTipC2_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C2_1" mat-icon-button matTooltip="{{ToolTipC2_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_2" mat-icon-button matTooltip="{{ToolTipC2_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_3" mat-icon-button matTooltip="{{ToolTipC2_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_4" mat-icon-button matTooltip="{{ToolTipC2_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C2_5" mat-icon-button matTooltip="{{ToolTipC2_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C2_6" mat-icon-button matTooltip="{{ToolTipC2_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_7" mat-icon-button matTooltip="{{ToolTipC2_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_8" mat-icon-button matTooltip="{{ToolTipC2_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_9" mat-icon-button matTooltip="{{ToolTipC2_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C2_10" mat-icon-button matTooltip="{{ToolTipC2_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">1</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_1" mat-icon-button matTooltip="{{ToolTipC1_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_2" mat-icon-button matTooltip="{{ToolTipC1_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_3" mat-icon-button matTooltip="{{ToolTipC1_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_4" mat-icon-button matTooltip="{{ToolTipC1_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C1_5" mat-icon-button matTooltip="{{ToolTipC1_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_6" mat-icon-button matTooltip="{{ToolTipC1_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_7" mat-icon-button matTooltip="{{ToolTipC1_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_8" mat-icon-button matTooltip="{{ToolTipC1_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_9" mat-icon-button matTooltip="{{ToolTipC1_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_10" mat-icon-button matTooltip="{{ToolTipC1_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_1" mat-icon-button matTooltip="{{ToolTipC1_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_2" mat-icon-button matTooltip="{{ToolTipC1_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_3" mat-icon-button matTooltip="{{ToolTipC1_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_4" mat-icon-button matTooltip="{{ToolTipC1_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_5" mat-icon-button matTooltip="{{ToolTipC1_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_6" mat-icon-button matTooltip="{{ToolTipC1_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_7" mat-icon-button matTooltip="{{ToolTipC1_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_8" mat-icon-button matTooltip="{{ToolTipC1_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_9" mat-icon-button matTooltip="{{ToolTipC1_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_10" mat-icon-button matTooltip="{{ToolTipC1_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>                                                
                                             <tr>
                                                 <td><strong>Prob.</strong></td>
-                                                <td align="center">1</td>
-                                                <td align="center">2</td>
-                                                <td align="center">3</td>
-                                                <td align="center">4</td>
-                                                <td align="center">5</td>
-                                                <td align="center">6</td>
-                                                <td align="center">7</td>
-                                                <td align="center">8</td>
-                                                <td align="center">9</td>
-                                                <td align="center">10</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">1</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">2</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">3</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">4</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">5</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">6</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">7</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">8</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">9</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">10</td>
                                             </tr>
                                         </table>   
                                     </div>
@@ -278,6 +289,7 @@
                                             <h3 mat-line>{{element.Riesgo}}</h3>                                            
                                             <p mat-line> Impacto: {{element.Impacto}}</p>
                                             <p mat-line> Probabilidad: {{element.Probabilidad}}</p>
+                                            <p mat-line> <strong>{{element.Resultado}}</strong></p>
                                         </mat-list-item>
                                         
                                     </mat-list>
@@ -362,29 +374,40 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #FFCDD2">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button>
-                                         Atención inmediata
+                                    <div class="col-xs-12 col-sm-10 col-md-10">
+                                        <div class="row">
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #FFCDD2" (click)="AtencionInmediata()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>
+                                                 Atención inmediata
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #FFE0B2" (click)="AtencionPeriodica()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button> 
+                                                 Atención periódica
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #BBDEFB" (click)="AtencionSeguimiento()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>   
+                                                 Atención seguimiento
+                                            </div>
+                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                <button mat-mini-fab style="background-color: #C8E6C9" (click)="AtencionControlada()">
+                                                    <mat-icon class="primary">location_on</mat-icon>
+                                                 </button>   
+                                                 Atención controlada
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #FFE0B2">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button> 
-                                         Atención periódica
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #BBDEFB">
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        <button mat-mini-fab style="background-color: #757575;" (click)="AtencionTodos()">
                                             <mat-icon class="primary">location_on</mat-icon>
                                          </button>   
-                                         Atención seguimiento
-                                    </div>
-                                    <div class="col-xs-12 col-sm-6 col-md-3">
-                                        <button mat-mini-fab style="background-color: #C8E6C9">
-                                            <mat-icon class="primary">location_on</mat-icon>
-                                         </button>   
-                                         Atención controlada
+                                         Todos
                                     </div>
                                 </div>
                                 <div class="row" align="center">
@@ -393,149 +416,149 @@
                                             <tr>
                                                 <td><strong>Impacto</strong></td>                                                    
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">10</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_1" mat-icon-button matTooltip="{{ToolTipC10_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_2" mat-icon-button matTooltip="{{ToolTipC10_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_3" mat-icon-button matTooltip="{{ToolTipC10_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C10_4" mat-icon-button matTooltip="{{ToolTipC10_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C10_5" mat-icon-button matTooltip="{{ToolTipC10_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_6" mat-icon-button matTooltip="{{ToolTipC10_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_7" mat-icon-button matTooltip="{{ToolTipC10_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_8" mat-icon-button matTooltip="{{ToolTipC10_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_9" mat-icon-button matTooltip="{{ToolTipC10_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C10_10" mat-icon-button matTooltip="{{ToolTipC10_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_1" mat-icon-button matTooltip="{{ToolTipC10_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_2" mat-icon-button matTooltip="{{ToolTipC10_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_3" mat-icon-button matTooltip="{{ToolTipC10_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_4" mat-icon-button matTooltip="{{ToolTipC10_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black; border-top: 1px solid black;" *ngIf="Periodica"><button *ngIf="C10_5" mat-icon-button matTooltip="{{ToolTipC10_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_6" mat-icon-button matTooltip="{{ToolTipC10_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_7" mat-icon-button matTooltip="{{ToolTipC10_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_8" mat-icon-button matTooltip="{{ToolTipC10_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_9" mat-icon-button matTooltip="{{ToolTipC10_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-top: 1px solid black;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C10_10" mat-icon-button matTooltip="{{ToolTipC10_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">9</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_1" mat-icon-button matTooltip="{{ToolTipC9_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_2" mat-icon-button matTooltip="{{ToolTipC9_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_3" mat-icon-button matTooltip="{{ToolTipC9_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C9_4" mat-icon-button matTooltip="{{ToolTipC9_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C9_5" mat-icon-button matTooltip="{{ToolTipC9_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_6" mat-icon-button matTooltip="{{ToolTipC9_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_7" mat-icon-button matTooltip="{{ToolTipC9_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_8" mat-icon-button matTooltip="{{ToolTipC9_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_9" mat-icon-button matTooltip="{{ToolTipC9_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C9_10" mat-icon-button matTooltip="{{ToolTipC9_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C9_1" mat-icon-button matTooltip="{{ToolTipC9_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_2" mat-icon-button matTooltip="{{ToolTipC9_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_3" mat-icon-button matTooltip="{{ToolTipC9_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C9_4" mat-icon-button matTooltip="{{ToolTipC9_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C9_5" mat-icon-button matTooltip="{{ToolTipC9_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C9_6" mat-icon-button matTooltip="{{ToolTipC9_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_7" mat-icon-button matTooltip="{{ToolTipC9_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_8" mat-icon-button matTooltip="{{ToolTipC9_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C9_9" mat-icon-button matTooltip="{{ToolTipC9_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C9_10" mat-icon-button matTooltip="{{ToolTipC9_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">8</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_1" mat-icon-button matTooltip="{{ToolTipC8_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_2"mat-icon-button matTooltip="{{ToolTipC8_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_3"mat-icon-button matTooltip="{{ToolTipC8_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C8_4" mat-icon-button matTooltip="{{ToolTipC8_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C8_5" mat-icon-button matTooltip="{{ToolTipC8_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_6" mat-icon-button matTooltip="{{ToolTipC8_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_7" mat-icon-button matTooltip="{{ToolTipC8_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_8" mat-icon-button matTooltip="{{ToolTipC8_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_9" mat-icon-button matTooltip="{{ToolTipC8_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C8_10" mat-icon-button matTooltip="{{ToolTipC8_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C8_1" mat-icon-button matTooltip="{{ToolTipC8_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_2"mat-icon-button matTooltip="{{ToolTipC8_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_3"mat-icon-button matTooltip="{{ToolTipC8_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C8_4" mat-icon-button matTooltip="{{ToolTipC8_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C8_5" mat-icon-button matTooltip="{{ToolTipC8_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C8_6" mat-icon-button matTooltip="{{ToolTipC8_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_7" mat-icon-button matTooltip="{{ToolTipC8_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_8" mat-icon-button matTooltip="{{ToolTipC8_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C8_9" mat-icon-button matTooltip="{{ToolTipC8_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C8_10" mat-icon-button matTooltip="{{ToolTipC8_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">7</td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_1" mat-icon-button matTooltip="{{ToolTipC7_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_2" mat-icon-button matTooltip="{{ToolTipC7_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_3" mat-icon-button matTooltip="{{ToolTipC7_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2;" ><button *ngIf="C7_4" mat-icon-button matTooltip="{{ToolTipC7_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" ><button *ngIf="C7_5" mat-icon-button matTooltip="{{ToolTip}}C7_5"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_6" mat-icon-button matTooltip="{{ToolTipC7_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_7" mat-icon-button matTooltip="{{ToolTipC7_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_8" mat-icon-button matTooltip="{{ToolTipC7_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_9" mat-icon-button matTooltip="{{ToolTipC7_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2;" ><button *ngIf="C7_10" mat-icon-button matTooltip="{{ToolTipC7_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black;" *ngIf="Periodica"><button *ngIf="C7_1" mat-icon-button matTooltip="{{ToolTipC7_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_2" mat-icon-button matTooltip="{{ToolTipC7_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_3" mat-icon-button matTooltip="{{ToolTipC7_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2;" *ngIf="Periodica"><button *ngIf="C7_4" mat-icon-button matTooltip="{{ToolTipC7_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C7_5" mat-icon-button matTooltip="{{ToolTip}}C7_5"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C7_6" mat-icon-button matTooltip="{{ToolTipC7_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_7" mat-icon-button matTooltip="{{ToolTipC7_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_8" mat-icon-button matTooltip="{{ToolTipC7_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;" *ngIf="Inmediata"><button *ngIf="C7_9" mat-icon-button matTooltip="{{ToolTipC7_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C7_10" mat-icon-button matTooltip="{{ToolTipC7_10}}"><mat-icon>location_on</mat-icon></button></td>
                                                 
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Periodica || Inmediata">
                                                 <td align="end">6</td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_1" mat-icon-button matTooltip="{{ToolTipC6_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_2" mat-icon-button matTooltip="{{ToolTipC6_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_3" mat-icon-button matTooltip="{{ToolTipC6_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" ><button *ngIf="C6_4" mat-icon-button matTooltip="{{ToolTipC6_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black; border-right: 1px solid black;" ><button *ngIf="C6_5" mat-icon-button matTooltip="{{ToolTipC6_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_6" mat-icon-button matTooltip="{{ToolTipC6_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_7" mat-icon-button matTooltip="{{ToolTipC6_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_8" mat-icon-button matTooltip="{{ToolTipC6_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_9" mat-icon-button matTooltip="{{ToolTipC6_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" ><button *ngIf="C6_10" mat-icon-button matTooltip="{{ToolTipC6_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_1" mat-icon-button matTooltip="{{ToolTipC6_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_2" mat-icon-button matTooltip="{{ToolTipC6_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_3" mat-icon-button matTooltip="{{ToolTipC6_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_4" mat-icon-button matTooltip="{{ToolTipC6_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFE0B2; border-bottom: 1px solid black; border-right: 1px solid black;" *ngIf="Periodica"><button *ngIf="C6_5" mat-icon-button matTooltip="{{ToolTipC6_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black; border-left: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_6" mat-icon-button matTooltip="{{ToolTipC6_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_7" mat-icon-button matTooltip="{{ToolTipC6_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_8" mat-icon-button matTooltip="{{ToolTipC6_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_9" mat-icon-button matTooltip="{{ToolTipC6_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #FFCDD2; border-bottom: 1px solid black;  border-right: 1px solid black;" *ngIf="Inmediata"><button *ngIf="C6_10" mat-icon-button matTooltip="{{ToolTipC6_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">5</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_1" mat-icon-button matTooltip="{{ToolTipC5_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_2" mat-icon-button matTooltip="{{ToolTipC5_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_3" mat-icon-button matTooltip="{{ToolTipC5_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C5_4" mat-icon-button matTooltip="{{ToolTipC5_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C5_5" mat-icon-button matTooltip="{{ToolTipC5_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_6" mat-icon-button matTooltip="{{ToolTipC5_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_7" mat-icon-button matTooltip="{{ToolTipC5_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_8" mat-icon-button matTooltip="{{ToolTipC5_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_9" mat-icon-button matTooltip="{{ToolTipC5_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C5_10" mat-icon-button matTooltip="{{ToolTipC5_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_1" mat-icon-button matTooltip="{{ToolTipC5_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_2" mat-icon-button matTooltip="{{ToolTipC5_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_3" mat-icon-button matTooltip="{{ToolTipC5_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_4" mat-icon-button matTooltip="{{ToolTipC5_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;  border-top: 1px solid black;" *ngIf="Controlada"><button *ngIf="C5_5" mat-icon-button matTooltip="{{ToolTipC5_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_6" mat-icon-button matTooltip="{{ToolTipC5_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_7" mat-icon-button matTooltip="{{ToolTipC5_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_8" mat-icon-button matTooltip="{{ToolTipC5_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_9" mat-icon-button matTooltip="{{ToolTipC5_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;  border-top: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C5_10" mat-icon-button matTooltip="{{ToolTipC5_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">4</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_1" mat-icon-button matTooltip="{{ToolTipC4_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_2" mat-icon-button matTooltip="{{ToolTipC4_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_3" mat-icon-button matTooltip="{{ToolTipC4_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C4_4" mat-icon-button matTooltip="{{ToolTipC4_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C4_5" mat-icon-button matTooltip="{{ToolTipC4_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_6" mat-icon-button matTooltip="{{ToolTipC4_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_7" mat-icon-button matTooltip="{{ToolTipC4_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_8" mat-icon-button matTooltip="{{ToolTipC4_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_9" mat-icon-button matTooltip="{{ToolTipC4_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C4_10" mat-icon-button matTooltip="{{ToolTipC4_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C4_1" mat-icon-button matTooltip="{{ToolTipC4_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_2" mat-icon-button matTooltip="{{ToolTipC4_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_3" mat-icon-button matTooltip="{{ToolTipC4_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C4_4" mat-icon-button matTooltip="{{ToolTipC4_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C4_5" mat-icon-button matTooltip="{{ToolTipC4_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C4_6" mat-icon-button matTooltip="{{ToolTipC4_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_7" mat-icon-button matTooltip="{{ToolTipC4_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_8" mat-icon-button matTooltip="{{ToolTipC4_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C4_9" mat-icon-button matTooltip="{{ToolTipC4_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C4_10" mat-icon-button matTooltip="{{ToolTipC4_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">3</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_1" mat-icon-button matTooltip="{{ToolTipC3_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_2" mat-icon-button matTooltip="{{ToolTipC3_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_3" mat-icon-button matTooltip="{{ToolTipC3_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C3_4" mat-icon-button matTooltip="{{ToolTipC3_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C3_5" mat-icon-button matTooltip="{{ToolTipC3_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_6" mat-icon-button matTooltip="{{ToolTipC3_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_7" mat-icon-button matTooltip="{{ToolTipC3_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_8" mat-icon-button matTooltip="{{ToolTipC3_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_9" mat-icon-button matTooltip="{{ToolTipC3_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C3_10" mat-icon-button matTooltip="{{ToolTipC3_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C3_1" mat-icon-button matTooltip="{{ToolTipC3_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_2" mat-icon-button matTooltip="{{ToolTipC3_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_3" mat-icon-button matTooltip="{{ToolTipC3_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C3_4" mat-icon-button matTooltip="{{ToolTipC3_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C3_5" mat-icon-button matTooltip="{{ToolTipC3_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C3_6" mat-icon-button matTooltip="{{ToolTipC3_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_7" mat-icon-button matTooltip="{{ToolTipC3_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_8" mat-icon-button matTooltip="{{ToolTipC3_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C3_9" mat-icon-button matTooltip="{{ToolTipC3_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C3_10" mat-icon-button matTooltip="{{ToolTipC3_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">2</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_1" mat-icon-button matTooltip="{{ToolTipC2_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_2" mat-icon-button matTooltip="{{ToolTipC2_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_3" mat-icon-button matTooltip="{{ToolTipC2_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C2_4" mat-icon-button matTooltip="{{ToolTipC2_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C2_5" mat-icon-button matTooltip="{{ToolTipC2_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_6" mat-icon-button matTooltip="{{ToolTipC2_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_7" mat-icon-button matTooltip="{{ToolTipC2_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_8" mat-icon-button matTooltip="{{ToolTipC2_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_9" mat-icon-button matTooltip="{{ToolTipC2_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C2_10" mat-icon-button matTooltip="{{ToolTipC2_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black;" *ngIf="Controlada"><button *ngIf="C2_1" mat-icon-button matTooltip="{{ToolTipC2_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_2" mat-icon-button matTooltip="{{ToolTipC2_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_3" mat-icon-button matTooltip="{{ToolTipC2_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9;" *ngIf="Controlada"><button *ngIf="C2_4" mat-icon-button matTooltip="{{ToolTipC2_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" *ngIf="Controlada"><button *ngIf="C2_5" mat-icon-button matTooltip="{{ToolTipC2_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C2_6" mat-icon-button matTooltip="{{ToolTipC2_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_7" mat-icon-button matTooltip="{{ToolTipC2_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_8" mat-icon-button matTooltip="{{ToolTipC2_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;" *ngIf="Seguimiento"><button *ngIf="C2_9" mat-icon-button matTooltip="{{ToolTipC2_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C2_10" mat-icon-button matTooltip="{{ToolTipC2_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>
-                                            <tr>
+                                            <tr *ngIf="Seguimiento || Controlada">
                                                 <td align="end">1</td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_1" mat-icon-button matTooltip="{{ToolTipC1_1}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_2" mat-icon-button matTooltip="{{ToolTipC1_2}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_3" mat-icon-button matTooltip="{{ToolTipC1_3}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9;" ><button *ngIf="C1_4" mat-icon-button matTooltip="{{ToolTipC1_4}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #C8E6C9; border-right: 1px solid black;" ><button *ngIf="C1_5" mat-icon-button matTooltip="{{ToolTipC1_5}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_6" mat-icon-button matTooltip="{{ToolTipC1_6}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_7" mat-icon-button matTooltip="{{ToolTipC1_7}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_8" mat-icon-button matTooltip="{{ToolTipC1_8}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_9" mat-icon-button matTooltip="{{ToolTipC1_9}}"><mat-icon>location_on</mat-icon></button></td>
-                                                <td style="background-color: #BBDEFB;" ><button *ngIf="C1_10" mat-icon-button matTooltip="{{ToolTipC1_10}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_1" mat-icon-button matTooltip="{{ToolTipC1_1}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_2" mat-icon-button matTooltip="{{ToolTipC1_2}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_3" mat-icon-button matTooltip="{{ToolTipC1_3}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_4" mat-icon-button matTooltip="{{ToolTipC1_4}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #C8E6C9; border-right: 1px solid black; border-bottom: 1px solid black;" *ngIf="Controlada"><button *ngIf="C1_5" mat-icon-button matTooltip="{{ToolTipC1_5}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-left: 1px solid black; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_6" mat-icon-button matTooltip="{{ToolTipC1_6}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_7" mat-icon-button matTooltip="{{ToolTipC1_7}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_8" mat-icon-button matTooltip="{{ToolTipC1_8}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_9" mat-icon-button matTooltip="{{ToolTipC1_9}}"><mat-icon>location_on</mat-icon></button></td>
+                                                <td style="background-color: #BBDEFB; border-bottom: 1px solid black;  border-right: 1px solid black;" *ngIf="Seguimiento"><button *ngIf="C1_10" mat-icon-button matTooltip="{{ToolTipC1_10}}"><mat-icon>location_on</mat-icon></button></td>
                                             </tr>                                                
                                             <tr>
                                                 <td><strong>Prob.</strong></td>
-                                                <td align="center">1</td>
-                                                <td align="center">2</td>
-                                                <td align="center">3</td>
-                                                <td align="center">4</td>
-                                                <td align="center">5</td>
-                                                <td align="center">6</td>
-                                                <td align="center">7</td>
-                                                <td align="center">8</td>
-                                                <td align="center">9</td>
-                                                <td align="center">10</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">1</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">2</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">3</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">4</td>
+                                                <td align="center" *ngIf="Periodica || Controlada">5</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">6</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">7</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">8</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">9</td>
+                                                <td align="center" *ngIf="Inmediata || Seguimiento">10</td>
                                             </tr>
                                         </table>   
                                     </div>
@@ -551,6 +574,7 @@
                             <h3 mat-line>{{element.Riesgo}}</h3>
                             <p mat-line> Impacto: {{element.Impacto}}</p>
                             <p mat-line> Probabilidad: {{element.Probabilidad}}</p>
+                            <p mat-line> <strong>{{element.Resultado}}</strong></p>
                         </mat-list-item>
                         
                     </mat-list>

@@ -138,6 +138,7 @@ export interface Riesgos {
   Descripcion:  string;
   Impacto:      number;
   Probabilidad: number; 
+  Resultado:    string;
 }
 
 export interface AreasRiesgos {  
@@ -179,10 +180,14 @@ export class DialogEncuesta implements OnInit {
   
   Riesgos: Riesgos[] = [];
 
-  Area: string;
+  Area: any;
   Riesgo: any;  
 
   //plano cartesiano
+  Inmediata:   boolean = true;
+  Periodica:   boolean = true;
+  Seguimiento: boolean = true;
+  Controlada:  boolean = true;
   C10_1: boolean; C10_2: boolean; C10_3: boolean; C10_4: boolean; C10_5: boolean; C10_6: boolean; C10_7: boolean; C10_8: boolean; C10_9: boolean; C10_10: boolean; 
   C9_1: boolean; C9_2: boolean; C9_3: boolean; C9_4: boolean; C9_5: boolean; C9_6: boolean; C9_7: boolean; C9_8: boolean; C9_9: boolean; C9_10: boolean; 
   C8_1: boolean; C8_2: boolean; C8_3: boolean; C8_4: boolean; C8_5: boolean; C8_6: boolean; C8_7: boolean; C8_8: boolean; C8_9: boolean; C8_10: boolean; 
@@ -251,19 +256,30 @@ export class DialogEncuesta implements OnInit {
             this.Folio        = Resultado.Folio;
             this.SitioInteres = Resultado.SitioInteres;
             this.Fecha        = Resultado.Fecha;
-            
-            Resultado.Riesgos.forEach(element => {              
+            let Puntos = [];
+            Resultado.Riesgos.forEach((element, index) => {              
               let Descripcion: string;
               Descripcion = "Impacto: "+element.Impacto+" Probabilidad: "+element.Probabilidad;
+              let Formula: number;
+              let Evaluacion: string;
+              Formula = Math.round(((+element.Impacto+ +element.Probabilidad)/2)); 
+              if(Formula == 1 || Formula == 2){Evaluacion = "No significativo"}
+              if(Formula == 3 || Formula == 4){Evaluacion = "Menor"}
+              if(Formula == 5 || Formula == 6){Evaluacion = "Crítico"}
+              if(Formula == 7 || Formula == 8){Evaluacion = "Mayor"}
+              if(Formula == 9 || Formula == 10){Evaluacion = "Catastrófico"}
               this.Riesgos.push({
                 Tipo: 1,
                 Id:           element.IdRespuestas,
                 Riesgo:       element.Riesgo,
                 Descripcion:  Descripcion,
                 Impacto:      element.Impacto,
-                Probabilidad: element.Probabilidad
+                Probabilidad: element.Probabilidad,
+                Resultado: Evaluacion
               });
-            });            
+              Puntos[index] = element.IdRespuestas;              
+              this.Riesgo = Puntos;
+            });     
           }
           else{
             this.Inspector = Resultado.Inspector;
@@ -271,24 +287,39 @@ export class DialogEncuesta implements OnInit {
             this.Cliente   = Resultado.Cliente;
             this.Fecha     = Resultado.Fecha;
             this.Areas     = Resultado.Areas;
-            let riesgos: Riesgos[] = []; 
+            
+            let Puntos = [];
             Resultado.Areas.forEach(element => {
               let NombreArea: string = element.NombreArea;
               let Area: string = element.Area;
+              let riesgos: Riesgos[] = []; 
               //let Titulo: string = NombreArea+" ("+Area+")";
               let Titulo: string = NombreArea;
-              element.Riesgos.forEach(item => {
+              element.Riesgos.forEach((item, index) => {
+                let Formula: number;
+                let Evaluacion: string;
+                Formula = Math.round(((+item.Impacto+ +item.Probabilidad)/2)); 
+                if(Formula == 1 || Formula == 2){Evaluacion = "No significativo"}
+                if(Formula == 3 || Formula == 4){Evaluacion = "Menor"}
+                if(Formula == 5 || Formula == 6){Evaluacion = "Crítico"}
+                if(Formula == 7 || Formula == 8){Evaluacion = "Mayor"}
+                if(Formula == 9 || Formula == 10){Evaluacion = "Catastrófico"}
                 riesgos.push({
                   Tipo: 2,
                   Id:           item.IdRespuestas, 
                   Riesgo:       item.Riesgo, 
                   Descripcion:  "Impacto: "+item.Impacto+" Probabilidad: "+item.Probabilidad,
                   Impacto:      item.Impacto,
-                  Probabilidad: item.Probabilidad
+                  Probabilidad: item.Probabilidad,
+                  Resultado: Evaluacion
                 });
-              });
+                Puntos[item.IdRespuestas] = item.IdRespuestas;     
+                console.log(Puntos);
+                           
+              });              
               this.AreasRiesgos.push({Area: Titulo, Riesgos: riesgos}); 
-            });            
+              this.Area = Puntos;
+            });                             
           }          
         }      
         else{
@@ -315,8 +346,9 @@ export class DialogEncuesta implements OnInit {
     this.LimpiarPuntos();
     event.forEach(elemento => {
       this.AreasRiesgos.forEach(element => {
+        let Area = element.Area;
         element.Riesgos.forEach(item => {
-          elemento == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad, item.Riesgo): null;
+          elemento == item.Id ? this.MostrarPunto(item.Impacto, item.Probabilidad, item.Riesgo, Area): null;
         });
       });
     });
@@ -324,7 +356,7 @@ export class DialogEncuesta implements OnInit {
     
     // this.Riesgos = area.Riesgos;
   }
-  BuscarRiesgo(event){
+  BuscarRiesgo(event){    
     this.LimpiarPuntos();
     event.forEach(element => {
       this.Riesgos.forEach(item => {
@@ -444,43 +476,93 @@ export class DialogEncuesta implements OnInit {
     this.C10_9 = false;
     this.C10_10 = false;
   }
-  private MostrarPunto(Impacto: number, Probabilidad: number, Riesgo: string){
+  private MostrarPunto(Impacto: number, Probabilidad: number, Riesgo: string, Area: string = ""){
     let Formula: number;
     Formula = Math.round(((+Impacto+ +Probabilidad)/2));    
     let tooltip;
     switch (Formula) {
       case 1:
-        tooltip = Riesgo+" - No significativo";
+        if(Area != ""){
+          tooltip = Area+", "+Riesgo+" - No significativo";
+        }
+        else{
+          tooltip = Riesgo+" - No significativo";
+        }
         break;
       case 2:
-        tooltip = Riesgo+" - No significativo";
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - No significativo";
+          }
+          else{
+            tooltip = Riesgo+" - No significativo";
+          }
           break;
-      case 3:
-          tooltip = Riesgo+" - Menor";
+      case 3:          
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Menor";
+          }
+          else{
+            tooltip = Riesgo+" - Menor";
+          }
           break;
       case 4:
-          tooltip = Riesgo+" - Menor";
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Menor";
+          }
+          else{
+            tooltip = Riesgo+" - Menor";
+          }
           break;
-      case 5:
-          tooltip = Riesgo+" - Crítico";
+      case 5:          
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Crítico";
+          }
+          else{
+            tooltip = Riesgo+" - Crítico";
+          }
           break;
       case 6:
-          tooltip = Riesgo+" - Crítico";
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Crítico";
+          }
+          else{
+            tooltip = Riesgo+" - Crítico";
+          }
           break;
-      case 7:
-          tooltip = Riesgo+" - Mayor";
+      case 7:          
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Mayor";
+          }
+          else{
+            tooltip = Riesgo+" - Mayor";
+          }
           break;
       case 8:
-          tooltip = Riesgo+" - Mayor";
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Mayor";
+          }
+          else{
+            tooltip = Riesgo+" - Mayor";
+          }
           break;
-      case 9:
-          tooltip = Riesgo+" - Catastrófico";
+      case 9:          
+          if(Area != ""){
+            tooltip = Area+", "+Riesgo+" - Catastrófico";
+          }
+          else{
+            tooltip = Riesgo+" - Catastrófico";
+          }
           break;
       case 10:
+        if(Area != ""){
+          tooltip = Area+", "+Riesgo+" - Catastrófico";
+        }
+        else{
           tooltip = Riesgo+" - Catastrófico";
+        }
           break;
       default:
-        tooltip = Riesgo+" - No evaluado";
+        tooltip = Area+" "+Riesgo+" - No evaluado";
         break;
     }
     if(Impacto == 1 && Probabilidad == 1){this.C1_1 = true; this.ToolTipC1_1 = tooltip;}
@@ -594,7 +676,6 @@ export class DialogEncuesta implements OnInit {
     if(Impacto == 10 && Probabilidad == 10){this.C10_10 = true; this.ToolTipC10_10 = tooltip;} 
   }
   EditarRiesgo(Riesgo){
-    console.log(Riesgo);
     const dialogRef = this.dialog.open(DialogModificarRiesgo, {
       maxWidth: '600px',
       minWidth: '200px',
@@ -606,6 +687,36 @@ export class DialogEncuesta implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.TraerInformacion();
     });
+  }
+  AtencionInmediata(){
+    this.Inmediata = true;
+    this.Periodica = false;
+    this.Seguimiento = false;
+    this.Controlada = false;
+  }
+  AtencionPeriodica(){
+    this.Inmediata = false;
+    this.Periodica = true;
+    this.Seguimiento = false;
+    this.Controlada = false;
+  }
+  AtencionSeguimiento(){
+    this.Inmediata = false;
+    this.Periodica = false;
+    this.Seguimiento = true;
+    this.Controlada = false;
+  }
+  AtencionControlada(){
+    this.Inmediata = false;
+    this.Periodica = false;
+    this.Seguimiento = false;
+    this.Controlada = true;
+  }
+  AtencionTodos(){
+    this.Inmediata = true;
+    this.Periodica = true;
+    this.Seguimiento = true;
+    this.Controlada = true;
   }
 }
 @Component({
@@ -690,5 +801,5 @@ export class DialogModificarRiesgo {
         duration: 2000
       });
     }
-  }
+  }  
 }
