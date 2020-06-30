@@ -211,20 +211,48 @@ export class DialogEncuesta implements OnInit {
   ToolTipC1_1: string; ToolTipC1_2: string; ToolTipC1_3: string; ToolTipC1_4: string; ToolTipC1_5: string; ToolTipC1_6: string; ToolTipC1_7: string; ToolTipC1_8: string; ToolTipC1_9: string; ToolTipC1_10: string;
 
   Update: boolean = false;
+
+  ClientesRiesgosColumns: string[] = ['Area', 'Riesgo', 'Impacto', 'Probabilidad', 'Evaluacion'];
+  ClientesRiesgos: MatTableDataSource<any>;
+  RiesgosColumns: string[] = ['SitioInteres', 'Riesgo', 'Impacto', 'Probabilidad', 'Evaluacion'];
+  TablaRiesgos: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(public dialog: MatDialog,
               public dialogRef: MatDialogRef<DialogEncuesta>, 
               @Inject(MAT_DIALOG_DATA) public data: any, 
               public http: HttpClient, 
               private snackBar: MatSnackBar,
-              private Permiso: ValidarPermisoService) {
+              private Permiso: ValidarPermisoService,
+              private excelService:ExcelService,) {
       this.Id   = data.Id;
       this.Tipo = data.Tipo;
 
       this.ObtenerServicio = new ServicioService(http);
       this.Update = Permiso.ValidarPermiso('modificar encuestas');
+      this.ClientesRiesgos = new MatTableDataSource([]);
+      this.TablaRiesgos = new MatTableDataSource([]);
   }
-  ngOnInit() {    
+  ngOnInit() {
+    this.ClientesRiesgos.paginator = this.paginator;
+    this.ClientesRiesgos.sort = this.sort;
+    this.TablaRiesgos.paginator = this.paginator;
+    this.TablaRiesgos.sort = this.sort;
     this.TraerInformacion();
+  }
+  exportAsXLSX1():void {
+    this.excelService.exportAsExcelFile(this.ClientesRiesgos.data, 'Evaluacion');
+  }
+  exportAsXLSX2():void {
+    this.excelService.exportAsExcelFile(this.TablaRiesgos.data, 'Evaluacion');
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.ClientesRiesgos.filter = filterValue.trim().toLowerCase();
+
+    if (this.ClientesRiesgos.paginator) {
+      this.ClientesRiesgos.paginator.firstPage();
+    }
   }
   onNoClick(): void {
     this.dialogRef.close();
@@ -232,6 +260,8 @@ export class DialogEncuesta implements OnInit {
   TraerInformacion(){
     this.Riesgos = [];
     this.AreasRiesgos = [];
+    this.ClientesRiesgos.data = [];
+    this.TablaRiesgos.data = [];
     let tipo;
     if(this.Tipo == 'Cliente'){
       tipo = 2;
@@ -280,6 +310,7 @@ export class DialogEncuesta implements OnInit {
               Puntos[index] = element.IdRespuestas;              
               this.Riesgo = Puntos;
             });     
+            this.ArmarTabla(Resultado, tipo);
           }
           else{
             this.Inspector = Resultado.Inspector;
@@ -313,12 +344,11 @@ export class DialogEncuesta implements OnInit {
                   Probabilidad: item.Probabilidad,
                   Resultado: Evaluacion
                 });
-                Puntos[item.IdRespuestas] = item.IdRespuestas;     
-                console.log(Puntos);
-                           
+                Puntos[item.IdRespuestas] = item.IdRespuestas;                           
               });              
               this.AreasRiesgos.push({Area: Titulo, Riesgos: riesgos}); 
               this.Area = Puntos;
+              this.ArmarTabla(Resultado, tipo);
             });                             
           }          
         }      
@@ -341,6 +371,62 @@ export class DialogEncuesta implements OnInit {
         
       })
     });
+  }
+  ArmarTabla(Resultado: any, tipo) {
+    console.log("Tabla: ",Resultado);
+    this.TablaRiesgos.data = [];
+    if(tipo == 1){
+      Resultado.Riesgos.forEach(riesgo => {
+        let Formula: number;
+        let Evaluacion: string;
+        Formula = Math.round(((+riesgo.Impacto+ +riesgo.Probabilidad)/2)); 
+        if(Formula == 1 || Formula == 2){Evaluacion = "No significativo"}
+        if(Formula == 3 || Formula == 4){Evaluacion = "Menor"}
+        if(Formula == 5 || Formula == 6){Evaluacion = "Crítico"}
+        if(Formula == 7 || Formula == 8){Evaluacion = "Mayor"}
+        if(Formula == 9 || Formula == 10){Evaluacion = "Catastrófico"}
+        this.TablaRiesgos.data.push({
+          SitioInteres: Resultado.SitioInteres,
+          Inspector:    Resultado.Inspector,
+          Fecha:        Resultado.Fecha,          
+          Id:           riesgo.IdRespuestas,
+          Riesgo:       riesgo.Riesgo,
+          Impacto:      riesgo.Impacto,
+          Probabilidad: riesgo.Probabilidad,
+          Evaluacion:   Evaluacion
+        });
+      });
+      this.TablaRiesgos.filter = "";
+      this.TablaRiesgos.paginator = this.paginator;
+    }
+    else{
+      Resultado.Areas.forEach(area => {
+        area.Riesgos.forEach(riesgo => {
+          let Formula: number;
+          let Evaluacion: string;
+          Formula = Math.round(((+riesgo.Impacto+ +riesgo.Probabilidad)/2)); 
+          if(Formula == 1 || Formula == 2){Evaluacion = "No significativo"}
+          if(Formula == 3 || Formula == 4){Evaluacion = "Menor"}
+          if(Formula == 5 || Formula == 6){Evaluacion = "Crítico"}
+          if(Formula == 7 || Formula == 8){Evaluacion = "Mayor"}
+          if(Formula == 9 || Formula == 10){Evaluacion = "Catastrófico"}
+          this.ClientesRiesgos.data.push({
+            Cliente:      Resultado.Cliente,
+            Inspector:    Resultado.Inspector,
+            Fecha:        Resultado.Fecha,
+            AliasArea:    area.Area,
+            Area:         area.NombreArea,
+            Id:           riesgo.IdRespuestas,
+            Riesgo:       riesgo.Riesgo,
+            Impacto:      riesgo.Impacto,
+            Probabilidad: riesgo.Probabilidad,
+            Evaluacion:   Evaluacion
+          });
+        });
+        this.ClientesRiesgos.filter = "";
+        this.ClientesRiesgos.paginator = this.paginator;
+      });      
+    }
   }
   BuscarArea(event){
     this.LimpiarPuntos();

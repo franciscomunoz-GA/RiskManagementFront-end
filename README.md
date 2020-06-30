@@ -1,3 +1,5 @@
+# 2020-06-26 (V 2.2.0)
+    Se agrega tabla en dialog para mostrar y poder descargar los riesgos
 # 2020-06-26 (V 2.1.2)
     Se hace un plano cartesiano dinamico
     Se corrige el maximo de MB en el proyecto
