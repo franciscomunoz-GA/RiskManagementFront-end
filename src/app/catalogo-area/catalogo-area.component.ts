@@ -342,7 +342,6 @@ export class DialogArea implements OnInit{
   error => {      
     this.snackBar.open('Error de conexión','',{
       duration: 2000,
-      
     })
   });
  }
@@ -386,7 +385,6 @@ export class DialogArea implements OnInit{
     error => {      
       this.snackBar.open('Error de conexión','',{
         duration: 2000,
-        
       })
     });
   }
@@ -433,7 +431,6 @@ export class DialogImportarArea implements OnInit {
   }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;
-
    this.Excel = (<HTMLInputElement>document.getElementById('Excel'));
    const schema = {
      'Nombre': {
@@ -498,7 +495,6 @@ export class DialogImportarArea implements OnInit {
      error => {      
        this.snackBar.open('Error de conexión','',{
          duration: 2000,
-         
        })
      });    
  }

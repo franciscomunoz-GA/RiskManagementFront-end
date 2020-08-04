@@ -1,14 +1,14 @@
+# 2020-06-28 (V 2.2.1)
+    Se refactoriza el codigo en la sección de areas
 # 2020-06-26 (V 2.2.0)
     Se agrega tabla en dialog para mostrar y poder descargar los riesgos
 # 2020-06-26 (V 2.1.2)
     Se hace un plano cartesiano dinamico
     Se corrige el maximo de MB en el proyecto
     se corrigen el tamaño de las columnas en las tablas para que no se encimen 
-    
 # 2020-06-24 (V 2.1.1)
     Se cambia el plano cartesiano para que se muestren varios riesgos a la vez
     Se le agregan los permisos para ver, crear y modificar
-
 # 2020-06-22 (V 2.1.0)
     Se cambian graficas por un plano cartesiano
     Se le da funcionalidad al plano cartesiano
