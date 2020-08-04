@@ -108,7 +108,6 @@ export class CatalogoCriterioComponent implements OnInit {
    error => {      
      this.snackBar.open('Error de conexión','',{
        duration: 2000,
-       
      })
    }); 
  }
@@ -121,8 +120,7 @@ export class CatalogoCriterioComponent implements OnInit {
  }
  EliminarRegistro(Id){
    this.Menu.MostrarProgress();
-   this.ObtenerServicio.PostRequest('Eliminar/LegalStandards', 'APIREST', 
-   {
+   this.ObtenerServicio.PostRequest('Eliminar/LegalStandards', 'APIREST', {
      Id: Id,
      IdUsuario: this.IdUsuario
     })
@@ -152,11 +150,10 @@ export class CatalogoCriterioComponent implements OnInit {
    error => {      
      this.snackBar.open('Error de conexión','',{
        duration: 2000,
-       
      })
-   }); 
+   });
  }
- DialogAgregar(){    
+ DialogAgregar(){
    const dialogRef = this.dialog.open(DialogCriterio, {
      width: '80vw',
      data:  {Titulo: 'Agregar'}
@@ -170,7 +167,6 @@ export class CatalogoCriterioComponent implements OnInit {
      width: '80vw',
      data:  {Titulo: 'Modificar', Id: Id}
    });
-
    dialogRef.afterClosed().subscribe(result => {
       this.TraerInformacion();   
    });
@@ -180,7 +176,6 @@ export class CatalogoCriterioComponent implements OnInit {
      width: '70vw',
      data:   {Titulo: 'Importar'}
    });
-
    dialogRef.afterClosed().subscribe(result => {
      this.TraerInformacion();
    });
@@ -214,26 +209,24 @@ export class CatalogoCriterioComponent implements OnInit {
          });
          this.Tabla.data = this.Catalogo;
          this.Tabla.paginator = this.paginator;
-         
-       }   
+       }
      }
-     else{                
+     else{
        this.snackBar.open('Error de conexión','',{
          duration: 2000
        });
      }
-   }, 
-   error => {      
+   },
+   error => {
      this.snackBar.open('Error de conexión','',{
-       duration: 2000,
-       
+       duration: 2000,       
      })
-   });        
+   });
  }
 }
 export interface ImportElement {
  Numero: number;
- Nombre: string;    
+ Nombre: string;
 }
 
 @Component({
@@ -303,7 +296,6 @@ export class DialogCriterio implements OnInit{
      error => {      
        this.snackBar.open('Error de conexión','',{
          duration: 2000,
-         
        })
      });
    }
@@ -316,8 +308,7 @@ export class DialogCriterio implements OnInit{
  }
  Detalle(){
   this.Progressbar = true;
-  this.ObtenerServicio.PostRequest('Seleccionar/LegalStandardsD', 'APIREST', 
-  {
+  this.ObtenerServicio.PostRequest('Seleccionar/LegalStandardsD', 'APIREST', {
     Id: this.data.Id,
     IdUsuario: this.IdUsuario
   })
@@ -344,17 +335,15 @@ export class DialogCriterio implements OnInit{
   error => {      
     this.snackBar.open('Error de conexión','',{
       duration: 2000,
-      
     })
   });
  }
  Modificar(){
   if(this.Nombre != '' && this.Nombre != undefined){
     this.Progressbar = true;
-    this.ObtenerServicio.PostRequest('Modificar/LegalStandards', 'APIREST', 
-    {
-      Id: this.data.Id, 
-      Nombre: this.Nombre, 
+    this.ObtenerServicio.PostRequest('Modificar/LegalStandards', 'APIREST', {
+      Id:        this.data.Id,
+      Nombre:    this.Nombre, 
       IdUsuario: this.IdUsuario
     })
     .subscribe((response)=>{   
@@ -386,7 +375,7 @@ export class DialogCriterio implements OnInit{
         });
       }
     }, 
-    error => {      
+    error => {
       this.snackBar.open('Error de conexión','',{
         duration: 2000,
         
@@ -436,7 +425,6 @@ export class DialogImportarCriterio implements OnInit {
   }
  ngOnInit() {
    this.Tabla.paginator = this.paginator;
-
    this.Excel = (<HTMLInputElement>document.getElementById('Excel'));
    const schema = {
      'Nombre': {
@@ -504,8 +492,7 @@ export class DialogImportarCriterio implements OnInit {
      }, 
      error => {      
        this.snackBar.open('Error de conexión','',{
-         duration: 2000,
-         
+         duration: 2000,        
        })
      });    
  }

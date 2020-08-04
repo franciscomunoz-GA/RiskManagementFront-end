@@ -1,3 +1,5 @@
+# 2020-08-04 (V 2.2.2)
+    Corrección de espacios
 # 2020-06-28 (V 2.2.1)
     Se refactoriza el codigo en la sección de areas
 # 2020-06-26 (V 2.2.0)
